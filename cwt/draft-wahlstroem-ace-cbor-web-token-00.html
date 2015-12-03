@@ -385,23 +385,23 @@
 <link href="#rfc.section.3.1.5" rel="Chapter" title="3.1.5 nbf (Not Before) Claim"/>
 <link href="#rfc.section.3.1.6" rel="Chapter" title="3.1.6 iat (Issued At) Claim"/>
 <link href="#rfc.section.3.1.7" rel="Chapter" title="3.1.7 cti (CWT ID) Claim"/>
-<link href="#rfc.section.3.1.8" rel="Chapter" title="3.1.8 cks (COSE Key Structure) Claim"/>
 <link href="#rfc.section.4" rel="Chapter" title="4 Summary of the values, CBOR major types and encoded claim keys"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations"/>
 <link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
-<link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgements"/>
-<link href="#rfc.references" rel="Chapter" title="8 Normative References"/>
+<link href="#rfc.references" rel="Chapter" title="7 Normative References"/>
 <link href="#rfc.appendix.A" rel="Chapter" title="A Examples"/>
-<link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 CWT with aud and symmetric key"/>
-<link href="#rfc.appendix.A.2" rel="Chapter" title="A.2 CWT with aud and a EC key"/>
+<link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 CWT with &quot;aud&quot; and symmetric key"/>
+<link href="#rfc.appendix.A.2" rel="Chapter" title="A.2 CWT with &quot;aud&quot; and EC key"/>
 <link href="#rfc.appendix.A.3" rel="Chapter" title="A.3 Full CWT"/>
+<link href="#rfc.appendix.B" rel="Chapter" title="B Acknowledgements"/>
+<link href="#rfc.appendix.C" rel="Chapter" title="C Document History"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
   <meta name="generator" content="xml2rfc version 2.5.1.dev0 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Wahlstroem, E., Jones, M., and H. Tschofenig" />
+  <meta name="dct.creator" content="Wahlstr&#246;m, E., Jones, M., and H. Tschofenig" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-wahlstroem-ace-cbor-web-token-00" />
   <meta name="dct.issued" scheme="ISO8601" content="2015-12-2" />
   <meta name="dct.abstract" content="CBOR Web Token (CWT) is a compact means of representing claims to be transferred between two parties.  CWT is a profile of the JSON Web Token (JWT) that is optimized for constrained devices. The claims in a CWT are encoded in the Concise Binary Object Representation (CBOR) and CBOR Object Signing and Encryption (COSE) is used for added application layer security protection.  A claim is a piece of information asserted about a subject and is represented as a name/value pair consisting of a claim name and a claim value.  " />
@@ -416,7 +416,7 @@
     
     	<tr>
   <td class="left">ACE Working Group</td>
-  <td class="right">E. Wahlstroem</td>
+  <td class="right">E. Wahlstr&#246;m</td>
 </tr>
 <tr>
   <td class="left">Internet-Draft</td>
@@ -483,37 +483,37 @@
 <li>3.1.5.   <a href="#rfc.section.3.1.5">nbf (Not Before) Claim</a></li>
 <li>3.1.6.   <a href="#rfc.section.3.1.6">iat (Issued At) Claim</a></li>
 <li>3.1.7.   <a href="#rfc.section.3.1.7">cti (CWT ID) Claim</a></li>
-<li>3.1.8.   <a href="#rfc.section.3.1.8">cks (COSE Key Structure) Claim</a></li>
 </ul></ul><li>4.   <a href="#rfc.section.4">Summary of the values, CBOR major types and encoded claim keys</a></li>
 <li>5.   <a href="#rfc.section.5">Security Considerations</a></li>
 <li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
-<li>7.   <a href="#rfc.section.7">Acknowledgements</a></li>
-<li>8.   <a href="#rfc.references">Normative References</a></li>
+<li>7.   <a href="#rfc.references">Normative References</a></li>
 <li>Appendix A.   <a href="#rfc.appendix.A">Examples</a></li>
-<ul><li>A.1.   <a href="#rfc.appendix.A.1">CWT with aud and symmetric key</a></li>
-<li>A.2.   <a href="#rfc.appendix.A.2">CWT with aud and a EC key</a></li>
+<ul><li>A.1.   <a href="#rfc.appendix.A.1">CWT with "aud" and symmetric key</a></li>
+<li>A.2.   <a href="#rfc.appendix.A.2">CWT with "aud" and EC key</a></li>
 <li>A.3.   <a href="#rfc.appendix.A.3">Full CWT</a></li>
-</ul><li><a href="#rfc.authors">Authors' Addresses</a></li>
+</ul><li>Appendix B.   <a href="#rfc.appendix.B">Acknowledgements</a></li>
+<li>Appendix C.   <a href="#rfc.appendix.C">Document History</a></li>
+<li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
   </ul>
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a></h1>
-<p id="rfc.section.1.p.1">With JSON Web Tokens (JWTs) a standardized format of security tokens has been defined and has found use in OAuth 2.0 and OpenID Connect deployments. With JSON Web Signatures (JWS) and JSON Web Encryption (JWE) security the content of the JWT, which comes in form of claims, is protected. The use of JSON for encoding information is popular for Web applications but it is still considered inefficient for use in many IoT systems that use low power radio technologies.  </p>
-<p id="rfc.section.1.p.2">In this document an alternative encoding of claims is defined. Instead of using JSON, as provided by JWTs, this specification suggests the use of CBOR and calls this new structure 'CBOR Web Token (CWT)', which is a compact means of representing claims to be transferred between two parties. CWT is closely related to JWT. It references both the claims and it borrows both name and pronunciation from JWT. To protect the claims inside the CWT the CBOR Object Signing and Encryption (COSE) specification is re-used.  </p>
+<p id="rfc.section.1.p.1">The JSON Web Token (JWT) <a href="#RFC7519">[5]</a> is a standardized security token format that has found use in OAuth 2.0 and OpenID Connect deployments, among other applications.  JWT uses JSON Web Signatures (JWS) <a href="#RFC7515">[3]</a> and JSON Web Encryption (JWE) <a href="#RFC7516">[4]</a> to secure the contents of the JWT, which is a set of claims represented in JSON <a href="#RFC7519">[5]</a>.  The use of JSON for encoding information is popular for Web and native applications, but it is considered inefficient for some Internet of Things (IoT) systems that use low power radio technologies.  </p>
+<p id="rfc.section.1.p.2">In this document an alternative encoding of claims is defined. Instead of using JSON, as provided by JWTs, this specification uses CBOR <a href="#RFC7049">[6]</a> and calls this new structure "CBOR Web Token (CWT)", which is a compact means of representing secured claims to be transferred between two parties. CWT is closely related to JWT. It references the JWT claims and both its name and pronunciation are derived from JWT. To protect the claims contained in CWTs, the CBOR Object Signing and Encryption (COSE) <a href="#I-D.ietf-cose-msg">[7]</a> specification is used.  </p>
 <p id="rfc.section.1.p.3">The suggested pronunciation of CWT is the same as the English word "cot".  </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Terminology</h1>
-<p id="rfc.section.2.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in "Key words for use in RFCs to Indicate Requirement Levels" <a href="#RFC2119">[1]</a>.</p>
-<p id="rfc.section.2.p.2">This document reuses terminology from RFC 7519 <a href="#RFC7519">[2]</a> and COSE <a href="#I-D.ietf-cose-msg">[4]</a>.  </p>
+<p id="rfc.section.2.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in "Key words for use in RFCs to Indicate Requirement Levels" <a href="#RFC2119">[1]</a>.</p>
+<p id="rfc.section.2.p.2">This document reuses terminology from JWT <a href="#RFC7519">[5]</a> and COSE <a href="#I-D.ietf-cose-msg">[7]</a>.  </p>
 <p/>
 
 <dl>
   <dt>Type3StringOrURI:</dt>
-  <dd style="margin-left: 8"><br/><br/> The "Type3StringOrURI" term has the same meaning, syntax, and processing rules as the the "StringOrUri" term defined in Section 2 of JWT <a href="#RFC7519">[2]</a>, except that Type3StringOrURI uses CBOR major type 3 instead of a JSON string value.  </dd>
+  <dd style="margin-left: 8"><br/><br/> The "Type3StringOrURI" term has the same meaning, syntax, and processing rules as the "StringOrUri" term defined in Section 2 of JWT <a href="#RFC7519">[5]</a>, except that Type3StringOrURI uses CBOR major type 3 instead of a JSON string value.  </dd>
   <dt></dt>
   <dd style="margin-left: 8">FIXME: Use tag 32 for URIs? </dd>
   <dt>Type6NumericDate:</dt>
-  <dd style="margin-left: 8"><br/><br/> The "Type6NumericDate" term has the same meaning, syntax, and processing rules as the the "NumericDate" term defined in Section 2 of JWT <a href="#RFC7519">[2]</a>, except that Type6NumericDate uses CBOR major type 6, with tag value 1, instead of a numeric JSON value.  </dd>
+  <dd style="margin-left: 8"><br/><br/> The "Type6NumericDate" term has the same meaning, syntax, and processing rules as the "NumericDate" term defined in Section 2 of JWT <a href="#RFC7519">[5]</a>, except that Type6NumericDate uses CBOR major type 6, with tag value 1, instead of a numeric JSON value.  </dd>
   <dt>CBOR encoded claim key:</dt>
   <dd style="margin-left: 8"><br/><br/> The key used to identify a claim value.  </dd>
 </dl>
@@ -521,30 +521,27 @@
 <p> </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Claims</h1>
 <p id="rfc.section.3.p.1">The set of claims that a CWT must contain to be considered valid is context dependent and is outside the scope of this specification.  Specific applications of CWTs will require implementations to understand and process some claims in particular ways.  However, in the absence of such requirements, all claims that are not understood by implementations MUST be ignored.  </p>
-<p id="rfc.section.3.p.2">To keep CWT's as small as possible the CBOR encoded claim key are represented using CBOR major type 0.  <a href="#CWTCNMajorTypesSummery">Section 4</a> summaries all keys used to identity the claims defined in this document.  </p>
+<p id="rfc.section.3.p.2">To keep CWTs as small as possible, the CBOR encoded claim keys are represented using CBOR major type 0.  <a href="#CWTCNMajorTypesSummery">Section 4</a> summaries all keys used to identity the claims defined in this document.  </p>
 <h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> <a href="#CWTClaimNames" id="CWTClaimNames">Claim Names</a></h1>
 <p id="rfc.section.3.1.p.1">None of the claims defined below are intended to be mandatory to use or implement. They rather provide a starting point for a set of useful, interoperable claims.  Applications using CWTs should define which specific claims they use and when they are required or optional.  </p>
 <h1 id="rfc.section.3.1.1"><a href="#rfc.section.3.1.1">3.1.1.</a> <a href="#CWTCNiss" id="CWTCNiss">iss (Issuer) Claim</a></h1>
-<p id="rfc.section.3.1.1.p.1">The "iss" (issuer) claim has the same meaning, syntax, and processing rules as the "iss" parameter defined in Section 4.1.1 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be a Type3StringOrURI. The CBOR encoded claim key 1 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.1.p.1">The <samp>iss</samp> (issuer) claim has the same meaning, syntax, and processing rules as the <samp>iss</samp> claim defined in Section 4.1.1 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be a Type3StringOrURI. The CBOR encoded claim key 1 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.3.1.2"><a href="#rfc.section.3.1.2">3.1.2.</a> <a href="#CWTCNsub" id="CWTCNsub">sub (Subject) Claim</a></h1>
-<p id="rfc.section.3.1.2.p.1">The "sub" (subject) claim has the same meaning, syntax, and processing rules as the "sub" parameter defined in Section 4.1.2 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be a Type3StringOrURI. The CBOR encoded claim key 2 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.2.p.1">The <samp>sub</samp> (subject) claim has the same meaning, syntax, and processing rules as the <samp>sub</samp> claim defined in Section 4.1.2 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be a Type3StringOrURI. The CBOR encoded claim key 2 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.3.1.3"><a href="#rfc.section.3.1.3">3.1.3.</a> <a href="#CWTCNaud" id="CWTCNaud">aud (Audience) Claim</a></h1>
-<p id="rfc.section.3.1.3.p.1">The "aud" (audience) claim has the same meaning, syntax, and processing rules as the "aud" parameter defined in Section 4.1.3 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be a Type3StringOrURI. The CBOR encoded claim key 3 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.3.p.1">The <samp>aud</samp> (audience) claim has the same meaning, syntax, and processing rules as the <samp>aud</samp> claim defined in Section 4.1.3 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be a Type3StringOrURI. The CBOR encoded claim key 3 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.3.1.4"><a href="#rfc.section.3.1.4">3.1.4.</a> <a href="#CWTCNexp" id="CWTCNexp">exp (Expiration Time) Claim</a></h1>
-<p id="rfc.section.3.1.4.p.1">The "exp" (expiration time) claim has the same meaning, syntax, and processing rules as the "exp" parameter defined in Section 4.1.4 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be a Type6NumericDate. The CBOR encoded claim key 4 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.4.p.1">The <samp>exp</samp> (expiration time) claim has the same meaning, syntax, and processing rules as the <samp>exp</samp> claim defined in Section 4.1.4 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be a Type6NumericDate. The CBOR encoded claim key 4 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.3.1.5"><a href="#rfc.section.3.1.5">3.1.5.</a> <a href="#CWTCNnbf" id="CWTCNnbf">nbf (Not Before) Claim</a></h1>
-<p id="rfc.section.3.1.5.p.1">The "nbf" (not before) claim has the same meaning, syntax, and processing rules as the "nbf" parameter defined in Section 4.1.5 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be a Type6NumericDate. The CBOR encoded claim key 5 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.5.p.1">The <samp>nbf</samp> (not before) claim has the same meaning, syntax, and processing rules as the <samp>nbf</samp> claim defined in Section 4.1.5 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be a Type6NumericDate. The CBOR encoded claim key 5 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.3.1.6"><a href="#rfc.section.3.1.6">3.1.6.</a> <a href="#CWTCNiat" id="CWTCNiat">iat (Issued At) Claim</a></h1>
-<p id="rfc.section.3.1.6.p.1">The "iat" (issued at) claim has the same meaning, syntax, and processing rules as the "iat" parameter defined in Section 4.1.6 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be a Type6NumericDate. The CBOR encoded claim key 6 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.6.p.1">The <samp>iat</samp> (issued at) claim has the same meaning, syntax, and processing rules as the <samp>iat</samp> claim defined in Section 4.1.6 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be a Type6NumericDate. The CBOR encoded claim key 6 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.3.1.7"><a href="#rfc.section.3.1.7">3.1.7.</a> <a href="#CWTCNcti" id="CWTCNcti">cti (CWT ID) Claim</a></h1>
-<p id="rfc.section.3.1.7.p.1">The "cti" (CWT ID) claim has the same meaning, syntax, and processing rules as the "jti" parameter defined in Section 4.1.7 of JWT <a href="#RFC7519">[2]</a>, except that the format MUST be of major type 3 with a case-sensitive string value. The CBOR encoded claim key 7 MUST be used to identify this claim.  </p>
-<h1 id="rfc.section.3.1.8"><a href="#rfc.section.3.1.8">3.1.8.</a> <a href="#CWTCNcks" id="CWTCNcks">cks (COSE Key Structure) Claim</a></h1>
-<p id="rfc.section.3.1.8.p.1">The "cks" (COSE Key Structure) claim holds members representing a COSE Key Structure.  The members of the structure can be found in Section 7.1 of <a href="#I-D.ietf-cose-msg">[4]</a>. The "cks" value is a case-sensitive string and MUST be of CBOR major type 2, byte string. The CBOR encoded claim key 8 MUST be used to identify this claim.  </p>
+<p id="rfc.section.3.1.7.p.1">The <samp>cti</samp> (CWT ID) claim has the same meaning, syntax, and processing rules as the <samp>jti</samp> claim defined in Section 4.1.7 of JWT <a href="#RFC7519">[5]</a>, except that the format MUST be of major type 3 with a case-sensitive string value. The CBOR encoded claim key 7 MUST be used to identify this claim.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#CWTCNMajorTypesSummery" id="CWTCNMajorTypesSummery">Summary of the values, CBOR major types and encoded claim keys</a></h1>
 <div id="rfc.figure.1"/>
 <div id="fig:cborMappingValuesAccessTokens"/>
 <pre>
-
 /---------+------------------------+--------------------------\
 | Claim   | CBOR encoded claim key | CBOR major type of value |
 |---------+------------------------+--------------------------|
@@ -555,10 +552,8 @@
 | nbf     | 5                      | 6 tag value 1            |
 | iat     | 6                      | 6 tag value 1            |
 | cti     | 7                      | 3                        |
-| cks     | 8                      | 3                        |
 \---------+------------------------+--------------------------/
-
-          </pre>
+</pre>
 <p class="figure">Figure 1: Summary of the values, CBOR major types and encoded claim keys.</p>
 <p/>
 <p id="rfc.section.4.p.2">Note: Claims defined by the OpenID Foundation have not yet been included in the table above.  </p>
@@ -566,10 +561,7 @@
 <p id="rfc.section.5.p.1">The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT an adversary is able to modify, add or remove claims. Since the claims conveyed in a CWT are used to make authorization decisions it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT. Without trust of the recipient in the party that created the CWT no sensible authorization decision can be made. Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.</p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
 <p id="rfc.section.6.p.1">This section will create a registry for CWT claims, possibly relating them to the JWT Claims Registry.  </p>
-<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> Acknowledgements</h1>
-<p id="rfc.section.7.p.1">Add your name here. </p>
-<p id="rfc.section.7.p.2">A straw man proposal of CWT was written in the draft "Authorization for the Internet of Things using OAuth 2.0" <a href="#I-D.seitz-ace-oauth-authz">[5]</a> with the help of Ludwig Seitz, G&#246;ran Selander, and Samuel Erdtman.  </p>
-<h1 id="rfc.references"><a href="#rfc.references">8.</a> Normative References</h1>
+<h1 id="rfc.references"><a href="#rfc.references">7.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -580,60 +572,78 @@
     </tr>
     <tr>
       <td class="reference">
-        <b id="RFC7519">[2]</b>
+        <b id="RFC7159">[2]</b>
+      </td>
+      <td class="top"><a>Bray, T.</a>, "<a href="http://tools.ietf.org/html/rfc7159">The JavaScript Object Notation (JSON) Data Interchange Format</a>", RFC 7159, DOI 10.17487/RFC7159, March 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7515">[3]</b>
+      </td>
+      <td class="top"><a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="http://tools.ietf.org/html/rfc7515">JSON Web Signature (JWS)</a>", RFC 7515, DOI 10.17487/RFC7515, May 2015.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7516">[4]</b>
+      </td>
+      <td class="top"><a>Jones, M.</a> and <a>J. Hildebrand</a>, "<a href="http://tools.ietf.org/html/rfc7516">JSON Web Encryption (JWE)</a>", RFC 7516, DOI 10.17487/RFC7516, May 2015.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7519">[5]</b>
       </td>
       <td class="top"><a>Jones, M.</a>, <a>Bradley, J.</a> and <a>N. Sakimura</a>, "<a href="http://tools.ietf.org/html/rfc7519">JSON Web Token (JWT)</a>", RFC 7519, DOI 10.17487/RFC7519, May 2015.</td>
     </tr>
     <tr>
       <td class="reference">
-        <b id="RFC7049">[3]</b>
+        <b id="RFC7049">[6]</b>
       </td>
       <td class="top"><a>Bormann, C.</a> and <a>P. Hoffman</a>, "<a href="http://tools.ietf.org/html/rfc7049">Concise Binary Object Representation (CBOR)</a>", RFC 7049, DOI 10.17487/RFC7049, October 2013.</td>
     </tr>
     <tr>
       <td class="reference">
-        <b id="I-D.ietf-cose-msg">[4]</b>
+        <b id="I-D.ietf-cose-msg">[7]</b>
       </td>
       <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-cose-msg-08">CBOR Encoded Message Syntax</a>", Internet-Draft draft-ietf-cose-msg-08, November 2015.</td>
     </tr>
     <tr>
       <td class="reference">
-        <b id="I-D.seitz-ace-oauth-authz">[5]</b>
+        <b id="I-D.seitz-ace-oauth-authz">[8]</b>
       </td>
       <td class="top"><a>Seitz, L.</a>, <a>Selander, G.</a>, <a>Wahlstroem, E.</a>, <a>Erdtman, S.</a> and <a>H. Tschofenig</a>, "<a href="http://tools.ietf.org/html/draft-seitz-ace-oauth-authz-00">Authorization for the Internet of Things using OAuth 2.0</a>", Internet-Draft draft-seitz-ace-oauth-authz-00, October 2015.</td>
     </tr>
   </tbody>
 </table>
 <h1 id="rfc.appendix.A"><a href="#rfc.appendix.A">Appendix A.</a> Examples</h1>
-<p id="rfc.section.A.p.1">Three examples of CWT is defined.</p>
-<h1 id="rfc.appendix.A.1"><a href="#rfc.appendix.A.1">A.1.</a> <a href="#exampleAudSymmetric" id="exampleAudSymmetric">CWT with aud and symmetric key</a></h1>
-<p id="rfc.section.A.1.p.1">A CWT used in the context of ACE requires at least the &#8220;aud" and a &#8220;cks" claim. This means that &#8220;iss&#8221;, &#8220;alg&#8221;, &#8220; key_ops" and others are pre-established and assumed. This would look like this non normative JSON.  </p>
+<p id="rfc.section.A.p.1">Three examples of CWTs follow.</p>
+<h1 id="rfc.appendix.A.1"><a href="#rfc.appendix.A.1">A.1.</a> <a href="#exampleAudSymmetric" id="exampleAudSymmetric">CWT with "aud" and symmetric key</a></h1>
+<p id="rfc.section.A.1.p.1">A CWT used in the context of ACE requires at least the <samp>aud</samp> and a <samp>cks</samp> claim (defined elsewhere).  This means that <samp>iss</samp>, <samp>alg</samp>, <samp>key_ops</samp> and others are pre-established and assumed.  This would look like this non-normative JSON.  </p>
 <div id="rfc.figure.2"/>
 <div id="fig:exampleAudSymmetricJSON"/>
 <pre>
 
 {
-  "aud":"coap://light.example.com&#8221;,
+  "aud":"coap://light.example.com",
   "cks":
     [                       // COSE_Key is a CBOR map with an array of keys
       {
-        &#8220;kty":4,            // symmetric key is indicated using kty 4
-        "k&#8221;: &#8220;loremipsum"   // the symmetric key
+        "kty":4,            // symmetric key is indicated using kty 4
+        "k": "loremipsum"   // the symmetric key
       }
     ]
 }
 
             </pre>
-<p class="figure">Figure 2: Aud claim and a symmetric key in non normative JSON.</p>
+<p class="figure">Figure 2: "aud" claim and symmetric key in non-normative JSON</p>
 <p/>
-<p id="rfc.section.A.1.p.3">Using the CBOR encoded claim keys according to <a href="#CWTCNMajorTypesSummery">Section 4</a> and COSE <a href="#I-D.ietf-cose-msg">[4]</a> makes a CWT with "aud" and a symmetric key look like this in CBOR diagnostic notation: </p>
+<p id="rfc.section.A.1.p.3">Using the CBOR encoded claim keys according to <a href="#CWTCNMajorTypesSummery">Section 4</a> and COSE <a href="#I-D.ietf-cose-msg">[7]</a> makes a CWT with <samp>aud</samp> and a symmetric key look like this in CBOR diagnostic notation: </p>
 <div id="rfc.figure.3"/>
 <div id="fig:exampleAudSymmetricDiag"/>
 <pre>
 
 {
   3: "coap://light.example.com",
-  8 :
+  8:
   [
     {
       1: 4,
@@ -643,7 +653,7 @@
 }
 
             </pre>
-<p class="figure">Figure 3: CWT in CBOR diagnostic notation.</p>
+<p class="figure">Figure 3: CWT in CBOR diagnostic notation</p>
 <p/>
 <p id="rfc.section.A.1.p.5">Defined in CBOR.  </p>
 <div id="rfc.figure.4"/>
@@ -665,11 +675,11 @@
                   6c6f72656d697073756d        # "loremipsum"
 
             </pre>
-<p class="figure">Figure 4: CWT with aud and symmetric key in CBOR.</p>
+<p class="figure">Figure 4: CWT with "aud" and symmetric key in CBOR</p>
 <p/>
 <p id="rfc.section.A.1.p.7">Size of the CWT with a symmetric key of 10 bytes is 45 bytes. This is then packaged signed and encrypted using COSE.  </p>
-<h1 id="rfc.appendix.A.2"><a href="#rfc.appendix.A.2">A.2.</a> <a href="#exampleAudEC" id="exampleAudEC">CWT with aud and a EC key</a></h1>
-<p id="rfc.section.A.2.p.1">Token with "aud" set to "coap://light.example.com" and an EC key with "kid" set to "11".  </p>
+<h1 id="rfc.appendix.A.2"><a href="#rfc.appendix.A.2">A.2.</a> <a href="#exampleAudEC" id="exampleAudEC">CWT with "aud" and EC key</a></h1>
+<p id="rfc.section.A.2.p.1">Token with <samp>aud</samp> set to "coap://light.example.com" and an EC key with <samp>kid</samp> set to <samp>11</samp>.  </p>
 <div id="rfc.figure.5"/>
 <div id="fig:exampleAudECJSON"/>
 <pre>
@@ -679,7 +689,7 @@
   "cks":
     [                       // COSE_Key is a CBOR map with an array of keys
       {
-        "kty": "EC2",
+        "kty": "EC",
         "kid": "11",
         "crv": 1, // using P-384
         "x": h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
@@ -689,16 +699,16 @@
 }
 
             </pre>
-<p class="figure">Figure 5: Aud claim and a EC key in non normative JSON.</p>
+<p class="figure">Figure 5: "aud" claim and EC key in non-normative JSON</p>
 <p/>
-<p id="rfc.section.A.2.p.3">Using the CBOR encoded claim keys according to <a href="#CWTCNMajorTypesSummery">Section 4</a> and COSE <a href="#I-D.ietf-cose-msg">[4]</a> makes a CWT with aud and a EC key look like this in CBOR diagnostic notation: </p>
+<p id="rfc.section.A.2.p.3">Using the CBOR encoded claim keys according to <a href="#CWTCNMajorTypesSummery">Section 4</a> and COSE <a href="#I-D.ietf-cose-msg">[7]</a> makes a CWT with <samp>aud</samp> and an EC key look like this in CBOR diagnostic notation: </p>
 <div id="rfc.figure.6"/>
 <div id="fig:exampleAudECDiag"/>
 <pre>
 
               {
                 3: "coap://light.example.com",
-                8 :
+                8:
                 [
                   {
                     1: 2,
@@ -711,7 +721,7 @@
               }
 
             </pre>
-<p class="figure">Figure 6: CWT with EC key in CBOR diagnostic notation.</p>
+<p class="figure">Figure 6: CWT with EC key in CBOR diagnostic notation</p>
 <p/>
 <p id="rfc.section.A.2.p.5">Defined in CBOR.  </p>
 <div id="rfc.figure.7"/>
@@ -737,14 +747,14 @@
                           bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff # "\xBA\xC5\xB1\x1C\xAD\x8F\x99\xF9\xC7+\x05\xCFK\x9E&amp;\xD2D\xDC\x18\x9FtR(%Z!\x9A\x86\xD6\xA0\x9E\xFF"
                        22                             # negative(2)
                        58 20                          # bytes(32)
-                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # " \x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
+                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # "\x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
 
             </pre>
-<p class="figure">Figure 7: CWT with EC in CBOR.</p>
+<p class="figure">Figure 7: CWT with EC in CBOR</p>
 <p/>
-<p id="rfc.section.A.2.p.7">Size of the CWT with a EC key is 109 bytes. This is then packaged signed and encrypted using COSE.  </p>
+<p id="rfc.section.A.2.p.7">Size of the CWT with an EC key is 109 bytes. This is then packaged signed and encrypted using COSE.  </p>
 <h1 id="rfc.appendix.A.3"><a href="#rfc.appendix.A.3">A.3.</a> <a href="#exampleFull" id="exampleFull">Full CWT</a></h1>
-<p id="rfc.section.A.3.p.1">Full CWT with all attributes, including an extension for AIF, and EC key.  </p>
+<p id="rfc.section.A.3.p.1">CWT using all claims defined by this specification, plus extensions for AIF and an EC key.  </p>
 <div id="rfc.figure.8"/>
 <div id="fig:exampleFullJSON"/>
 <pre>
@@ -752,15 +762,15 @@
 {
    "iss": "coap://as.example.com",
    "aud": "coap://light.example.com",
-   &#8220;sub": &#8220;erikw",
+   "sub": "erikw",
    "exp": 1444064944,
-   &#8220;nbf": 1443944944,
+   "nbf": 1443944944,
    "iat": 1443944944,
-   &#8220;cti": 2929,
+   "cti": 2929,
    "cks":
      [                       // COSE_Key is a CBOR map with an array of keys
        {
-         "kty": "EC2",
+         "kty": "EC",
          "kid": "11",
          "crv": 1, // using P-384
          "x": h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
@@ -771,9 +781,9 @@
  }
 
             </pre>
-<p class="figure">Figure 8: All claim, aid and a EC key in non normative JSON.</p>
+<p class="figure">Figure 8: All claims, "aif" and EC key in non-normative JSON</p>
 <p/>
-<p id="rfc.section.A.3.p.3">Using the CBOR encoded claim keys according to <a href="#CWTCNMajorTypesSummery">Section 4</a> and COSE <a href="#I-D.ietf-cose-msg">[4]</a> makes a full CWT look like this in CBOR diagnostic notation: </p>
+<p id="rfc.section.A.3.p.3">Using the CBOR encoded claim keys according to <a href="#CWTCNMajorTypesSummery">Section 4</a> and COSE <a href="#I-D.ietf-cose-msg">[7]</a> makes a full CWT look like this in CBOR diagnostic notation: </p>
 <div id="rfc.figure.9"/>
 <div id="fig:exampleFullDiag"/>
 <pre>
@@ -799,7 +809,7 @@
 }
 
             </pre>
-<p class="figure">Figure 9: Full CWT with EC key in CBOR diagnostic notation.</p>
+<p class="figure">Figure 9: Full CWT with EC key in CBOR diagnostic notation</p>
 <p/>
 <p id="rfc.section.A.3.p.5">Defined in CBOR.  </p>
 <div id="rfc.figure.10"/>
@@ -841,7 +851,7 @@
                           bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff # "\xBA\xC5\xB1\x1C\xAD\x8F\x99\xF9\xC7+\x05\xCFK\x9E&amp;\xD2D\xDC\x18\x9FtR(%Z!\x9A\x86\xD6\xA0\x9E\xFF"
                        22                             # negative(2)
                        58 20                          # bytes(32)
-                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # " \x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
+                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # "\x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
                  09                                   # unsigned(9)
                  83                                   # array(3)
                     82                                # array(2)
@@ -858,18 +868,30 @@
                        02                             # unsigned(2)
 
             </pre>
-<p class="figure">Figure 10: Full CWT with EC in CBOR.</p>
+<p class="figure">Figure 10: Full CWT with EC in CBOR</p>
 <p/>
-<p id="rfc.section.A.3.p.7">Size of the CWT with a EC key is 194 bytes. This is then packaged signed and encrypted using COSE.  </p>
+<p id="rfc.section.A.3.p.7">Size of the CWT with an EC key is 194 bytes. This is then packaged signed and encrypted using COSE.  </p>
+<h1 id="rfc.appendix.B"><a href="#rfc.appendix.B">Appendix B.</a> Acknowledgements</h1>
+<p id="rfc.section.B.p.1">A straw man proposal of CWT was written in the draft "Authorization for the Internet of Things using OAuth 2.0" <a href="#I-D.seitz-ace-oauth-authz">[8]</a> with the help of Ludwig Seitz, G&#246;ran Selander, and Samuel Erdtman.  </p>
+<h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> <a href="#History" id="History">Document History</a></h1>
+<p id="rfc.section.C.p.1">[[ to be removed by the RFC Editor before publication as an RFC ]]</p>
+<p id="rfc.section.C.p.2">-00 </p>
+
+<ul>
+  <li>Created the initial version based on draft-wahlstroem-oauth-cbor-web-token-00.  </li>
+  <li>Now reference the JWT claim definitions, rather than repeating them.  </li>
+</ul>
+
+<p> </p>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Authors' Addresses</a>
 </h1>
 <div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
-	  <span class="fn">Erik Wahlstroem</span> 
+	  <span class="fn">Erik Wahlstr&#246;m</span> 
 	  <span class="n hidden">
-		<span class="family-name">Wahlstroem</span>
+		<span class="family-name">Wahlstr&#246;m</span>
 	  </span>
 	</span>
 	<span class="org vcardline">Nexus Technology</span>

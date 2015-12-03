@@ -19,7 +19,7 @@
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
 
-    <author initials="E." surname="Wahlstroem" fullname="Erik Wahlstroem">
+    <author initials="E." surname="Wahlström" fullname="Erik Wahlström">
       <organization>Nexus Technology</organization>
       <address>
         <postal>
@@ -90,24 +90,26 @@
     <section anchor="introduction" title="Introduction">
 
       <t>
-        With JSON Web Tokens (JWTs) a standardized format of security tokens
-        has been defined and has found use in OAuth 2.0 and OpenID Connect
-        deployments. With JSON Web Signatures (JWS) and JSON Web Encryption
-        (JWE) security the content of the JWT, which comes in form of claims,
-        is protected. The use of JSON for encoding information is popular for
-        Web applications but it is still considered inefficient for use in many
-        IoT systems that use low power radio technologies.
+        The JSON Web Token (JWT) <xref target="RFC7519"/> is a standardized security token format
+        that has found use in OAuth 2.0 and OpenID Connect deployments, among other applications.
+	JWT uses JSON Web Signatures (JWS) <xref target="RFC7515"/> and
+	JSON Web Encryption (JWE) <xref target="RFC7516"/> to secure the contents of the JWT,
+	which is a set of claims represented in JSON <xref target="RFC7519"/>.
+	The use of JSON for encoding information is popular for
+        Web and native applications, but it is considered inefficient for some
+        Internet of Things (IoT) systems that use low power radio technologies.
       </t>
 
       <t>
         In this document an alternative encoding of claims is defined. Instead
-        of using JSON, as provided by JWTs, this specification suggests the use
-        of CBOR and calls this new structure 'CBOR Web Token (CWT)', which is a
-        compact means of representing claims to be transferred between two
-        parties. CWT is closely related to JWT. It references both the claims
-        and it borrows both name and pronunciation from JWT. To protect the
-        claims inside the CWT the CBOR Object Signing and Encryption (COSE)
-        specification is re-used.
+        of using JSON, as provided by JWTs, this specification uses
+        CBOR <xref target="RFC7049"/> and calls this new structure "CBOR Web Token (CWT)", which is a
+        compact means of representing secured claims to be transferred between two
+        parties. CWT is closely related to JWT. It references the JWT claims
+        and both its name and pronunciation are derived from JWT. To protect the
+        claims contained in CWTs, the CBOR Object Signing and Encryption (COSE)
+	<xref target="I-D.ietf-cose-msg"/>
+        specification is used.
       </t>
 
       <t>
@@ -121,12 +123,12 @@
 
     <section title="Terminology">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-       "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+       "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
        document are to be interpreted as described in "Key words for use in
        RFCs to Indicate Requirement Levels" <xref target="RFC2119"/>.</t>
 
        <t>
-         This document reuses terminology from RFC 7519
+         This document reuses terminology from JWT
          <xref target="RFC7519"/> and COSE <xref target="I-D.ietf-cose-msg" />.
        </t>
 
@@ -134,7 +136,7 @@
         <list style="hanging">
           <t hangText="Type3StringOrURI:"><vspace blankLines="1"/>
             The "Type3StringOrURI" term has the same meaning, syntax, and
-            processing rules as the the "StringOrUri" term defined in Section 2
+            processing rules as the "StringOrUri" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that Type3StringOrURI uses
             CBOR major type 3 instead of a JSON string value.
            </t>
@@ -145,7 +147,7 @@
 
           <t hangText="Type6NumericDate:"><vspace blankLines="1"/>
             The "Type6NumericDate" term has the same meaning, syntax, and
-            processing rules as the the "NumericDate" term defined in Section 2
+            processing rules as the "NumericDate" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that Type6NumericDate uses
             CBOR major type 6, with tag value 1, instead of a numeric JSON
             value.
@@ -171,7 +173,7 @@
       </t>
 
       <t>
-        To keep CWT's as small as possible the CBOR encoded claim key are
+        To keep CWTs as small as possible, the CBOR encoded claim keys are
         represented using CBOR major type 0.
         <xref target="CWTCNMajorTypesSummery" /> summaries all keys used to
         identity the claims defined in this document.
@@ -189,8 +191,8 @@
 
          <section anchor="CWTCNiss" title="iss (Issuer) Claim">
             <t>
-              The "iss" (issuer) claim has the same meaning, syntax, and
-              processing rules as the "iss" parameter defined in Section 4.1.1
+              The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning, syntax, and
+              processing rules as the <spanx style="verb">iss</spanx> claim defined in Section 4.1.1
               of JWT <xref target="RFC7519" />, except that the format MUST be a
               Type3StringOrURI. The CBOR encoded claim key 1 MUST be used to
               identify this claim.
@@ -199,8 +201,8 @@
 
          <section anchor="CWTCNsub" title="sub (Subject) Claim">
             <t>
-              The "sub" (subject) claim has the same meaning, syntax, and
-              processing rules as the "sub" parameter defined in Section 4.1.2
+              The <spanx style="verb">sub</spanx> (subject) claim has the same meaning, syntax, and
+              processing rules as the <spanx style="verb">sub</spanx> claim defined in Section 4.1.2
               of JWT <xref target="RFC7519" />, except that the format MUST be a
               Type3StringOrURI. The CBOR encoded claim key 2 MUST be used to
               identify this claim.
@@ -209,8 +211,8 @@
 
           <section anchor="CWTCNaud" title="aud (Audience) Claim">
             <t>
-              The "aud" (audience) claim has the same meaning, syntax, and
-              processing rules as the "aud" parameter defined in Section 4.1.3
+              The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
+              processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
               of JWT <xref target="RFC7519" />, except that the format MUST be a
               Type3StringOrURI. The CBOR encoded claim key 3 MUST be used to
               identify this claim.
@@ -219,8 +221,8 @@
 
           <section anchor="CWTCNexp" title="exp (Expiration Time) Claim">
             <t>
-              The "exp" (expiration time) claim has the same meaning, syntax,
-              and processing rules as the "exp" parameter defined in Section
+              The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning, syntax,
+              and processing rules as the <spanx style="verb">exp</spanx> claim defined in Section
               4.1.4 of JWT <xref target="RFC7519" />, except that the format
               MUST be a Type6NumericDate. The CBOR encoded claim key 4 MUST be
               used to identify this claim.
@@ -229,8 +231,8 @@
 
           <section anchor="CWTCNnbf" title="nbf (Not Before) Claim">
             <t>
-              The "nbf" (not before) claim has the same meaning, syntax,
-              and processing rules as the "nbf" parameter defined in Section
+              The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning, syntax,
+              and processing rules as the <spanx style="verb">nbf</spanx> claim defined in Section
               4.1.5 of JWT <xref target="RFC7519" />, except that the format
               MUST be a Type6NumericDate. The CBOR encoded claim key 5 MUST be
               used to identify this claim.
@@ -239,8 +241,8 @@
 
           <section anchor="CWTCNiat" title="iat (Issued At) Claim">
             <t>
-              The "iat" (issued at) claim has the same meaning, syntax,
-              and processing rules as the "iat" parameter defined in Section
+              The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning, syntax,
+              and processing rules as the <spanx style="verb">iat</spanx> claim defined in Section
               4.1.6 of JWT <xref target="RFC7519" />, except that the format
               MUST be a Type6NumericDate. The CBOR encoded claim key 6 MUST be
               used to identify this claim.
@@ -249,25 +251,28 @@
 
           <section anchor="CWTCNcti" title="cti (CWT ID) Claim">
             <t>
-              The "cti" (CWT ID) claim has the same meaning, syntax,
-              and processing rules as the "jti" parameter defined in Section
+              The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
+              and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
               4.1.7 of JWT <xref target="RFC7519" />, except that the format
               MUST be of major type 3 with a case-sensitive string value. The
               CBOR encoded claim key 7 MUST be used to identify this claim.
             </t>
           </section>
 
-         <section anchor="CWTCNcks" title="cks (COSE Key Structure) Claim">
+	  <!--
+	    Let's literally just reference all the claims defined in JWT and define other claims in other specs.
+          <section anchor="CWTCNcks" title="cks (COSE Key Structure) Claim">
             <t>
-              The "cks" (COSE Key Structure) claim holds members representing a
+              The <spanx style="verb">cks</spanx> (COSE Key Structure) claim holds members representing a
               COSE Key Structure.  The members of the structure can be found in
-              Section 7.1 of <xref target="I-D.ietf-cose-msg" />. The "cks"
+              Section 7.1 of <xref target="I-D.ietf-cose-msg" />. The <spanx style="verb">cks</spanx>
               value is a case-sensitive string and MUST be of CBOR major type 2,
               byte string. The CBOR encoded claim key 8 MUST be used to identify
               this claim.
-	      <!-- TBD: Check this section number periodically -->
+	      <!== TBD: Check this section number periodically ==>
             </t>
-         </section>
+          </section>
+	  -->
 
       </section>
 
@@ -281,7 +286,6 @@
         <figure align="center" anchor="fig:cborMappingValuesAccessTokens"
                 title="Summary of the values, CBOR major types and encoded claim keys.">
           <artwork align="left"><![CDATA[
-
 /---------+------------------------+--------------------------\
 | Claim   | CBOR encoded claim key | CBOR major type of value |
 |---------+------------------------+--------------------------|
@@ -292,10 +296,11 @@
 | nbf     | 5                      | 6 tag value 1            |
 | iat     | 6                      | 6 tag value 1            |
 | cti     | 7                      | 3                        |
-| cks     | 8                      | 3                        |
 \---------+------------------------+--------------------------/
-
-          ]]></artwork>
+]]></artwork>
+<!--
+| cks     | 8                      | 3                        |
+-->
         </figure>
       </t>
 
@@ -365,22 +370,14 @@
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
 
-    <section title="Acknowledgements">
-        <t>Add your name here. </t>
-
-        <t>
-          A straw man proposal of CWT was written in the draft
-          "Authorization for the Internet of Things using OAuth 2.0"
-          <xref target="I-D.seitz-ace-oauth-authz" /> with the help of
-          Ludwig Seitz, Göran Selander, and Samuel Erdtman.
-        </t>
-    </section>
-
   </middle>
 
   <back>
     <references title='Normative References'>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7515.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
 
@@ -395,30 +392,31 @@
     -->
 
     <section title="Examples">
-      <t>Three examples of CWT is defined.</t>
+      <t>Three examples of CWTs follow.</t>
 
-      <section title="CWT with aud and symmetric key"
+      <section title='CWT with "aud" and symmetric key'
         anchor="exampleAudSymmetric">
 
         <t>
-          A CWT used in the context of ACE requires at least the “aud" and a
-          “cks" claim. This means that “iss”, “alg”, “ key_ops" and
-          others are pre-established and assumed. This would look like this non
-          normative JSON.
+          A CWT used in the context of ACE requires at least the <spanx style="verb">aud</spanx> and a
+          <spanx style="verb">cks</spanx> claim (defined elsewhere).
+	  This means that <spanx style="verb">iss</spanx>, <spanx style="verb">alg</spanx>, <spanx style="verb">key_ops</spanx> and
+          others are pre-established and assumed.
+	  This would look like this non-normative JSON.
         </t>
 
         <t>
           <figure align="center" anchor="fig:exampleAudSymmetricJSON"
-                title="Aud claim and a symmetric key in non normative JSON.">
+                title='"aud" claim and symmetric key in non-normative JSON'>
             <artwork align="left"><![CDATA[
 
 {
-  "aud":"coap://light.example.com”,
+  "aud":"coap://light.example.com",
   "cks":
     [                       // COSE_Key is a CBOR map with an array of keys
       {
-        “kty":4,            // symmetric key is indicated using kty 4
-        "k”: “loremipsum"   // the symmetric key
+        "kty":4,            // symmetric key is indicated using kty 4
+        "k": "loremipsum"   // the symmetric key
       }
     ]
 }
@@ -431,18 +429,18 @@
         <t>
           Using the CBOR encoded claim keys according to
           <xref target="CWTCNMajorTypesSummery" /> and COSE
-          <xref target="I-D.ietf-cose-msg" /> makes a CWT with "aud" and a
+          <xref target="I-D.ietf-cose-msg" /> makes a CWT with <spanx style="verb">aud</spanx> and a
           symmetric key look like this in CBOR diagnostic notation:
         </t>
 
         <t>
           <figure align="center" anchor="fig:exampleAudSymmetricDiag"
-                title="CWT in CBOR diagnostic notation.">
+                title="CWT in CBOR diagnostic notation">
             <artwork align="left"><![CDATA[
 
 {
   3: "coap://light.example.com",
-  8 :
+  8:
   [
     {
       1: 4,
@@ -461,7 +459,7 @@
 
         <t>
           <figure align="center" anchor="fig:exampleAudSymmetricCBOR"
-                title="CWT with aud and symmetric key in CBOR.">
+                title='CWT with "aud" and symmetric key in CBOR'>
             <artwork align="left"><![CDATA[
 
 
@@ -490,17 +488,17 @@
       </section>
 
 
-      <section title="CWT with aud and a EC key"
+      <section title='CWT with "aud" and EC key'
         anchor="exampleAudEC">
 
         <t>
-          Token with "aud" set to "coap://light.example.com" and an EC key with
-          "kid" set to "11".
+          Token with <spanx style="verb">aud</spanx> set to "coap://light.example.com" and an EC key with
+          <spanx style="verb">kid</spanx> set to <spanx style="verb">11</spanx>.
         </t>
 
         <t>
           <figure align="center" anchor="fig:exampleAudECJSON"
-                title="Aud claim and a EC key in non normative JSON.">
+                title='"aud" claim and EC key in non-normative JSON'>
             <artwork align="left"><![CDATA[
 
 {
@@ -508,7 +506,7 @@
   "cks":
     [                       // COSE_Key is a CBOR map with an array of keys
       {
-        "kty": "EC2",
+        "kty": "EC",
         "kid": "11",
         "crv": 1, // using P-384
         "x": h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
@@ -524,18 +522,18 @@
         <t>
           Using the CBOR encoded claim keys according to
            <xref target="CWTCNMajorTypesSummery" /> and COSE
-          <xref target="I-D.ietf-cose-msg" /> makes a CWT with aud and a EC key
+          <xref target="I-D.ietf-cose-msg" /> makes a CWT with <spanx style="verb">aud</spanx> and an EC key
           look like this in CBOR diagnostic notation:
         </t>
 
         <t>
           <figure align="center" anchor="fig:exampleAudECDiag"
-                title="CWT with EC key in CBOR diagnostic notation.">
+                title="CWT with EC key in CBOR diagnostic notation">
             <artwork align="left"><![CDATA[
 
               {
                 3: "coap://light.example.com",
-                8 :
+                8:
                 [
                   {
                     1: 2,
@@ -557,7 +555,7 @@
 
         <t>
           <figure align="center" anchor="fig:exampleECCBOR"
-                title="CWT with EC in CBOR.">
+                title="CWT with EC in CBOR">
             <artwork align="left"><![CDATA[
 
               a2                                      # map(2)
@@ -579,14 +577,14 @@
                           bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff # "\xBA\xC5\xB1\x1C\xAD\x8F\x99\xF9\xC7+\x05\xCFK\x9E&\xD2D\xDC\x18\x9FtR(%Z!\x9A\x86\xD6\xA0\x9E\xFF"
                        22                             # negative(2)
                        58 20                          # bytes(32)
-                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # " \x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
+                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # "\x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
 
             ]]></artwork>
           </figure>
         </t>
 
         <t>
-          Size of the CWT with a EC key is 109 bytes. This is
+          Size of the CWT with an EC key is 109 bytes. This is
           then packaged signed and encrypted using COSE.
         </t>
 
@@ -596,26 +594,26 @@
       <section title="Full CWT" anchor="exampleFull">
 
         <t>
-          Full CWT with all attributes, including an extension for AIF, and EC key.
+          CWT using all claims defined by this specification, plus extensions for AIF and an EC key.
         </t>
 
         <t>
           <figure align="center" anchor="fig:exampleFullJSON"
-                title="All claim, aid and a EC key in non normative JSON.">
+                title='All claims, "aif" and EC key in non-normative JSON'>
             <artwork align="left"><![CDATA[
 
 {
    "iss": "coap://as.example.com",
    "aud": "coap://light.example.com",
-   “sub": “erikw",
+   "sub": "erikw",
    "exp": 1444064944,
-   “nbf": 1443944944,
+   "nbf": 1443944944,
    "iat": 1443944944,
-   “cti": 2929,
+   "cti": 2929,
    "cks":
      [                       // COSE_Key is a CBOR map with an array of keys
        {
-         "kty": "EC2",
+         "kty": "EC",
          "kid": "11",
          "crv": 1, // using P-384
          "x": h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
@@ -638,7 +636,7 @@
 
         <t>
           <figure align="center" anchor="fig:exampleFullDiag"
-                title="Full CWT with EC key in CBOR diagnostic notation.">
+                title="Full CWT with EC key in CBOR diagnostic notation">
             <artwork align="left"><![CDATA[
 
 {
@@ -671,7 +669,7 @@
 
         <t>
           <figure align="center" anchor="fig:exampleFullCBOR"
-                title="Full CWT with EC in CBOR.">
+                title="Full CWT with EC in CBOR">
             <artwork align="left"><![CDATA[
               a9                                      # map(9)
                  01                                   # unsigned(1)
@@ -709,7 +707,7 @@
                           bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff # "\xBA\xC5\xB1\x1C\xAD\x8F\x99\xF9\xC7+\x05\xCFK\x9E&\xD2D\xDC\x18\x9FtR(%Z!\x9A\x86\xD6\xA0\x9E\xFF"
                        22                             # negative(2)
                        58 20                          # bytes(32)
-                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # " \x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
+                          20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # "\x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
                  09                                   # unsigned(9)
                  83                                   # array(3)
                     82                                # array(2)
@@ -730,24 +728,38 @@
         </t>
 
         <t>
-          Size of the CWT with a EC key is 194 bytes. This is
+          Size of the CWT with an EC key is 194 bytes. This is
           then packaged signed and encrypted using COSE.
         </t>
 
       </section>
 
+    </section>
+
+    <section title="Acknowledgements">
+      <t>
+	A straw man proposal of CWT was written in the draft
+	"Authorization for the Internet of Things using OAuth 2.0"
+	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
+	Ludwig Seitz, Göran Selander, and Samuel Erdtman.
+      </t>
+    </section>
+
+    <section anchor="History" title="Document History">
+      <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+
+      <t>
+	-00
+        <list style="symbols">
+	  <t>
+	    Created the initial version based on draft-wahlstroem-oauth-cbor-web-token-00.
+	  </t>
+	  <t>
+	    Now reference the JWT claim definitions, rather than repeating them.
+	  </t>
+	</list>
+      </t>
 
     </section>
-<!--
-    <section title="Document updates" anchor="docUpdates">
-      <section title="Revision -01" anchor="docUpdates01">
-        <t>
-          StringOrURI is now IntStringOrURI to make tokens compact. Also added
-          example of a token.
-        </t>
-      </section>
-
-    </section>
--->
   </back>
 </rfc>
