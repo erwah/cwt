@@ -388,6 +388,7 @@
 <link href="#rfc.section.4" rel="Chapter" title="4 Summary of the values, CBOR major types and encoded claim keys"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations"/>
 <link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 CoAP Content-Format Registration"/>
 <link href="#rfc.references" rel="Chapter" title="7 Normative References"/>
 <link href="#rfc.appendix.A" rel="Chapter" title="A Examples"/>
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 CWT with &quot;aud&quot; and symmetric key"/>
@@ -403,7 +404,7 @@
 
   <meta name="dct.creator" content="Wahlstr&#246;m, E., Jones, M., and H. Tschofenig" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-wahlstroem-ace-cbor-web-token-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-12-4" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-1-30" />
   <meta name="dct.abstract" content="CBOR Web Token (CWT) is a compact means of representing claims to be transferred between two parties.  CWT is a profile of the JSON Web Token (JWT) that is optimized for constrained devices. The claims in a CWT are encoded in the Concise Binary Object Representation (CBOR) and CBOR Object Signing and Encryption (COSE) is used for added application layer security protection.  A claim is a piece of information asserted about a subject and is represented as a name/value pair consisting of a claim name and a claim value.  " />
   <meta name="description" content="CBOR Web Token (CWT) is a compact means of representing claims to be transferred between two parties.  CWT is a profile of the JSON Web Token (JWT) that is optimized for constrained devices. The claims in a CWT are encoded in the Concise Binary Object Representation (CBOR) and CBOR Object Signing and Encryption (COSE) is used for added application layer security protection.  A claim is a piece of information asserted about a subject and is represented as a name/value pair consisting of a claim name and a claim value.  " />
 
@@ -427,7 +428,7 @@
   <td class="right">M. Jones</td>
 </tr>
 <tr>
-  <td class="left">Expires: June 6, 2016</td>
+  <td class="left">Expires: August 2, 2016</td>
   <td class="right">Microsoft</td>
 </tr>
 <tr>
@@ -440,7 +441,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">December 4, 2015</td>
+  <td class="right">January 30, 2016</td>
 </tr>
 
     	
@@ -460,11 +461,11 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 6, 2016.</p>
+<p>This Internet-Draft will expire on August 2, 2016.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
-<p>Copyright (c) 2015 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2016 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -486,7 +487,8 @@
 </ul></ul><li>4.   <a href="#rfc.section.4">Summary of the values, CBOR major types and encoded claim keys</a></li>
 <li>5.   <a href="#rfc.section.5">Security Considerations</a></li>
 <li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
-<li>7.   <a href="#rfc.references">Normative References</a></li>
+<ul><li>6.1.   <a href="#rfc.section.6.1">CoAP Content-Format Registration</a></li>
+</ul><li>7.   <a href="#rfc.references">Normative References</a></li>
 <li>Appendix A.   <a href="#rfc.appendix.A">Examples</a></li>
 <ul><li>A.1.   <a href="#rfc.appendix.A.1">CWT with "aud" and symmetric key</a></li>
 <li>A.2.   <a href="#rfc.appendix.A.2">CWT with "aud" and EC key</a></li>
@@ -561,6 +563,12 @@
 <p id="rfc.section.5.p.1">The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT an adversary is able to modify, add or remove claims. Since the claims conveyed in a CWT are used to make authorization decisions it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT. Without trust of the recipient in the party that created the CWT no sensible authorization decision can be made. Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.</p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
 <p id="rfc.section.6.p.1">This section will create a registry for CWT claims, possibly relating them to the JWT Claims Registry.  </p>
+<h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> <a href="#IANACoAPContentFormatRegistration" id="IANACoAPContentFormatRegistration">CoAP Content-Format Registration</a></h1>
+<p id="rfc.section.6.1.p.1">This section registers the "application/cwt" CoAP Content-Format id in "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner described in [RFC7252].  </p>
+<p id="rfc.section.6.1.p.2">Media Type: application/cwt</p>
+<p id="rfc.section.6.1.p.3">Encoding: - </p>
+<p id="rfc.section.6.1.p.4">Id: TBD (maybe 61) </p>
+<p id="rfc.section.6.1.p.5">Reference: [draft-wahlstroem-ace-cbor-web-token]</p>
 <h1 id="rfc.references"><a href="#rfc.references">7.</a> Normative References</h1>
 <table>
   <tbody>
@@ -604,7 +612,7 @@
       <td class="reference">
         <b id="I-D.ietf-cose-msg">[7]</b>
       </td>
-      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-cose-msg-08">CBOR Encoded Message Syntax</a>", Internet-Draft draft-ietf-cose-msg-08, November 2015.</td>
+      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-cose-msg-09">CBOR Encoded Message Syntax</a>", Internet-Draft draft-ietf-cose-msg-09, December 2015.</td>
     </tr>
     <tr>
       <td class="reference">
