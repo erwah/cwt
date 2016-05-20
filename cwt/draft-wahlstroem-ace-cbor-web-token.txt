@@ -5,10 +5,10 @@
 ACE Working Group                                          E. Wahlstroem
 Internet-Draft                                          Nexus Technology
 Intended status: Informational                                  M. Jones
-Expires: August 2, 2016                                        Microsoft
+Expires: September 28, 2016                                    Microsoft
                                                            H. Tschofenig
                                                                 ARM Ltd.
-                                                        January 30, 2016
+                                                          March 27, 2016
 
 
                           CBOR Web Token (CWT)
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 2, 2016.
+   This Internet-Draft will expire on September 28, 2016.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 1]
+Wahlstroem, et al.     Expires September 28, 2016               [Page 1]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
    publication of this document.  Please review these documents
@@ -82,15 +82,18 @@ Table of Contents
        keys  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-     6.1.  CoAP Content-Format Registration  . . . . . . . . . . . .   6
-   7.  Normative References  . . . . . . . . . . . . . . . . . . . .   6
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .   7
-     A.1.  CWT with "aud" and symmetric key  . . . . . . . . . . . .   7
-     A.2.  CWT with "aud" and EC key . . . . . . . . . . . . . . . .   8
-     A.3.  Full CWT  . . . . . . . . . . . . . . . . . . . . . . . .  10
-   Appendix B.  Acknowledgements . . . . . . . . . . . . . . . . . .  13
-   Appendix C.  Document History . . . . . . . . . . . . . . . . . .  13
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  14
+     6.1.  CWT Claims Key value Registry . . . . . . . . . . . . . .   6
+       6.1.1.  Registration Template . . . . . . . . . . . . . . . .   6
+       6.1.2.  Initial Registry Contents . . . . . . . . . . . . . .   6
+     6.2.  CoAP Content-Format Registration  . . . . . . . . . . . .   7
+   7.  Normative References  . . . . . . . . . . . . . . . . . . . .   7
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .   8
+     A.1.  CWT with "aud" and symmetric key  . . . . . . . . . . . .   8
+     A.2.  CWT with "aud" and EC key . . . . . . . . . . . . . . . .  10
+     A.3.  Full CWT  . . . . . . . . . . . . . . . . . . . . . . . .  12
+   Appendix B.  Acknowledgements . . . . . . . . . . . . . . . . . .  14
+   Appendix C.  Document History . . . . . . . . . . . . . . . . . .  14
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  15
 
 1.  Introduction
 
@@ -103,17 +106,17 @@ Table of Contents
    it is considered inefficient for some Internet of Things (IoT)
    systems that use low power radio technologies.
 
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016               [Page 2]
+
+Internet-Draft               CBOR Web Token                   March 2016
+
+
    In this document an alternative encoding of claims is defined.
    Instead of using JSON, as provided by JWTs, this specification uses
    CBOR [6] and calls this new structure "CBOR Web Token (CWT)", which
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 2]
-
-Internet-Draft               CBOR Web Token                 January 2016
-
-
    is a compact means of representing secured claims to be transferred
    between two parties.  CWT is closely related to JWT.  It references
    the JWT claims and both its name and pronunciation are derived from
@@ -138,16 +141,13 @@ Internet-Draft               CBOR Web Token                 January 2016
       processing rules as the "StringOrUri" term defined in Section 2 of
       JWT [5], except that Type3StringOrURI uses CBOR major type 3
       instead of a JSON string value.
-
       FIXME: Use tag 32 for URIs?
-
    Type6NumericDate:
 
       The "Type6NumericDate" term has the same meaning, syntax, and
       processing rules as the "NumericDate" term defined in Section 2 of
       JWT [5], except that Type6NumericDate uses CBOR major type 6, with
       tag value 1, instead of a numeric JSON value.
-
    CBOR encoded claim key:
 
       The key used to identify a claim value.
@@ -165,9 +165,9 @@ Internet-Draft               CBOR Web Token                 January 2016
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 3]
+Wahlstroem, et al.     Expires September 28, 2016               [Page 3]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
    To keep CWTs as small as possible, the CBOR encoded claim keys are
@@ -221,9 +221,9 @@ Internet-Draft               CBOR Web Token                 January 2016
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 4]
+Wahlstroem, et al.     Expires September 28, 2016               [Page 4]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
 3.1.6.  iat (Issued At) Claim
@@ -277,9 +277,9 @@ Internet-Draft               CBOR Web Token                 January 2016
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 5]
+Wahlstroem, et al.     Expires September 28, 2016               [Page 5]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
 6.  IANA Considerations
@@ -287,7 +287,84 @@ Internet-Draft               CBOR Web Token                 January 2016
    This section will create a registry for CWT claims, possibly relating
    them to the JWT Claims Registry.
 
-6.1.  CoAP Content-Format Registration
+6.1.  CWT Claims Key value Registry
+
+   A new registry will be requested from IANA, entitled "CBOR encoded
+   claim key registry".  The registry is to be created as Expert Review
+   Required.
+
+6.1.1.  Registration Template
+
+   Claim name:
+      JWT name of the claim.
+   CBOR key value:
+      Key value for the claim.  The key value MUST be an integer in the
+      range of 1 to 65536.
+   CBOR major type:
+      CBOR Major type and optional tag for the claim.
+   Change Controller:
+      For Standards Track RFCs, list the "IESG".  For others, give the
+      name of the responsible party.  Other details (e.g., postal
+      address, email address, home page URI) may also be included.
+   Specification Document(s):
+      Reference to the document or documents that specify the
+      parameter,preferably including URIs that can be used to retrieve
+      copies of the documents.  An indication of the relevant sections
+      may also be included but is not required.
+
+6.1.2.  Initial Registry Contents
+
+   o  Claim name: "iss"
+   o  CBOR key value: 1
+   o  CBOR major type: 3
+   o  Change Controller: IESG
+   o  Specification Document(s): this document
+
+   o  Claim name: "sub"
+   o  CBOR key value: 2
+   o  CBOR major type: 3
+   o  Change Controller: IESG
+   o  Specification Document(s): this document
+
+   o  Claim name: "aud"
+   o  CBOR key value: 3
+   o  CBOR major type: 3
+   o  Change Controller: IESG
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016               [Page 6]
+
+Internet-Draft               CBOR Web Token                   March 2016
+
+
+   o  Specification Document(s): this document
+
+   o  Claim name: "exp"
+   o  CBOR key value: 4
+   o  CBOR major type: 6, tag value 1
+   o  Change Controller: IESG
+   o  Specification Document(s): this document
+
+   o  Claim name: "nbf"
+   o  CBOR key value: 5
+   o  CBOR major type: 6, tag value 1
+   o  Change Controller: IESG
+   o  Specification Document(s): this document
+
+   o  Claim name: "iat"
+   o  CBOR key value: 6
+   o  CBOR major type: 6, tag value 1
+   o  Change Controller: IESG
+   o  Specification Document(s): this document
+
+   o  Claim name: "cti"
+   o  CBOR key value: 7
+   o  CBOR major type: 3
+   o  Change Controller: IESG
+   o  Specification Document(s): this document
+
+6.2.  CoAP Content-Format Registration
 
    This section registers the "application/cwt" CoAP Content-Format id
    in "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner
@@ -307,6 +384,15 @@ Internet-Draft               CBOR Web Token                 January 2016
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <http://www.rfc-editor.org/info/rfc2119>.
+
+
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016               [Page 7]
+
+Internet-Draft               CBOR Web Token                   March 2016
+
 
    [2]        Bray, T., Ed., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, DOI 10.17487/RFC7159, March
@@ -329,14 +415,7 @@ Internet-Draft               CBOR Web Token                 January 2016
               October 2013, <http://www.rfc-editor.org/info/rfc7049>.
 
    [7]        Schaad, J., "CBOR Encoded Message Syntax", draft-ietf-
-              cose-msg-09 (work in progress), December 2015.
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 6]
-
-Internet-Draft               CBOR Web Token                 January 2016
-
+              cose-msg-11 (work in progress), March 2016.
 
    [8]        Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
               H. Tschofenig, "Authorization for the Internet of Things
@@ -353,6 +432,22 @@ A.1.  CWT with "aud" and symmetric key
    "cks" claim (defined elsewhere).  This means that "iss", "alg",
    "key_ops" and others are pre-established and assumed.  This would
    look like this non-normative JSON.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016               [Page 8]
+
+Internet-Draft               CBOR Web Token                   March 2016
 
 
 {
@@ -374,26 +469,6 @@ A.1.  CWT with "aud" and symmetric key
    diagnostic notation:
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 7]
-
-Internet-Draft               CBOR Web Token                 January 2016
-
-
    {
      3: "coap://light.example.com",
      8:
@@ -409,6 +484,26 @@ Internet-Draft               CBOR Web Token                 January 2016
                  Figure 3: CWT in CBOR diagnostic notation
 
    Defined in CBOR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016               [Page 9]
+
+Internet-Draft               CBOR Web Token                   March 2016
 
 
 a2                                      # map(2)
@@ -436,20 +531,6 @@ A.2.  CWT with "aud" and EC key
    "kid" set to "11".
 
 
-
-
-
-
-
-
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 8]
-
-Internet-Draft               CBOR Web Token                 January 2016
-
-
 {
   "aud": "coap://light.example.com",
   "cks":
@@ -472,6 +553,15 @@ Internet-Draft               CBOR Web Token                 January 2016
    diagnostic notation:
 
 
+
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016              [Page 10]
+
+Internet-Draft               CBOR Web Token                   March 2016
+
+
 {
   3: "coap://light.example.com",
   8:
@@ -490,20 +580,6 @@ Internet-Draft               CBOR Web Token                 January 2016
            Figure 6: CWT with EC key in CBOR diagnostic notation
 
    Defined in CBOR.
-
-
-
-
-
-
-
-
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                 [Page 9]
-
-Internet-Draft               CBOR Web Token                 January 2016
 
 
 a2                                      # map(2)
@@ -533,33 +609,19 @@ a2                                      # map(2)
    Size of the CWT with an EC key is 109 bytes.  This is then packaged
    signed and encrypted using COSE.
 
+
+
+
+
+Wahlstroem, et al.     Expires September 28, 2016              [Page 11]
+
+Internet-Draft               CBOR Web Token                   March 2016
+
+
 A.3.  Full CWT
 
    CWT using all claims defined by this specification, plus extensions
    for AIF and an EC key.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                [Page 10]
-
-Internet-Draft               CBOR Web Token                 January 2016
 
 
 {
@@ -607,15 +669,9 @@ Internet-Draft               CBOR Web Token                 January 2016
 
 
 
-
-
-
-
-
-
-Wahlstroem, et al.       Expires August 2, 2016                [Page 11]
+Wahlstroem, et al.     Expires September 28, 2016              [Page 12]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
 {
@@ -669,9 +725,9 @@ a9                                      # map(9)
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                [Page 12]
+Wahlstroem, et al.     Expires September 28, 2016              [Page 13]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
    81                                   # array(1)
@@ -725,14 +781,13 @@ Appendix C.  Document History
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                [Page 13]
+Wahlstroem, et al.     Expires September 28, 2016              [Page 14]
 
-Internet-Draft               CBOR Web Token                 January 2016
+Internet-Draft               CBOR Web Token                   March 2016
 
 
    o  Created the initial version based on draft-wahlstroem-oauth-cbor-
       web-token-00.
-
    o  Now reference the JWT claim definitions, rather than repeating
       them.
 
@@ -781,4 +836,5 @@ Authors' Addresses
 
 
 
-Wahlstroem, et al.       Expires August 2, 2016                [Page 14]
+
+Wahlstroem, et al.     Expires September 28, 2016              [Page 15]
