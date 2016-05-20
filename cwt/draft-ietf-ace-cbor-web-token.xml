@@ -14,7 +14,7 @@
 <?rfc compact="no"?>
 <?rfc subcompact="no"?>
 
-<rfc category="info" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-00">
+<rfc category="info" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-01">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -365,6 +365,17 @@
     <t>
       This section will create a registry for CWT claims, possibly relating them to the JWT Claims Registry.
     </t>
+    <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Format Registration">
+        <t>
+          This section registers the "application/cwt" CoAP Content-Format ID in the
+          "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner described
+          in [RFC7252].
+        </t>
+        <t>Media Type: application/cwt</t>
+        <t>Encoding: - </t>
+        <t>Id: TBD (maybe 61) </t>
+        <t>Reference: [draft-ietf-ace-cbor-web-token]</t>
+      </section>
 
     </section>
 
@@ -743,10 +754,26 @@ a9                                      # map(9)
 	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
 	Ludwig Seitz, Göran Selander, and Samuel Erdtman.
       </t>
+      <t>
+	The following individuals contributed ideas,
+	feedback, and wording that influenced this specification:
+      </t>
+      <t>
+	Samuel Erdtman.
+      </t>
     </section>
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+
+      <t>
+	-01
+        <list style="symbols">
+	  <t>
+	    Added an IANA Registration for the application/cwt CoAP content-format type.
+	  </t>
+	</list>
+      </t>
 
       <t>
 	-00
