@@ -388,7 +388,10 @@
 <link href="#rfc.section.4" rel="Chapter" title="4 Summary of the values, CBOR major types and encoded claim keys"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations"/>
 <link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
-<link href="#rfc.section.6.1" rel="Chapter" title="6.1 CoAP Content-Format Registration"/>
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 CWT Claims Key value Registry"/>
+<link href="#rfc.section.6.1.1" rel="Chapter" title="6.1.1 Registration Template"/>
+<link href="#rfc.section.6.1.2" rel="Chapter" title="6.1.2 Initial Registry Contents"/>
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 CoAP Content-Format Registration"/>
 <link href="#rfc.references" rel="Chapter" title="7 Normative References"/>
 <link href="#rfc.appendix.A" rel="Chapter" title="A Examples"/>
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 CWT with &quot;aud&quot; and symmetric key"/>
@@ -404,7 +407,7 @@
 
   <meta name="dct.creator" content="Wahlstr&#246;m, E., Jones, M., and H. Tschofenig" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-wahlstroem-ace-cbor-web-token-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-1-30" />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-3-27" />
   <meta name="dct.abstract" content="CBOR Web Token (CWT) is a compact means of representing claims to be transferred between two parties.  CWT is a profile of the JSON Web Token (JWT) that is optimized for constrained devices. The claims in a CWT are encoded in the Concise Binary Object Representation (CBOR) and CBOR Object Signing and Encryption (COSE) is used for added application layer security protection.  A claim is a piece of information asserted about a subject and is represented as a name/value pair consisting of a claim name and a claim value.  " />
   <meta name="description" content="CBOR Web Token (CWT) is a compact means of representing claims to be transferred between two parties.  CWT is a profile of the JSON Web Token (JWT) that is optimized for constrained devices. The claims in a CWT are encoded in the Concise Binary Object Representation (CBOR) and CBOR Object Signing and Encryption (COSE) is used for added application layer security protection.  A claim is a piece of information asserted about a subject and is represented as a name/value pair consisting of a claim name and a claim value.  " />
 
@@ -428,7 +431,7 @@
   <td class="right">M. Jones</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 2, 2016</td>
+  <td class="left">Expires: September 28, 2016</td>
   <td class="right">Microsoft</td>
 </tr>
 <tr>
@@ -441,7 +444,7 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">January 30, 2016</td>
+  <td class="right">March 27, 2016</td>
 </tr>
 
     	
@@ -461,7 +464,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 2, 2016.</p>
+<p>This Internet-Draft will expire on September 28, 2016.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -487,7 +490,10 @@
 </ul></ul><li>4.   <a href="#rfc.section.4">Summary of the values, CBOR major types and encoded claim keys</a></li>
 <li>5.   <a href="#rfc.section.5">Security Considerations</a></li>
 <li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
-<ul><li>6.1.   <a href="#rfc.section.6.1">CoAP Content-Format Registration</a></li>
+<ul><li>6.1.   <a href="#rfc.section.6.1">CWT Claims Key value Registry</a></li>
+<ul><li>6.1.1.   <a href="#rfc.section.6.1.1">Registration Template</a></li>
+<li>6.1.2.   <a href="#rfc.section.6.1.2">Initial Registry Contents</a></li>
+</ul><li>6.2.   <a href="#rfc.section.6.2">CoAP Content-Format Registration</a></li>
 </ul><li>7.   <a href="#rfc.references">Normative References</a></li>
 <li>Appendix A.   <a href="#rfc.appendix.A">Examples</a></li>
 <ul><li>A.1.   <a href="#rfc.appendix.A.1">CWT with "aud" and symmetric key</a></li>
@@ -563,12 +569,109 @@
 <p id="rfc.section.5.p.1">The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT an adversary is able to modify, add or remove claims. Since the claims conveyed in a CWT are used to make authorization decisions it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT. Without trust of the recipient in the party that created the CWT no sensible authorization decision can be made. Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.</p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
 <p id="rfc.section.6.p.1">This section will create a registry for CWT claims, possibly relating them to the JWT Claims Registry.  </p>
-<h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> <a href="#IANACoAPContentFormatRegistration" id="IANACoAPContentFormatRegistration">CoAP Content-Format Registration</a></h1>
-<p id="rfc.section.6.1.p.1">This section registers the "application/cwt" CoAP Content-Format id in "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner described in [RFC7252].  </p>
-<p id="rfc.section.6.1.p.2">Media Type: application/cwt</p>
-<p id="rfc.section.6.1.p.3">Encoding: - </p>
-<p id="rfc.section.6.1.p.4">Id: TBD (maybe 61) </p>
-<p id="rfc.section.6.1.p.5">Reference: [draft-wahlstroem-ace-cbor-web-token]</p>
+<h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> <a href="#IANACWTClaimsKeyRegistry" id="IANACWTClaimsKeyRegistry">CWT Claims Key value Registry</a></h1>
+<p id="rfc.section.6.1.p.1">A new registry will be requested from IANA, entitled "CBOR encoded claim key registry".  The registry is to be created as Expert Review Required.</p>
+<h1 id="rfc.section.6.1.1"><a href="#rfc.section.6.1.1">6.1.1.</a> <a href="#IANACWTClaimsKeyRegistryTemplate" id="IANACWTClaimsKeyRegistryTemplate">Registration Template</a></h1>
+<p/>
+
+<dl>
+  <dt>Claim name:</dt>
+  <dd style="margin-left: 8"><br/> JWT name of the claim.  </dd>
+  <dt>CBOR key value:</dt>
+  <dd style="margin-left: 8"><br/> Key value for the claim.  The key value MUST be an integer in the range of 1 to 65536.  </dd>
+  <dt>CBOR major type:</dt>
+  <dd style="margin-left: 8"><br/> CBOR Major type and optional tag for the claim.  </dd>
+  <dt>Change Controller:</dt>
+  <dd style="margin-left: 8"><br/> For Standards Track RFCs, list the "IESG". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.  </dd>
+  <dt>Specification Document(s):</dt>
+  <dd style="margin-left: 8"><br/> Reference to the document or documents that specify the parameter,preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.  </dd>
+</dl>
+
+<p> </p>
+<h1 id="rfc.section.6.1.2"><a href="#rfc.section.6.1.2">6.1.2.</a> <a href="#IANACWTClaimsKeyRegistryInitial" id="IANACWTClaimsKeyRegistryInitial">Initial Registry Contents</a></h1>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>iss</samp></li>
+  <li>CBOR key value: 1</li>
+  <li>CBOR major type: 3</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>sub</samp></li>
+  <li>CBOR key value: 2</li>
+  <li>CBOR major type: 3</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>aud</samp></li>
+  <li>CBOR key value: 3</li>
+  <li>CBOR major type: 3</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>exp</samp></li>
+  <li>CBOR key value: 4</li>
+  <li>CBOR major type: 6, tag value 1</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>nbf</samp></li>
+  <li>CBOR key value: 5</li>
+  <li>CBOR major type: 6, tag value 1</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>iat</samp></li>
+  <li>CBOR key value: 6</li>
+  <li>CBOR major type: 6, tag value 1</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<p/>
+
+<ul>
+  <li>Claim name: <samp>cti</samp></li>
+  <li>CBOR key value: 7</li>
+  <li>CBOR major type: 3</li>
+  <li>Change Controller: IESG</li>
+  <li>Specification Document(s): this document</li>
+</ul>
+
+<p> </p>
+<h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> <a href="#IANACoAPContentFormatRegistration" id="IANACoAPContentFormatRegistration">CoAP Content-Format Registration</a></h1>
+<p id="rfc.section.6.2.p.1">This section registers the "application/cwt" CoAP Content-Format id in "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner described in [RFC7252].  </p>
+<p id="rfc.section.6.2.p.2">Media Type: application/cwt</p>
+<p id="rfc.section.6.2.p.3">Encoding: - </p>
+<p id="rfc.section.6.2.p.4">Id: TBD (maybe 61) </p>
+<p id="rfc.section.6.2.p.5">Reference: [draft-wahlstroem-ace-cbor-web-token]</p>
 <h1 id="rfc.references"><a href="#rfc.references">7.</a> Normative References</h1>
 <table>
   <tbody>
@@ -612,7 +715,7 @@
       <td class="reference">
         <b id="I-D.ietf-cose-msg">[7]</b>
       </td>
-      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-cose-msg-09">CBOR Encoded Message Syntax</a>", Internet-Draft draft-ietf-cose-msg-09, December 2015.</td>
+      <td class="top"><a>Schaad, J.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-cose-msg-11">CBOR Encoded Message Syntax</a>", Internet-Draft draft-ietf-cose-msg-11, March 2016.</td>
     </tr>
     <tr>
       <td class="reference">
