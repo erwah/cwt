@@ -365,6 +365,111 @@
     <t>
       This section will create a registry for CWT claims, possibly relating them to the JWT Claims Registry.
     </t>
+    <section anchor="IANACWTClaimsKeyRegistry" title="CWT Claims Key value Registry">
+      <t>A new registry will be requested from IANA, entitled "CBOR encoded claim key registry".  The registry is to be created as Expert Review Required.</t>
+
+      <section anchor="IANACWTClaimsKeyRegistryTemplate" title="Registration Template">
+        <t>
+          <list style='hanging'>
+            <t hangText='Claim name:'>
+              <vspace/>
+              JWT name of the claim.
+            </t>
+            <t hangText='CBOR key value:'>
+              <vspace/>
+              Key value for the claim.  The key value MUST be an integer in the range of 1 to 65536.
+            </t>
+            <t hangText='CBOR major type:'>
+              <vspace/>
+              CBOR Major type and optional tag for the claim.
+            </t>
+            <t hangText='Change Controller:'>
+              <vspace/>
+              For Standards Track RFCs, list the "IESG". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
+            </t>
+            <t hangText='Specification Document(s):'>
+              <vspace/>
+              Reference to the document or documents that specify the parameter,preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
+            </t>
+          </list>
+        </t>
+      </section>
+
+      <section anchor="IANACWTClaimsKeyRegistryInitial" title="Initial Registry Contents">
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">iss</spanx></t>
+            <t>CBOR key value: 1</t>
+            <t>CBOR major type: 3</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">sub</spanx></t>
+            <t>CBOR key value: 2</t>
+            <t>CBOR major type: 3</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">aud</spanx></t>
+            <t>CBOR key value: 3</t>
+            <t>CBOR major type: 3</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">exp</spanx></t>
+            <t>CBOR key value: 4</t>
+            <t>CBOR major type: 6, tag value 1</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">nbf</spanx></t>
+            <t>CBOR key value: 5</t>
+            <t>CBOR major type: 6, tag value 1</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">iat</spanx></t>
+            <t>CBOR key value: 6</t>
+            <t>CBOR major type: 6, tag value 1</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+        <t>
+          <?rfc subcompact="yes"?>
+          <list style='symbols'>
+            <t>Claim name: <spanx style="verb">cti</spanx></t>
+            <t>CBOR key value: 7</t>
+            <t>CBOR major type: 3</t>
+            <t>Change Controller: IESG</t>
+            <t>Specification Document(s): this document</t>
+          </list>
+        </t>
+
+      </section>
+    </section>
+
     <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Format Registration">
         <t>
           This section registers the "application/cwt" CoAP Content-Format ID in the
@@ -770,7 +875,10 @@ a9                                      # map(9)
 	-01
         <list style="symbols">
 	  <t>
-	    Added an IANA Registration for the application/cwt CoAP content-format type.
+	    Added IANA registration for CWT Claims.
+	  </t>
+	  <t>
+	    Added IANA registration for the application/cwt CoAP content-format type.
 	  </t>
 	</list>
       </t>
