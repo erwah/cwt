@@ -357,7 +357,7 @@
           <t>
               If a nested signing, MACing or encryption operation will be performed, let the Message be the COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and return to Step 3, using "content type" header value of "CWT" in the new COSE Header created in that step.
             <vspace/>
-              Note: If a integrity (signing/MACing) and confidentiality (encryption) protection is needed it is recommended to use an authenticated encryption algorithm to save space and processing.
+              Note: If integrity (signing/MACing) and confidentiality (encryption) protection are needed, it is recommended to use an authenticated encryption algorithm to save space and processing.
           </t>
         </list>
       </t>
@@ -381,13 +381,13 @@
               Depending upon whether the CWT is a COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, there are three cases:
               <list style="symbols">
                 <t>
-                  If the CWT is a COSE_Sign/COSE_Sign1, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 4 ,Signing Objects, for validating a COSE_Sign/COSE_Sign1 object.  Let the Message be the COSE_Sign/COSE_Sign1 payload.
+                  If the CWT is a COSE_Sign/COSE_Sign1, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 4 (Signing Objects) for validating a COSE_Sign/COSE_Sign1 object.  Let the Message be the COSE_Sign/COSE_Sign1 payload.
                 </t>
                 <t>
-                  Else, if the CWT is a COSE_Mac/COSE_Mac0, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 6 ,MAC Objects, for validating a COSE_Mac/COSE_Mac0 object.  Let the Message be the COSE_Mac/COSE_Mac0 payload.
+                  Else, if the CWT is a COSE_Mac/COSE_Mac0, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 6 (MAC Objects) for validating a COSE_Mac/COSE_Mac0 object.  Let the Message be the COSE_Mac/COSE_Mac0 payload.
                 </t>
                 <t>
-                  Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 5, Encryption Objects, for validating a COSE_Encrypt/COSE_Encrypt0 object.  Let the Message be the resulting plaintext.
+                  Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 5 (Encryption Objects) for validating a COSE_Encrypt/COSE_Encrypt0 object.  Let the Message be the resulting plaintext.
                 </t>
               </list>
             </t>
