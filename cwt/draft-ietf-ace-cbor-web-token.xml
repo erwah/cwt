@@ -254,7 +254,7 @@
               The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
               and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
               4.1.7 of JWT <xref target="RFC7519" />, except that the format
-              MUST be of major type 3 with a case-sensitive string value. The
+              MUST be of major type 2, binary string. The
               CBOR encoded claim key 7 MUST be used to identify this claim.
             </t>
           </section>
@@ -295,7 +295,7 @@
 | exp     | 4                      | 6 tag value 1            |
 | nbf     | 5                      | 6 tag value 1            |
 | iat     | 6                      | 6 tag value 1            |
-| cti     | 7                      | 3                        |
+| cti     | 7                      | 2                        |
 \---------+------------------------+--------------------------/
 ]]></artwork>
 <!--
@@ -495,7 +495,7 @@
 	      <t>Claim Description: CWT ID</t>
 	      <t>JWT Claim Name: <spanx style="verb">jti</spanx></t>
 	      <t>CBOR Key Value: 7</t>
-	      <t>CBOR Major Type: 3</t>
+	      <t>CBOR Major Type: 2</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNcti"/> of [[ this specification ]]</t>
 	    </list>
