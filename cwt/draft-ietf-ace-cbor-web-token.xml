@@ -54,7 +54,7 @@
       </address>
     </author>
 
-    <date day="20" month="May" year="2016" />
+    <date day="5" month="July" year="2016" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -87,7 +87,7 @@
 
     <!-- ====================================================================== -->
 
-    <section anchor="introduction" title="Introduction">
+    <section anchor="Introduction" title="Introduction">
 
       <t>
         The JSON Web Token (JWT) <xref target="RFC7519"/> is a standardized security token format
@@ -121,7 +121,7 @@
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
 
-    <section title="Terminology">
+    <section anchor="Terminology" title="Terminology">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
        document are to be interpreted as described in "Key words for use in
@@ -162,7 +162,7 @@
 
     </section>
 
-    <section title="Claims">
+    <section anchor="Claims" title="Claims">
       <t>
         The set of claims that a CWT must contain to be considered valid is
         context dependent and is outside the scope of this specification.
@@ -344,7 +344,7 @@
     </section>
 
 
-	  <section title="Data Type Mapping">
+	  <section anchor="DataTypeMapping" title="Data Type Mapping">
 
       <t>The data types listed along with the claim definitions in <xref target="claims"/> need to be mapped to data types available with CBOR. This document has not yet attempted to provide such mapping.</t>
 
@@ -352,7 +352,7 @@
   -->
 
 
-    <section title="Security Considerations">
+    <section anchor="Security" title="Security Considerations">
 
       <t>The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT an adversary is able to modify, add or remove claims. Since the claims conveyed in a CWT are used to make authorization decisions it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT. Without trust of the recipient in the party that created the CWT no sensible authorization decision can be made. Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.</t>
 
@@ -360,126 +360,171 @@
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
 
-    <section anchor="iana" title="IANA Considerations">
+    <section anchor="IANA" title="IANA Considerations">
 
-    <t>
-      This section will create a registry for CWT claims, possibly relating them to the JWT Claims Registry.
-    </t>
-    <section anchor="IANACWTClaimsKeyRegistry" title="CWT Claims Key value Registry">
-      <t>A new registry will be requested from IANA, entitled "CBOR encoded claim key registry".  The registry is to be created as Expert Review Required.</t>
+      <section anchor="IANACWTClaimsRegistry" title="CBOR Web Token (CWT) Claims Registry">
+	<t>
+	  This section establishes the
+	  IANA "CBOR Web Token (CWT) Claims" registry.
+	</t>
+	<t>
+	  Values are registered on a Specification Required
+	  <xref target="RFC5226"/> basis, on the advice of one or more Designated Experts.
+	  However, to allow for the
+	  allocation of values prior to publication, the Designated Experts may approve
+	  registration once they are satisfied that such a specification will be published.
+	</t>
+	<t>
+	  Criteria that should be applied by the Designated Experts includes
+	  determining whether the proposed registration duplicates existing functionality,
+	  whether it is likely to be of general applicability
+	  or whether it is useful only for a single application,
+	  and whether the registration description is clear.
+	</t>
 
-      <section anchor="IANACWTClaimsKeyRegistryTemplate" title="Registration Template">
-        <t>
-          <list style='hanging'>
-            <t hangText='Claim name:'>
-              <vspace/>
-              JWT name of the claim.
-            </t>
-            <t hangText='CBOR key value:'>
-              <vspace/>
-              Key value for the claim.  The key value MUST be an integer in the range of 1 to 65536.
-            </t>
-            <t hangText='CBOR major type:'>
-              <vspace/>
-              CBOR Major type and optional tag for the claim.
-            </t>
-            <t hangText='Change Controller:'>
-              <vspace/>
-              For Standards Track RFCs, list the "IESG". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
-            </t>
-            <t hangText='Specification Document(s):'>
-              <vspace/>
-              Reference to the document or documents that specify the parameter,preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
-            </t>
-          </list>
-        </t>
+	<section anchor="IANACWTClaimsKeyRegistryTemplate" title="Registration Template">
+	  <t>
+	    <list style='hanging'>
+	      <t hangText='Claim Name:'>
+                <vspace/>
+                The human-readable name requested (e.g., "iss").
+              </t>
+              <t hangText='Claim Description:'>
+                <vspace/>
+                Brief description of the claim (e.g., "Issuer").
+              </t>
+	      <t hangText='JWT Claim Name:'>
+		<vspace/>
+		Claim Name of the equivalent JWT claim as registered in <xref target="IANA.JWT.Claims"/>.
+		CWT claims should normally have a corresponding JWT claim.
+		If a corresponding JWT claim would not make sense,
+		the Designated Experts can choose to accept registrations
+		for which the JWT Claim Name is listed as "N/A".
+	      </t>
+	      <t hangText='CBOR Key Value:'>
+		<vspace/>
+		Key value for the claim.  The key value MUST be an integer in the range of 1 to 65536.
+	      </t>
+	      <t hangText='CBOR Major Type:'>
+		<vspace/>
+		CBOR Major type and optional tag for the claim.
+	      </t>
+	      <t hangText='Change Controller:'>
+		<vspace/>
+		For Standards Track RFCs, list the "IESG". For others, give the name of the responsible party. Other details (e.g., postal address, email address, home page URI) may also be included.
+	      </t>
+	      <t hangText='Specification Document(s):'>
+		<vspace/>
+		Reference to the document or documents that specify the parameter, preferably including URIs that can be used to retrieve copies of the documents. An indication of the relevant sections may also be included but is not required.
+	      </t>
+	    </list>
+	  </t>
+	</section>
+
+	<section anchor="IANACWTClaimsKeyRegistryInitial" title="Initial Registry Contents">
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">iss</spanx></t>
+	      <t>Claim Description: Issuer</t>
+	      <t>JWT Claim Name: <spanx style="verb">iss</spanx></t>
+	      <t>CBOR Key Value: 1</t>
+	      <t>CBOR Major Type: 3</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNiss"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">sub</spanx></t>
+	      <t>Claim Description: Subject</t>
+	      <t>JWT Claim Name: <spanx style="verb">sub</spanx></t>
+	      <t>CBOR Key Value: 2</t>
+	      <t>CBOR Major Type: 3</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNsub"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">aud</spanx></t>
+	      <t>Claim Description: Audience</t>
+	      <t>JWT Claim Name: <spanx style="verb">aud</spanx></t>
+	      <t>CBOR Key Value: 3</t>
+	      <t>CBOR Major Type: 3</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNaud"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">exp</spanx></t>
+	      <t>Claim Description: Expiration Time</t>
+	      <t>JWT Claim Name: <spanx style="verb">exp</spanx></t>
+	      <t>CBOR Key Value: 4</t>
+	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNexp"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">nbf</spanx></t>
+	      <t>Claim Description: Not Before</t>
+	      <t>JWT Claim Name: <spanx style="verb">nbf</spanx></t>
+	      <t>CBOR Key Value: 5</t>
+	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNnbf"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">iat</spanx></t>
+	      <t>Claim Description: Issued At</t>
+	      <t>JWT Claim Name: <spanx style="verb">iat</spanx></t>
+	      <t>CBOR Key Value: 6</t>
+	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNiat"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
+	    <list style='symbols'>
+	      <t>Claim Name: <spanx style="verb">cti</spanx></t>
+	      <t>Claim Description: CWT ID</t>
+	      <t>JWT Claim Name: <spanx style="verb">jti</spanx></t>
+	      <t>CBOR Key Value: 7</t>
+	      <t>CBOR Major Type: 2</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): <xref target="CWTCNcti"/> of [[ this specification ]]</t>
+	    </list>
+	  </t>
+
+	</section>
+	<?rfc subcompact="no"?>
+
       </section>
 
-      <section anchor="IANACWTClaimsKeyRegistryInitial" title="Initial Registry Contents">
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">iss</spanx></t>
-            <t>CBOR key value: 1</t>
-            <t>CBOR major type: 3</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">sub</spanx></t>
-            <t>CBOR key value: 2</t>
-            <t>CBOR major type: 3</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">aud</spanx></t>
-            <t>CBOR key value: 3</t>
-            <t>CBOR major type: 3</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">exp</spanx></t>
-            <t>CBOR key value: 4</t>
-            <t>CBOR major type: 6, tag value 1</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">nbf</spanx></t>
-            <t>CBOR key value: 5</t>
-            <t>CBOR major type: 6, tag value 1</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">iat</spanx></t>
-            <t>CBOR key value: 6</t>
-            <t>CBOR major type: 6, tag value 1</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-        <t>
-          <?rfc subcompact="yes"?>
-          <list style='symbols'>
-            <t>Claim name: <spanx style="verb">cti</spanx></t>
-            <t>CBOR key value: 7</t>
-            <t>CBOR major type: 2</t>
-            <t>Change Controller: IESG</t>
-            <t>Specification Document(s): this document</t>
-          </list>
-        </t>
-
-      </section>
-    </section>
-
-    <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Format Registration">
+      <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Format Registration">
         <t>
           This section registers the "application/cwt" CoAP Content-Format ID in the
           "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner described
-          in [RFC7252].
+          in <xref target="RFC7252"/>.
         </t>
-        <t>Media Type: application/cwt</t>
-        <t>Encoding: - </t>
-        <t>Id: TBD (maybe 61) </t>
-        <t>Reference: [draft-ietf-ace-cbor-web-token]</t>
+
+	<section anchor="CoAPreg" title="Registry Contents">
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style='symbols'>
+	      <t>Media Type: application/cwt</t>
+	      <t>Encoding: - </t>
+	      <t>Id: TBD (maybe 61) </t>
+	      <t>Reference: [[ this specification ]]</t>
+	    </list>
+	  </t>
+	</section>
+	<?rfc subcompact="no"?>
       </section>
 
     </section>
@@ -491,23 +536,34 @@
   <back>
     <references title='Normative References'>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7252.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7515.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
 
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-cose-msg"?>
+
+      <reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
+        <front>
+          <title>JSON Web Token Claims</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
+    </references>
+
+
+    <references title='Informative References'>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.seitz-ace-oauth-authz"?>
     </references>
 
-
-    <!--
-    <references title='Informative References'>
-    </references>
-    -->
-
-    <section title="Examples">
+    <section anchor="Examples" title="Examples">
       <t>Three examples of CWTs follow.</t>
 
       <section title='CWT with "aud" and symmetric key'
@@ -852,7 +908,7 @@ a9                                      # map(9)
 
     </section>
 
-    <section title="Acknowledgements">
+    <section anchor="Acknowledgements" title="Acknowledgements">
       <t>
 	A straw man proposal of CWT was written in the draft
 	"Authorization for the Internet of Things using OAuth 2.0"
