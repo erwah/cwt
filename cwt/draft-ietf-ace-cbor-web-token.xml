@@ -310,40 +310,86 @@
       </t>
 
     </section>
+    <section anchor="CreatingValidatingCWTs" title="Creating and Validating CWTs">
+
+      <section anchor="CreatingCWT" title="Creating a CWT">
+        <t>
+          To create a CWT, the following steps are performed.  The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.
+        </t>
+        <t>
+        <list style="numbers">
+          <t>
+            Create a CWT Claims Set containing the desired claims.
+          </t>
+          <t>
+            Let the Message be the binary representation of the CWT Claims Set.
+          </t>
+          <t>
+            Create a COSE Header containing the desired set of Header Parameters.  The CWT Header MUST be a valid according to the <xref target="I-D.ietf-cose-msg"/> specification.
+          </t>
+          <t>
+            Depending upon whether the CWT is signed, MACed or encrypted, there are three cases:
+            <list style="symbols">
+              <t>
+                If the CWT is signed, create a COSE_Sign/COSE_Sign1 object using the Message as the COSE_Sign/COSE_Sign1 Payload; all steps specified in <xref target="I-D.ietf-cose-msg" /> for creating a COSE_Sign/COSE_Sign1 object MUST be followed.
+              </t>
+              <t>
+                Else, if the CWT is MACed, create a COSE_Mac/COSE_Mac0 object using the Message as the COSE_Mac/COSE_Mac0 Payload; all steps specified in <xref target="I-D.ietf-cose-msg" /> for creating a COSE_Mac/COSE_Mac0 object MUST be followed.
+              </t>
+              <t>
+                Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object, create a COSE_Encrypt/COSE_Encrypt0 using the Message as the plaintext for the COSE_Encrypt/COSE_Encrypt0 object; all steps specified in <xref target="I-D.ietf-cose-msg" /> for creating a COSE_Encrypt/COSE_Encrypt0 object MUST be followed.
+              </t>
+            </list>
+          </t>
+          <t>
+              If a nested signing, MACing or encryption operation will be performed, let the Message be the COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and return to Step 3, using "content type" header value of "CWT" in the new COSE Header created in that step.
+            <vspace/>
+              Note: If a integrity (signing/MACing) and confidentiality (encryption) protection is needed it is recommended to use an authenticated encryption algorithm to save space and processing.
+          </t>
+        </list>
+      </t>
+      </section>
+      <section anchor="ValidatingCWT" title="Validating a CWT">
+        <t>
+          When validating a CWT, the following steps are performed.  The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.  If any of the listed steps fail, then the CWT MUST be rejected -- that is, treated by the application as an invalid input.
+        </t>
+        <t>
+          <list style="numbers">
+            <t>
+              Verify that the CWT is a valid CBOR object.
+            </t>
+            <t>
+              Verify that the resulting COSE Header includes only parameters and values whose syntax and semantics are both understood and supported or that are specified as being ignored when not understood.
+            </t>
+            <t>
+              Use the CBOR tag to determine the type the CWT, COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0.
+            </t>
+            <t>
+              Depending upon whether the CWT is a COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, there are three cases:
+              <list style="symbols">
+                <t>
+                  If the CWT is a COSE_Sign/COSE_Sign1, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 4 ,Signing Objects, for validating a COSE_Sign/COSE_Sign1 object.  Let the Message be the COSE_Sign/COSE_Sign1 payload.
+                </t>
+                <t>
+                  Else, if the CWT is a COSE_Mac/COSE_Mac0, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 6 ,MAC Objects, for validating a COSE_Mac/COSE_Mac0 object.  Let the Message be the COSE_Mac/COSE_Mac0 payload.
+                </t>
+                <t>
+                  Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 5, Encryption Objects, for validating a COSE_Encrypt/COSE_Encrypt0 object.  Let the Message be the resulting plaintext.
+                </t>
+              </list>
+            </t>
+            <t>
+              If the JOSE Header contains a "content type" value of "CWT", then the Message is a CWT that was the subject of nested signing or encryption operations.  In this case, return to Step 1, using the Message as the CWT.
+            </t>
+            <t>
+              Verify that the Message is a valid CBOR object; let the CWT Claims Set be this CBOR object.
+            </t>
+          </list>
+        </t>
+      </section>
+    </section>
 
 <!--
-    <section anchor="CWTCreation" title="CWT creation">
-
-      <t>TBD</t>
-
-      <t>
-        Rewrite section 7 from  <xref target="RFC7519"/>.
-      </t>
-
-      <t>
-        Reference section 4.2 in  <xref target="I-D.ietf-cose-msg" /> for
-        descriptions on how to sign and encrypt the claims.
-      </t>
-
-    </section>
-
-    <section anchor="CWTValidation" title="CWT validation">
-
-      <t>TBD</t>
-
-      <t>
-        Rewrite section 7 from  <xref target="RFC7519"/>.
-      </t>
-
-      <t>
-        Reference section 4.2 in  <xref target="I-D.ietf-cose-msg" /> for
-        descriptions on how to sign and encrypt the claims.
-      </t>
-
-
-    </section>
-
-
 	  <section anchor="DataTypeMapping" title="Data Type Mapping">
 
       <t>The data types listed along with the claim definitions in <xref target="claims"/> need to be mapped to data types available with CBOR. This document has not yet attempted to provide such mapping.</t>
