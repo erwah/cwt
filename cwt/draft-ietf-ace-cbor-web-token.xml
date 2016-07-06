@@ -3,15 +3,11 @@
 
 <?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
 <?rfc toc="yes"?>
-<?rfc tocompact="yes"?>
 <?rfc tocdepth="4"?>
-<?rfc tocindent="yes"?>
-<?rfc symrefs="no"?>
+<?rfc symrefs="yes"?>
 <?rfc sortrefs="yes"?>
-<?rfc comments="yes"?>
-<?rfc inline="yes"?>
-<?rfc strict="no"?>
-<?rfc compact="no"?>
+<?rfc strict="yes"?>
+<?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
 <rfc category="info" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-01">
@@ -20,7 +16,7 @@
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
 
     <author initials="E." surname="Wahlström" fullname="Erik Wahlström">
-      <organization>Nexus Technology</organization>
+      <organization></organization>
       <address>
         <postal>
           <street></street>
@@ -29,8 +25,7 @@
           <country>Sweden</country>
         </postal>
         <phone></phone>
-        <email>erik.wahlstrom@nexusgroup.com</email>
-        <uri>https://www.nexusgroup.com</uri>
+        <email>erik@wahlstromstekniska.se</email>
       </address>
     </author>
 
@@ -54,7 +49,22 @@
       </address>
     </author>
 
-    <date day="5" month="July" year="2016" />
+    <author fullname="Samuel Erdtman" initials="S.E." surname="Erdtman">
+      <organization></organization>
+      <address>
+	<postal>
+	  <street></street>
+	  <city></city>
+	  <region></region>
+	  <code></code>
+	  <country>Sweden</country>
+	</postal>
+	<phone>+46702691499</phone>
+	<email>samuel@erdtman.se</email>
+      </address>
+    </author>
+
+    <date day="6" month="July" year="2016" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -134,7 +144,8 @@
 
       <t>
         <list style="hanging">
-          <t hangText="Type3StringOrURI:"><vspace blankLines="1"/>
+          <t hangText="Type3StringOrURI:">
+	    <vspace/>
             The "Type3StringOrURI" term has the same meaning, syntax, and
             processing rules as the "StringOrUri" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that Type3StringOrURI uses
@@ -145,7 +156,8 @@
              FIXME: Use tag 32 for URIs?
            </t>
 
-          <t hangText="Type6NumericDate:"><vspace blankLines="1"/>
+          <t hangText="Type6NumericDate:">
+	    <vspace/>
             The "Type6NumericDate" term has the same meaning, syntax, and
             processing rules as the "NumericDate" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that Type6NumericDate uses
@@ -153,7 +165,8 @@
             value.
           </t>
 
-          <t hangText="CBOR encoded claim key:"><vspace blankLines="1"/>
+          <t hangText="CBOR encoded claim key:">
+	    <vspace/>
             The key used to identify a claim value.
           </t>
 
@@ -915,13 +928,15 @@ a9                                      # map(9)
 	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
 	Ludwig Seitz, Göran Selander, and Samuel Erdtman.
       </t>
+      <!-- 
       <t>
 	The following individuals contributed ideas,
 	feedback, and wording that influenced this specification:
       </t>
       <t>
-	Samuel Erdtman.
+	TBD
       </t>
+      -->
     </section>
 
     <section anchor="History" title="Document History">
@@ -935,6 +950,12 @@ a9                                      # map(9)
 	  </t>
 	  <t>
 	    Added IANA registration for the application/cwt CoAP content-format type.
+	  </t>
+	  <t>
+	    Added Samuel Erdtman as an editor.
+	  </t>
+	  <t>
+	    Changed Erik's e-mail address.
 	  </t>
 	</list>
       </t>
