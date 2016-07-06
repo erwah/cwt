@@ -592,7 +592,6 @@
       }
     ]
 }
-
             ]]></artwork>
           </figure>
         </t>
@@ -609,7 +608,6 @@
           <figure align="center" anchor="fig:exampleAudSymmetricDiag"
                 title="CWT in CBOR diagnostic notation">
             <artwork align="left"><![CDATA[
-
 {
   3: "coap://light.example.com",
   8:
@@ -620,7 +618,6 @@
     }
   ]
 }
-
             ]]></artwork>
           </figure>
         </t>
@@ -631,13 +628,12 @@
 
         <t>
           <figure align="center" anchor="fig:exampleAudSymmetricCBOR"
-                title='CWT with "aud" and symmetric key in CBOR'>
+                title='CWT with "aud" and symmetric key in CBOR, some values has been truncated for readability'>
             <artwork align="left"><![CDATA[
-
 a2                                      # map(2)
    03                                   # unsigned(3)
    78 18                                # text(24)
-      636f61703a2f2f6c696768742e6578616d706c652e636f6d # "coap://light.example.com"
+      636f61703a2f2f6c696768742e6578... # "coap://light.example.com"
    08                                   # unsigned(8)
    81                                   # array(1)
       a2                                # map(2)
@@ -646,7 +642,6 @@ a2                                      # map(2)
          20                             # negative(0)
          6a                             # text(10)
             6c6f72656d697073756d        # "loremipsum"
-
             ]]></artwork>
           </figure>
         </t>
@@ -669,9 +664,8 @@ a2                                      # map(2)
 
         <t>
           <figure align="center" anchor="fig:exampleAudECJSON"
-                title='"aud" claim and EC key in non-normative JSON'>
+                title='"aud" claim and EC key in non-normative JSON, some values has been truncated for readability'>
             <artwork align="left"><![CDATA[
-
 {
   "aud": "coap://light.example.com",
   "cks":
@@ -680,12 +674,11 @@ a2                                      # map(2)
         "kty": "EC",
         "kid": "11",
         "crv": 1, // using P-384
-        "x": h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
-        "y": h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e'
+        "x": h'bac5b11cad8f99f9c72b05cf4b9e26d2...',
+        "y": h'20138bf82dc1b6d562be0fa54ab7804a...'
       }
     ]
 }
-
             ]]></artwork>
           </figure>
         </t>
@@ -699,9 +692,8 @@ a2                                      # map(2)
 
         <t>
           <figure align="center" anchor="fig:exampleAudECDiag"
-                title="CWT with EC key in CBOR diagnostic notation">
+                title="CWT with EC key in CBOR diagnostic notation, some values has been truncated for readability">
             <artwork align="left"><![CDATA[
-
 {
   3: "coap://light.example.com",
   8:
@@ -710,12 +702,11 @@ a2                                      # map(2)
       1: 2,
       2: "11",
       -1: 1,
-      -2: h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
-      -3: h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e'
+      -2: h'bac5b11cad8f99f9c72b05cf4b9e26d2...',
+      -3: h'20138bf82dc1b6d562be0fa54ab7804a...'
     }
   ]
 }
-
             ]]></artwork>
           </figure>
         </t>
@@ -726,13 +717,13 @@ a2                                      # map(2)
 
         <t>
           <figure align="center" anchor="fig:exampleECCBOR"
-                title="CWT with EC in CBOR">
+                title="CWT with EC in CBOR, some values has been truncated for readability">
             <artwork align="left"><![CDATA[
 
 a2                                      # map(2)
    03                                   # unsigned(3)
    78 18                                # text(24)
-      636f61703a2f2f6c696768742e6578616d706c652e636f6d # "coap://light.example.com"
+      636f61703a2f2f6c696768742e6578... # "coap://light.example.com"
    08                                   # unsigned(8)
    81                                   # array(1)
       a5                                # map(5)
@@ -745,10 +736,10 @@ a2                                      # map(2)
          01                             # unsigned(1)
          21                             # negative(1)
          58 20                          # bytes(32)
-            bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff # "\xBA\xC5\xB1\x1C\xAD\x8F\x99\xF9\xC7+\x05\xCFK\x9E&\xD2D\xDC\x18\x9FtR(%Z!\x9A\x86\xD6\xA0\x9E\xFF"
+            bac5b11cad8f99f9c72b05cf... # (binary string)
          22                             # negative(2)
          58 20                          # bytes(32)
-            20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # "\x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
+            20138bf82dc1b6d562be0fa5... # (binary string)
 
             ]]></artwork>
           </figure>
@@ -770,7 +761,7 @@ a2                                      # map(2)
 
         <t>
           <figure align="center" anchor="fig:exampleFullJSON"
-                title='All claims, "aif" and EC key in non-normative JSON'>
+                title='All claims, "aif" and EC key in non-normative JSON, some values has been truncated for readability'>
             <artwork align="left"><![CDATA[
 
 {
@@ -787,8 +778,8 @@ a2                                      # map(2)
          "kty": "EC",
          "kid": "11",
          "crv": 1, // using P-384
-         "x": h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
-         "y": h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e'
+         "x": h'bac5b11cad8f99f9c72b05cf4b9e26d2...',
+         "y": h'20138bf82dc1b6d562be0fa54ab7804a...'
        }
      ],
    "aif": [["/s/light", 1], ["/a/led", 5], ["/dtls", 2]]
@@ -807,7 +798,7 @@ a2                                      # map(2)
 
         <t>
           <figure align="center" anchor="fig:exampleFullDiag"
-                title="Full CWT with EC key in CBOR diagnostic notation">
+                title="Full CWT with EC key in CBOR diagnostic notation, some values has been truncated for readability">
             <artwork align="left"><![CDATA[
 
 {
@@ -823,8 +814,8 @@ a2                                      # map(2)
       1: 2,
       2: "11",
       -1: 1,
-      -2: h'bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff',
-      -3: h'20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e'
+      -2: h'bac5b11cad8f99f9c72b05cf4b9e26d2...',
+      -3: h'20138bf82dc1b6d562be0fa54ab7804a...'
     }
     ],
   9: [["/s/light", 1], ["/a/led", 5], ["/dtls", 2]]
@@ -840,16 +831,16 @@ a2                                      # map(2)
 
         <t>
           <figure align="center" anchor="fig:exampleFullCBOR"
-                title="Full CWT with EC in CBOR">
+                title="Full CWT with EC in CBOR, some values has been truncated for readability">
             <artwork align="left"><![CDATA[
 
 a9                                      # map(9)
    01                                   # unsigned(1)
    75                                   # text(21)
-      636f61703a2f2f61732e6578616d706c652e636f6d # "coap://as.example.com"
+      636f61703a2f2f61732e6578616d70... # "coap://as.example.com"
    03                                   # unsigned(3)
    78 18                                # text(24)
-      636f61703a2f2f6c696768742e6578616d706c652e636f6d # "coap://light.example.com"
+      636f61703a2f2f6c696768742e6578... # "coap://light.example.com"
    02                                   # unsigned(2)
    65                                   # text(5)
       6572696b77                        # "erikw"
@@ -876,10 +867,10 @@ a9                                      # map(9)
          01                             # unsigned(1)
          21                             # negative(1)
          58 20                          # bytes(32)
-            bac5b11cad8f99f9c72b05cf4b9e26d244dc189f745228255a219a86d6a09eff # "\xBA\xC5\xB1\x1C\xAD\x8F\x99\xF9\xC7+\x05\xCFK\x9E&\xD2D\xDC\x18\x9FtR(%Z!\x9A\x86\xD6\xA0\x9E\xFF"
+            bac5b11cad8f99f9c72b05cf... # (binary string)
          22                             # negative(2)
          58 20                          # bytes(32)
-            20138bf82dc1b6d562be0fa54ab7804a3a64b6d72ccfed6b6fb6ed28bbfc117e # "\x13\x8B\xF8-\xC1\xB6\xD5b\xBE\x0F\xA5J\xB7\x80J:d\xB6\xD7,\xCF\xEDko\xB6\xED(\xBB\xFC\x11~"
+            20138bf82dc1b6d562be0fa5... # (binary string)
    09                                   # unsigned(9)
    83                                   # array(3)
       82                                # array(2)
