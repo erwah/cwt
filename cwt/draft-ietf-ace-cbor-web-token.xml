@@ -972,7 +972,7 @@ a9                                      # map(9)
 	A straw man proposal of CWT was written in the draft
 	"Authorization for the Internet of Things using OAuth 2.0"
 	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
-	Ludwig Seitz, Göran Selander, and Samuel Erdtman.
+	Ludwig Seitz, and Göran Selander.
       </t>
       <!--
       <t>
