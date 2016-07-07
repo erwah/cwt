@@ -50,17 +50,17 @@
     </author>
 
     <author fullname="Samuel Erdtman" initials="S.E." surname="Erdtman">
-      <organization></organization>
+      <organization>Spotify AB</organization>
       <address>
-	<postal>
-	  <street></street>
-	  <city></city>
-	  <region></region>
-	  <code></code>
-	  <country>Sweden</country>
-	</postal>
-	<phone>+46702691499</phone>
-	<email>samuel@erdtman.se</email>
+      	<postal>
+      	  <street>Birger Jarlsgatan 61, 4tr</street>
+      	  <city>Stockholm</city>
+      	  <region></region>
+      	  <code>113 56</code>
+      	  <country>Sweden</country>
+      	</postal>
+      	<phone>+46702691499</phone>
+      	<email>erdtman@spotify.com</email>
       </address>
     </author>
 
@@ -972,9 +972,9 @@ a9                                      # map(9)
 	A straw man proposal of CWT was written in the draft
 	"Authorization for the Internet of Things using OAuth 2.0"
 	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
-	Ludwig Seitz, Göran Selander, and Samuel Erdtman.
+	Ludwig Seitz, and Göran Selander.
       </t>
-      <!-- 
+      <!--
       <t>
 	The following individuals contributed ideas,
 	feedback, and wording that influenced this specification:
