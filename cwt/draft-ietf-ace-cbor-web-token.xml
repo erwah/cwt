@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="6" month="July" year="2016" />
+    <date day="7" month="July" year="2016" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -150,10 +150,6 @@
             processing rules as the "StringOrUri" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that Type3StringOrURI uses
             CBOR major type 3 instead of a JSON string value.
-           </t>
-
-           <t>
-             FIXME: Use tag 32 for URIs?
            </t>
 
           <t hangText="Type6NumericDate:">
@@ -315,11 +311,6 @@
 | cks     | 8                      | 3                        |
 -->
         </figure>
-      </t>
-
-      <t>
-        Note: Claims defined by the OpenID Foundation have not yet been
-        included in the table above.
       </t>
 
     </section>
@@ -969,10 +960,12 @@ a9                                      # map(9)
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>
+	This specification is based on JSON Web Token (JWT) <xref target="RFC7519"/>,
+	the authors of which also include Nat Sakimura and John Bradley.
 	A straw man proposal of CWT was written in the draft
 	"Authorization for the Internet of Things using OAuth 2.0"
 	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
-	Ludwig Seitz, and Göran Selander.
+	Ludwig Seitz and Göran Selander.
       </t>
       <!--
       <t>
