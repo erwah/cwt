@@ -329,7 +329,7 @@
             Let the Message be the binary representation of the CWT Claims Set.
           </t>
           <t>
-            Create a COSE Header containing the desired set of Header Parameters.  The CWT Header MUST be a valid according to the <xref target="I-D.ietf-cose-msg"/> specification.
+            Create a COSE Header containing the desired set of Header Parameters.  The COSE Header MUST be a valid according to the <xref target="I-D.ietf-cose-msg"/> specification.
           </t>
           <t>
             Depending upon whether the CWT is signed, MACed or encrypted, there are three cases:
@@ -383,7 +383,7 @@
               </list>
             </t>
             <t>
-              If the JOSE Header contains a "content type" value of "CWT", then the Message is a CWT that was the subject of nested signing or encryption operations.  In this case, return to Step 1, using the Message as the CWT.
+              If the COSE Header contains a "content type" value of "CWT", then the Message is a CWT that was the subject of nested signing or encryption operations.  In this case, return to Step 1, using the Message as the CWT.
             </t>
             <t>
               Verify that the Message is a valid CBOR object; let the CWT Claims Set be this CBOR object.
