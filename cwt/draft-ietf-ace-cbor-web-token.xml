@@ -10,10 +10,18 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="info" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-01">
+<rfc category="info" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-02">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
+
+    <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+      <organization>Microsoft</organization>
+      <address>
+        <email>mbj@microsoft.com</email>
+        <uri>http://self-issued.info/</uri>
+      </address>
+    </author>
 
     <author initials="E." surname="Wahlström" fullname="Erik Wahlström">
       <organization></organization>
@@ -26,26 +34,6 @@
         </postal>
         <phone></phone>
         <email>erik@wahlstromstekniska.se</email>
-      </address>
-    </author>
-
-    <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-      <organization>Microsoft</organization>
-      <address>
-        <email>mbj@microsoft.com</email>
-        <uri>http://self-issued.info/</uri>
-      </address>
-    </author>
-
-    <author fullname="Hannes Tschofenig" initials="H." surname="Tschofenig">
-      <organization>ARM Ltd.</organization>
-      <address>
-        <postal>
-          <street></street>
-          <code>6060</code> <city>Hall in Tirol</city>
-          <country>Austria</country>
-        </postal>
-        <email>Hannes.Tschofenig@arm.com</email>
       </address>
     </author>
 
@@ -64,7 +52,19 @@
       </address>
     </author>
 
-    <date day="7" month="July" year="2016" />
+    <author fullname="Hannes Tschofenig" initials="H." surname="Tschofenig">
+      <organization>ARM Ltd.</organization>
+      <address>
+        <postal>
+          <street></street>
+          <code>6060</code> <city>Hall in Tirol</city>
+          <country>Austria</country>
+        </postal>
+        <email>Hannes.Tschofenig@arm.com</email>
+      </address>
+    </author>
+
+    <date day="13" month="January" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -166,6 +166,11 @@
             The key used to identify a claim value.
           </t>
 
+          <t hangText="CWT Claims Set">
+	    <vspace/>
+	    A CBOR map that contains the claims conveyed by the CWT.
+	  </t>
+
         </list>
       </t>
 
@@ -184,8 +189,8 @@
       <t>
         To keep CWTs as small as possible, the CBOR encoded claim keys are
         represented using CBOR major type 0.
-        <xref target="CWTCNMajorTypesSummery" /> summaries all keys used to
-        identity the claims defined in this document.
+        <xref target="CWTCNMajorTypesSummary" /> summarizes all keys
+	used to identify the claims defined in this document.
       </t>
 
       <section anchor="CWTClaimNames" title="Claim Names">
@@ -288,7 +293,7 @@
     </section>
 
 
-    <section anchor="CWTCNMajorTypesSummery"
+    <section anchor="CWTCNMajorTypesSummary"
        title="Summary of the values, CBOR major types and encoded claim keys">
 
       <t>
@@ -329,7 +334,7 @@
             Let the Message be the binary representation of the CWT Claims Set.
           </t>
           <t>
-            Create a COSE Header containing the desired set of Header Parameters.  The COSE Header MUST be a valid according to the <xref target="I-D.ietf-cose-msg"/> specification.
+            Create a COSE Header containing the desired set of Header Parameters.  The COSE Header MUST be valid according to the <xref target="I-D.ietf-cose-msg"/> specification.
           </t>
           <t>
             Depending upon whether the CWT is signed, MACed or encrypted, there are three cases:
@@ -346,7 +351,7 @@
             </list>
           </t>
           <t>
-              If a nested signing, MACing or encryption operation will be performed, let the Message be the COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and return to Step 3, using "content type" header value of "CWT" in the new COSE Header created in that step.
+              If a nested signing, MACing or encryption operation will be performed, let the Message be the COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and return to Step 3, using a "content type" header value corresponding to the media type "application/cwt" in the new COSE Header created in that step.
             <vspace/>
               Note: If integrity (signing/MACing) and confidentiality (encryption) protection are needed, it is recommended to use an authenticated encryption algorithm to save space and processing.
           </t>
@@ -366,7 +371,7 @@
               Verify that the resulting COSE Header includes only parameters and values whose syntax and semantics are both understood and supported or that are specified as being ignored when not understood.
             </t>
             <t>
-              Use the CBOR tag to determine the type the CWT, COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0.
+              Use the CBOR tag to determine the type of the CWT, COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0, or COSE_Encrypt/COSE_Encrypt0.
             </t>
             <t>
               Depending upon whether the CWT is a COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, there are three cases:
@@ -383,7 +388,7 @@
               </list>
             </t>
             <t>
-              If the COSE Header contains a "content type" value of "CWT", then the Message is a CWT that was the subject of nested signing or encryption operations.  In this case, return to Step 1, using the Message as the CWT.
+              If the COSE Header contains a "content type" header value corresponding to the media type "application/cwt", then the Message is a CWT that was the subject of nested signing or encryption operations.  In this case, return to Step 1, using the Message as the CWT.
             </t>
             <t>
               Verify that the Message is a valid CBOR object; let the CWT Claims Set be this CBOR object.
@@ -457,7 +462,7 @@
 	      </t>
 	      <t hangText='CBOR Major Type:'>
 		<vspace/>
-		CBOR Major type and optional tag for the claim.
+		CBOR major type and optional tag for the claim.
 	      </t>
 	      <t hangText='Change Controller:'>
 		<vspace/>
@@ -556,11 +561,87 @@
 
       </section>
 
-      <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Format Registration">
+
+      <section title="Media Type Registration" anchor="MediaReg">
+	<t>
+	  This section registers the <spanx
+	  style="verb">application/cwt</spanx> media type <xref target="RFC2046"/>
+	  in the "Media Types" registry <xref target="IANA.MediaTypes"/>
+	  in the manner described in <xref target="RFC6838">RFC 6838</xref>,
+	  which can be used to indicate that the content is a CWT.
+	</t>
+	<section title="Registry Contents" anchor="MediaContents">
+	  <t> <?rfc subcompact="yes"?>
+	    <list style="symbols">
+	      <t>
+		Type name: application
+	      </t>
+	      <t>
+		Subtype name: cwt
+	      </t>
+	      <t>
+		Required parameters: N/A
+	      </t>
+	      <t>
+		Optional parameters: N/A
+	      </t>
+	      <t>
+		Encoding considerations: binary
+	      </t>
+	      <t>
+		Security considerations: See the Security Considerations section of [[ this specification ]]
+	      </t>
+	      <t>
+		Interoperability considerations: N/A
+	      </t>
+	      <t>
+		Published specification: [[ this specification ]]
+	      </t>
+	      <t>
+		Applications that use this media type:
+		IoT applications sending security tokens over HTTP(S) and other transports.
+	      </t>
+	      <t>
+		Fragment identifier considerations: N/A
+	      </t>
+	      <t>
+		Additional information:<list style="empty">
+	        <t>Magic number(s): N/A</t>
+		<t>File extension(s): N/A</t>
+		<t>Macintosh file type code(s): N/A </t></list>
+<vspace/>
+	      </t>
+	      <t>
+		Person &amp; email address to contact for further information:
+<vspace/>
+		IESG, iesg@ietf.org
+	      </t>
+	      <t>
+		Intended usage: COMMON
+	      </t>
+	      <t>
+		Restrictions on usage: none
+	      </t>
+	      <t>
+		Author: Michael B.&nbsp;Jones, mbj@microsoft.com
+	      </t>
+	      <t>
+		Change controller: IESG
+	      </t>
+	      <t>
+		Provisional registration? No
+	      </t>
+	    </list>
+	  </t>
+	</section>
+	<?rfc subcompact="no"?>
+      </section>
+
+      <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
         <t>
-          This section registers the "application/cwt" CoAP Content-Format ID in the
-          "CoRE Parameters" sub-registry "CoAP Content-Format" in the manner described
-          in <xref target="RFC7252"/>.
+          This section registers the CoAP Content-Format ID for the "application/cwt" media type
+	  in the "CoAP Content-Formats" registry <xref target="IANA.CoAP.Content-Formats"/>
+	  established by <xref target="RFC7252"/>.
         </t>
 
 	<section anchor="CoAPreg" title="Registry Contents">
@@ -586,7 +667,9 @@
   <back>
     <references title='Normative References'>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2046.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7252.xml' ?>
@@ -594,7 +677,7 @@
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml' ?>
 
-      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-cose-msg"?>
+      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-cose-msg-24"?>
 
       <reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
         <front>
@@ -606,11 +689,32 @@
         </front>
       </reference>
 
+      <reference anchor="IANA.MediaTypes" target="http://www.iana.org/assignments/media-types">
+        <front>
+          <title>Media Types</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
+      <reference anchor="IANA.CoAP.Content-Formats" target="http://www.iana.org/assignments/core-parameters/core-parameters.xhtml#content-formats">
+        <front>
+          <title>CoAP Content-Formats</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
     </references>
 
 
     <references title='Informative References'>
-      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.seitz-ace-oauth-authz"?>
+      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-seitz-ace-oauth-authz-00"?>
+
     </references>
 
     <section anchor="Examples" title="Examples">
@@ -650,7 +754,7 @@
 
         <t>
           Using the CBOR encoded claim keys according to
-          <xref target="CWTCNMajorTypesSummery" /> and COSE
+          <xref target="CWTCNMajorTypesSummary" /> and COSE
           <xref target="I-D.ietf-cose-msg" /> makes a CWT with <spanx style="verb">aud</spanx> and a
           symmetric key look like this in CBOR diagnostic notation:
         </t>
@@ -742,7 +846,7 @@ a2                                      # map(2)
 
         <t>
           Using the CBOR encoded claim keys according to
-           <xref target="CWTCNMajorTypesSummery" /> and COSE
+           <xref target="CWTCNMajorTypesSummary" /> and COSE
           <xref target="I-D.ietf-cose-msg" /> makes a CWT with <spanx style="verb">aud</spanx> and an EC key
           look like this in CBOR diagnostic notation:
         </t>
@@ -850,7 +954,7 @@ a2                                      # map(2)
 
         <t>
           Using the CBOR encoded claim keys according to
-          <xref target="CWTCNMajorTypesSummery" /> and COSE
+          <xref target="CWTCNMajorTypesSummary" /> and COSE
           <xref target="I-D.ietf-cose-msg" /> makes a full CWT look like this
           in CBOR diagnostic notation:
         </t>
@@ -980,6 +1084,21 @@ a9                                      # map(9)
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+
+      <t>
+	-02
+        <list style="symbols">
+	  <t>
+	    Added IANA registration for the application/cwt media type.
+	  </t>
+	  <t>
+	    Clarified the nested CWT language.
+	  </t>
+	  <t>
+	    Corrected nits identified by Ludwig Seitz.
+	  </t>
+	</list>
+      </t>
 
       <t>
 	-01
