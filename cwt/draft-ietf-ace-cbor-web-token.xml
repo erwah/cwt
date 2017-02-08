@@ -721,7 +721,29 @@
       <t>This appendix includes a set of CWT examples that show how the CWT claims set can be protected, signed MACed encrypted and nested signature and encryption</t>
       <t>To make the examples easier to read, they are presented both as hex string and the extended CBOR diagnostic notation (defined in
    [I-D.greevenbosch-appsawg-cbor-cddl]).</t>
-
+      <section anchor="exampleClaimSet" title='Example Claim Set'>
+        <t>
+          The claim set used for the different examples is a full claim set to
+          display usage of all the different claims. For signed and MACed
+          examples the claim set is the CBOR encoding as a binary string.
+        </t>
+        <t>
+          <figure align="center" anchor="fig:exampleClaimSet"
+              title='Full example claim set'>
+              <artwork align="left"><![CDATA[
+{
+  / iss / 1: "coap://as.example.com",
+  / sub / 2: "erikw",
+  / aud / 3: "coap://light.example.com",
+  / exp / 4: 1444064944,
+  / nbf / 5: 1443944944,
+  / iat / 6: 1443944944,
+  / cti / 7: h'0b71'
+}
+            ]]></artwork>
+          </figure>
+        </t>
+      </section>
       <section anchor="exampleKeys" title='Example keys'>
         <t>This section contains the keys used to sign and encrypt the messages in this appendix (line breaks are for display purposes only)</t>
         <t>
@@ -742,7 +764,7 @@ e60198ac1650ec9210d7f4f5b27aeae2ada8f4adada555909edca75ce2ae506e
         </t>
         <t>
           <figure align="center" anchor="fig:exampleKeysPrivateECDSA256"
-                title='Private ECDSA 256-bit COSE Key as hex encoded string'>
+                title='ECDSA 256-bit COSE Key as hex encoded string'>
             <artwork align="left"><![CDATA[
 a6225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
 9f3ef2fc2358200657fada2568959c49a404583fe237290ebeb1956f3ad3d966
@@ -753,11 +775,16 @@ c7b7a9bc197c7c1e1bc6d0c1dc612001
         </t>
         <t>
           <figure align="center" anchor="fig:exampleKeysPublicECDSA256"
-                title='Public ECDSA 256-bit COSE Key as hex encoded string'>
+                title='ECDSA 256-bit COSE Key in CBOR diagnostic notation'>
             <artwork align="left"><![CDATA[
-a5225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
-9f3ef2fc0326215820c4f9160fc22682991c59c4d96e8accc2da3cc7b7a9bc19
-7c7c1e1bc6d0c1dc6101022001
+{
+  / d / -4: h'0657fada2568959c49a404583fe237290ebeb1956f3ad3d966ea09e33369d7b1',
+  / y / -3: h'feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee9f3ef2fc',
+  / x / -2: h'c4f9160fc22682991c59c4d96e8accc2da3cc7b7a9bc197c7c1e1bc6d0c1dc61',
+  / crv / -1: 1 / P-256 /
+  / kty /  1: 2 / EC2 /,
+  / alg /  3: -7, \ ECDSA 256 \
+}
             ]]></artwork>
           </figure>
         </t>
@@ -796,6 +823,15 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
 )
             ]]></artwork>
           </figure>
+          <figure align="center" anchor="fig:exampleSignedProtectedCBORDiagnostic"
+                title='Protected headers in diagnostic notation'>
+            <artwork align="left"><![CDATA[
+{
+  / content type / 3: 61, / CWT /
+  / alg / 1: -7 / ECDSA 256 /
+}
+            ]]></artwork>
+          </figure>
         </t>
       </section>
 
@@ -828,6 +864,15 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
     / tag / h'b598846f1ce93f9d'
   ]
 )
+            ]]></artwork>
+          </figure>
+          <figure align="center" anchor="fig:exampleMACedProtectedCBORDiagnostic"
+                title='Protected headers in diagnostic notation'>
+            <artwork align="left"><![CDATA[
+{
+  / content type / 3: 61, / CWT /
+  / alg / 1: 4 / HMAC 256/64 /
+}
             ]]></artwork>
           </figure>
         </t>
@@ -864,11 +909,21 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
 )
             ]]></artwork>
           </figure>
+          <figure align="center" anchor="fig:exampleProtectedCBORDiagnostic"
+                title='Protected headers in diagnostic notation'>
+            <artwork align="left"><![CDATA[
+{
+  / content type / 3: 61, / CWT /
+  / alg / 1: 10 / AES-CCM-16-64-128 /
+}
+            ]]></artwork>
+          </figure>
         </t>
       </section>
       <section anchor="exampleNested" title='Example Nested CWT'>
         <t>This section shows a Nested CWT, signed and encrypted, with a single recipient and a full CWT claim set.</t>
         <t>Signature is generated using the private ECDSA key from the keys section and it can be validated using the public ECDSA from the keys section. Encryption is done with AES-CCM mode using the 128 bit symmetric key from the keys section with a 64-bit tag and 13 byte nonce, i.e. COSE AES-CCM-16-64-128 (line breaks are for display purposes only)</t>
+        <t>After the first layer of protection has been decrypted the signed example is the same as for the signed one.</t>
         <t>
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
@@ -902,6 +957,15 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
                      c3facd0a0ac09d88ea73d4ed7e3b57c'
   ]
 )
+            ]]></artwork>
+          </figure>
+          <figure align="center" anchor="fig:exampleNestedProtectedCBORDiagnostic"
+                title='Protected headers in diagnostic notation'>
+            <artwork align="left"><![CDATA[
+{
+  / content type / 3: 11, / cose-sign1 /
+  / alg / 1: 10 / AES-CCM-16-64-128 /
+}
             ]]></artwork>
           </figure>
         </t>
