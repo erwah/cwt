@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="info" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-02">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-03">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="13" month="January" year="2017" />
+    <date day="2" month="February" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -299,7 +299,7 @@
       <t>
         <figure align="center" anchor="fig:cborMappingValuesAccessTokens"
                 title="Summary of the values, CBOR major types and encoded claim keys.">
-          <artwork align="left"><![CDATA[
+          <artwork><![CDATA[
 /---------+------------------------+--------------------------\
 | Claim   | CBOR encoded claim key | CBOR major type of value |
 |---------+------------------------+--------------------------|
@@ -711,16 +711,14 @@
 
     </references>
 
-
     <references title='Informative References'>
-      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-seitz-ace-oauth-authz-00"?>
-
+      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-greevenbosch-appsawg-cbor-cddl-09"?>
     </references>
 
     <section anchor="examples" title="Examples">
       <t>This appendix includes a set of CWT examples that show how the CWT claims set can be protected, signed MACed encrypted and nested signature and encryption</t>
       <t>To make the examples easier to read, they are presented both as hex string and the extended CBOR diagnostic notation (defined in
-   [I-D.greevenbosch-appsawg-cbor-cddl]).</t>
+   <xref target="I-D.greevenbosch-appsawg-cbor-cddl" pageno="false" format="default"/>).</t>
       <section anchor="exampleClaimSet" title='Example Claim Set'>
         <t>
           The claim set used for the different examples is a full claim set to
@@ -744,28 +742,30 @@
           </figure>
         </t>
       </section>
+
       <section anchor="exampleKeys" title='Example keys'>
-        <t>This section contains the keys used to sign and encrypt the messages in this appendix (line breaks are for display purposes only)</t>
         <t>
-          <figure align="center" anchor="fig:exampleKeysSymetric128"
-                title='128-bit symmetric key as hex encoded string'>
-            <artwork align="left"><![CDATA[
+	  This section contains the keys used to sign, MAC, and encrypt the messages in this appendix.
+	  Line breaks are for display purposes only.
+	</t>
+
+	<section anchor="exampleKeysSymmetric128" title='128-bit Symmetric Key as Hex Encoded String'>
+	  <figure><artwork><![CDATA[
 9e4f3e65cc1a558b39ce97b3db469b04
-            ]]></artwork>
-          </figure>
-        </t>
-        <t>
-          <figure align="center" anchor="fig:exampleKeysSymetric256"
-                title='256-bit symmetric key as hex encoded string'>
-            <artwork align="left"><![CDATA[
+]]></artwork></figure>
+        </section>
+
+	<section anchor="exampleKeysSymmetric256" title='256-bit Symmetric Key as Hex Encoded String'>
+	  <figure><artwork><![CDATA[
 e60198ac1650ec9210d7f4f5b27aeae2ada8f4adada555909edca75ce2ae506e
-            ]]></artwork>
-          </figure>
-        </t>
-        <t>
-          <figure align="center" anchor="fig:exampleKeysPrivateECDSA256"
-                title='ECDSA 256-bit COSE Key as hex encoded string'>
-            <artwork align="left"><![CDATA[
+]]></artwork></figure>
+        </section>
+
+	<section anchor="exampleKeysECDSA256" title='ECDSA P-256 256-bit COSE Key'>
+    <t>
+    <figure align="center" anchor="fig:exampleKeysECDSA256"
+          title='ECDSA 256-bit COSE Key as hex string'>
+      <artwork align="left"><![CDATA[
 a6225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
 9f3ef2fc2358200657fada2568959c49a404583fe237290ebeb1956f3ad3d966
 ea09e33369d7b103260102215820c4f9160fc22682991c59c4d96e8accc2da3c
@@ -774,13 +774,16 @@ c7b7a9bc197c7c1e1bc6d0c1dc612001
           </figure>
         </t>
         <t>
-          <figure align="center" anchor="fig:exampleKeysPublicECDSA256"
+          <figure align="center" anchor="fig:exampleKeysECDSA256CBORDiagnostic"
                 title='ECDSA 256-bit COSE Key in CBOR diagnostic notation'>
             <artwork align="left"><![CDATA[
 {
-  / d / -4: h'0657fada2568959c49a404583fe237290ebeb1956f3ad3d966ea09e33369d7b1',
-  / y / -3: h'feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee9f3ef2fc',
-  / x / -2: h'c4f9160fc22682991c59c4d96e8accc2da3cc7b7a9bc197c7c1e1bc6d0c1dc61',
+  / d / -4: h'0657fada2568959c49a404583fe237290ebeb1956f3ad3d966
+              ea09e33369d7b1',
+  / y / -3: h'feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb030
+              97ffee9f3ef2fc',
+  / x / -2: h'c4f9160fc22682991c59c4d96e8accc2da3cc7b7a9bc197c7c
+              1e1bc6d0c1dc61',
   / crv / -1: 1 / P-256 /
   / kty /  1: 2 / EC2 /,
   / alg /  3: -7, \ ECDSA 256 \
@@ -788,14 +791,22 @@ c7b7a9bc197c7c1e1bc6d0c1dc612001
             ]]></artwork>
           </figure>
         </t>
+        </section>
       </section>
+
       <section anchor="exampleSigned" title='Example Signed CWT'>
-        <t>This section shows a signed CWT with a single recipient and a full CWT claim set.</t>
-        <t>Signature is generated using the private ECDSA key from the keys section and it can be validated using the public ECDSA from the keys section (line breaks are for display purposes only)</t>
+        <t>
+	  This section shows a signed CWT with a single recipient and a full CWT Claims Set.
+	</t>
+        <t>
+	  The signature is generated using the private ECDSA key from <xref target="exampleKeysECDSA256"/>
+	  and it can be validated using the public part of the ECDSA key from <xref target="exampleKeysECDSA256"/>.
+	  Line breaks are for display purposes only.
+	</t>
         <t>
           <figure align="center" anchor="fig:exampleSignedHex"
                 title='Signed CWT as hex string'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 d28446a203183d0126a05850a702656572696b77037818636f61703a2f2f6c69
 6768742e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9
 f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
@@ -807,7 +818,7 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
         <t>
           <figure align="center" anchor="fig:exampleSignedCBORDiagnostic"
                 title='Signed CWT in CBOR diagnostic notation'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 18(
   [
     / protected / h'a203183d0126',
@@ -836,12 +847,17 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
       </section>
 
       <section anchor="exampleMACed" title='Example MACed CWT'>
-        <t>This section shows a MACed CWT with a single recipient and a full CWT claim set.</t>
-        <t>MAC is generated using the 256 bit symmetric key from the keys section with a 64-bit truncation (line breaks are for display purposes only)</t>
+        <t>
+	  This section shows a MACed CWT with a single recipient and a full CWT Claims Set.
+	</t>
+        <t>
+	  The MAC is generated using the 256-bit symmetric key from <xref target="exampleKeysSymmetric256"/> with a 64-bit truncation.
+	  Line breaks are for display purposes only.
+	</t>
         <t>
           <figure align="center" anchor="fig:exampleMACedHex"
                 title='MACed CWT as hex string'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 d18446a203183d0104a05850a702656572696b77037818636f61703a2f2f6c69
 6768742e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9
 f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
@@ -852,7 +868,7 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
         <t>
           <figure align="center" anchor="fig:exampleMACedCBORDiagnostic"
                 title='MACed CWT in CBOR diagnostic notation'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 17(
   [
     / protected / h'a203183d0104',
@@ -878,11 +894,16 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
         </t>
       </section>
       <section anchor="exampleEncrypted" title='Example Encrypted CWT'>
-        <t>This section shows an encrypted CWT with a single recipient and a full CWT claim set.</t>
-        <t>Encryption is done with AES-CCM mode using the 128 bit symmetric key from the keys section with a 64-bit tag and 13 byte nonce, i.e. COSE AES-CCM-16-64-128 (line breaks are for display purposes only)</t>
+        <t>
+	  This section shows an encrypted CWT with a single recipient and a full CWT Claims Set.
+	</t>
+        <t>
+	  The encryption is done with AES-CCM mode using the 128-bit symmetric key from <xref target="exampleKeysSymmetric128"/> with a 64-bit tag and 13-byte nonce, i.e., COSE AES-CCM-16-64-128.
+	  Line breaks are for display purposes only.
+	</t>
         <t>
           <figure align="center" anchor="fig:exampleEncryptedHex" title='Encrypted CWT as hex string'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
 3bb6e006e8aec087666f6fc0d65d7aa272f5f1dde1dfb52fd3a5e1ace97e5bfc
 8f05a146fd8a9feab7bb9e722254e2660612f956041264c06ea3b95afb0d8ce3
@@ -893,7 +914,7 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
         <t>
           <figure align="center" anchor="fig:exampleEncryptedCBORDiagnostic"
                 title='Encrypted CWT in CBOR diagnostic notation'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 16(
   [
     / protected / h'a203183d010a',
@@ -921,13 +942,27 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
         </t>
       </section>
       <section anchor="exampleNested" title='Example Nested CWT'>
-        <t>This section shows a Nested CWT, signed and encrypted, with a single recipient and a full CWT claim set.</t>
-        <t>Signature is generated using the private ECDSA key from the keys section and it can be validated using the public ECDSA from the keys section. Encryption is done with AES-CCM mode using the 128 bit symmetric key from the keys section with a 64-bit tag and 13 byte nonce, i.e. COSE AES-CCM-16-64-128 (line breaks are for display purposes only)</t>
-        <t>After the first layer of protection has been decrypted the signed example is the same as for the signed one.</t>
+
+        <t>
+	  This section shows a Nested CWT, signed and then encrypted, with a single recipient and a full CWT Claims Set.
+	</t>
+        <t>
+	  The signature is generated using the private ECDSA key from <xref target="exampleKeysECDSA256"/>
+	  and it can be validated using the public ECDSA parts from <xref target="exampleKeysECDSA256"/>.
+	  The encryption is done with AES-CCM mode using the 128-bit symmetric key from <xref target="exampleKeysSymmetric128"/>
+    with a 64-bit tag and 13-byte nonce, i.e., COSE AES-CCM-16-64-128.
+    The content type is set to COSE_sign1 to indicate that there is multiple
+    layers of COSE protection before finding the CWT claim set. The decrypted
+    ciphertext will be a COSE_sign1 structure, in this example it is the same
+    one as in <xref target="exampleSigned"/>, i.e. a Signed CWT claim set.
+    Note that there is no limitation to the number of layers this is just an
+    example with two layers.
+	  Line breaks are for display purposes only.
+	</t>
         <t>
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 d08345a2030b010aa1054d2653469d58937647a6a1bb023458a65da538206c33
 cf941df7ea933ba7b93c60322017f9db9c904608fce2688b51028b5b912f9010
 ae72802bf65778593c7270b20683b1587824eb4074e03323ccf0541b495a3757
@@ -940,7 +975,7 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
         <t>
           <figure align="center" anchor="fig:exampleNestedCBORDiagnostic"
                 title='Signed and Encrypted CWT in CBOR diagnostic notation'>
-            <artwork align="left"><![CDATA[
+            <artwork><![CDATA[
 16(
   [
     / protected / h'a2030b010a',
@@ -971,18 +1006,13 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
         </t>
       </section>
 
-
-
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>
 	This specification is based on JSON Web Token (JWT) <xref target="RFC7519"/>,
 	the authors of which also include Nat Sakimura and John Bradley.
-	A straw man proposal of CWT was written in the draft
-	"Authorization for the Internet of Things using OAuth 2.0"
-	<xref target="I-D.seitz-ace-oauth-authz" /> with the help of
-	Ludwig Seitz and Göran Selander.
+	Ludwig Seitz and Göran Selander have made contributions the specification.
       </t>
       <!--
       <t>
@@ -997,6 +1027,15 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+
+      <t>
+	-03
+        <list style="symbols">
+	  <t>
+	    Reworked examples to include signed, MACed, encrypted, and nested CWTs.
+	  </t>
+	</list>
+      </t>
 
       <t>
 	-02
