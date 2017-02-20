@@ -821,26 +821,28 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
             <artwork><![CDATA[
 18(
   [
-    / protected / h'a203183d0126',
+    / protected / h'a203183d0126' / {
+      / content type / 3: 61, / CWT /
+      / alg / 1: -7 / ECDSA 256 /
+    } / ,
     / unprotected / {},
     / payload / h'a702656572696b77037818636f61703a2f2f6c69676874
                   2e6578616d706c652e636f6d041a5612aeb0051a5610d9
                   f0061a5610d9f00175636f61703a2f2f61732e6578616d
-                  706c652e636f6d07420b71',
+                  706c652e636f6d07420b71' / {
+        / iss / 1: "coap://as.example.com",
+        / sub / 2: "erikw",
+        / aud / 3: "coap://light.example.com",
+        / exp / 4: 1444064944,
+        / nbf / 5: 1443944944,
+        / iat / 6: 1443944944,
+        / cti / 7: h'0b71'
+      } / ,
     / signature / h'7eef29abe962ac185e5a372d95d69ce1b5683c5c25ef
                     b69a81710dc5173254f5179a639827694c2282881970
                     4eb026676ca78aaf8da76672a6b5537fb90e710d'
   ]
 )
-            ]]></artwork>
-          </figure>
-          <figure align="center" anchor="fig:exampleSignedProtectedCBORDiagnostic"
-                title='Protected headers in diagnostic notation'>
-            <artwork align="left"><![CDATA[
-{
-  / content type / 3: 61, / CWT /
-  / alg / 1: -7 / ECDSA 256 /
-}
             ]]></artwork>
           </figure>
         </t>
@@ -871,24 +873,26 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
             <artwork><![CDATA[
 17(
   [
-    / protected / h'a203183d0104',
+    / protected / h'a203183d0104' / {
+      / content type / 3: 61, / CWT /
+      / alg / 1: 4 / HMAC 256/64 /
+    } / ,
     / unprotected / {},
     / payload / h'a702656572696b77037818636f61703a2f2f6c69676874
                   2e6578616d706c652e636f6d041a5612aeb0051a5610d9
                   f0061a5610d9f00175636f61703a2f2f61732e6578616d
-                  706c652e636f6d07420b71',
+                  706c652e636f6d07420b71' / {
+        / iss / 1: "coap://as.example.com",
+        / sub / 2: "erikw",
+        / aud / 3: "coap://light.example.com",
+        / exp / 4: 1444064944,
+        / nbf / 5: 1443944944,
+        / iat / 6: 1443944944,
+        / cti / 7: h'0b71'
+      } / ,
     / tag / h'b598846f1ce93f9d'
   ]
 )
-            ]]></artwork>
-          </figure>
-          <figure align="center" anchor="fig:exampleMACedProtectedCBORDiagnostic"
-                title='Protected headers in diagnostic notation'>
-            <artwork align="left"><![CDATA[
-{
-  / content type / 3: 61, / CWT /
-  / alg / 1: 4 / HMAC 256/64 /
-}
             ]]></artwork>
           </figure>
         </t>
@@ -917,7 +921,10 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
             <artwork><![CDATA[
 16(
   [
-    / protected / h'a203183d010a',
+    / protected / h'a203183d010a' / {
+      / content type / 3: 61, / CWT /
+      / alg / 1: 10 / AES-CCM-16-64-128 /
+    } /,
     / unprotected / {
       / iv / 5: h'adbe290e8c9c23067a558b1579'
     },
@@ -928,15 +935,6 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
                      a449'
   ]
 )
-            ]]></artwork>
-          </figure>
-          <figure align="center" anchor="fig:exampleProtectedCBORDiagnostic"
-                title='Protected headers in diagnostic notation'>
-            <artwork align="left"><![CDATA[
-{
-  / content type / 3: 61, / CWT /
-  / alg / 1: 10 / AES-CCM-16-64-128 /
-}
             ]]></artwork>
           </figure>
         </t>
@@ -978,7 +976,10 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
             <artwork><![CDATA[
 16(
   [
-    / protected / h'a2030b010a',
+    / protected / h'a2030b010a' / {
+      / content type / 3: 11, / cose-sign1 /
+      / alg / 1: 10 / AES-CCM-16-64-128 /
+    } / ,
     / unprotected / {
       / iv / 5: h'2653469d58937647a6a1bb0234'
     },
@@ -992,15 +993,6 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
                      c3facd0a0ac09d88ea73d4ed7e3b57c'
   ]
 )
-            ]]></artwork>
-          </figure>
-          <figure align="center" anchor="fig:exampleNestedProtectedCBORDiagnostic"
-                title='Protected headers in diagnostic notation'>
-            <artwork align="left"><![CDATA[
-{
-  / content type / 3: 11, / cose-sign1 /
-  / alg / 1: 10 / AES-CCM-16-64-128 /
-}
             ]]></artwork>
           </figure>
         </t>
