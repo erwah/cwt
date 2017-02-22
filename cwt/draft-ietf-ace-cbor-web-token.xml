@@ -716,30 +716,34 @@
     </references>
 
     <section anchor="examples" title="Examples">
-      <t>
-	This appendix includes a set of CWT examples that show how the CWT Claims Set can be protected via signing, MACing, encryption, and with nested signing and encryption.
-      </t>
-      <t>
-	To make the examples easier to read, they are presented both as hex strings and in the extended CBOR diagnostic notation defined in <xref target="I-D.greevenbosch-appsawg-cbor-cddl"/>.
-      </t>
-
-      <section anchor="exampleClaims" title="CWT Claims Set Used in Examples">
-	<t>
-	  This section shows the CWT Claims Set used in the examples below.
-	</t>
-	<t>
-	  TBD Decode the payload used in the examples so that the CWT claim names and claim values are shown.
-	  This presentation alone doesn't help readers understand what the CWT Claims Set contains:
-	</t>
-	<figure><artwork><![CDATA[
-payload / h'a702656572696b77037818636f61703a2f2f6c69676874
-                  2e6578616d706c652e636f6d041a5612aeb0051a5610d9
-                  f0061a5610d9f00175636f61703a2f2f61732e6578616d
-                  706c652e636f6d07420b71'
-]]></artwork></figure>
+      <t>This appendix includes a set of CWT examples that show how the CWT claims set can be protected, signed MACed encrypted and nested signature and encryption</t>
+      <t>To make the examples easier to read, they are presented both as hex string and the extended CBOR diagnostic notation (defined in
+   <xref target="I-D.greevenbosch-appsawg-cbor-cddl" pageno="false" format="default"/>).</t>
+      <section anchor="exampleClaimSet" title='Example Claim Set'>
+        <t>
+          The claim set used for the different examples is a full claim set to
+          display usage of all the different claims. For signed and MACed
+          examples the claim set is the CBOR encoding as a binary string.
+        </t>
+        <t>
+          <figure align="center" anchor="fig:exampleClaimSet"
+              title='Full example claim set'>
+              <artwork align="left"><![CDATA[
+{
+  / iss / 1: "coap://as.example.com",
+  / sub / 2: "erikw",
+  / aud / 3: "coap://light.example.com",
+  / exp / 4: 1444064944,
+  / nbf / 5: 1443944944,
+  / iat / 6: 1443944944,
+  / cti / 7: h'0b71'
+}
+            ]]></artwork>
+          </figure>
+        </t>
       </section>
 
-      <section anchor="exampleKeys" title='Keys Used in Examples'>
+      <section anchor="exampleKeys" title='Example keys'>
         <t>
 	  This section contains the keys used to sign, MAC, and encrypt the messages in this appendix.
 	  Line breaks are for display purposes only.
@@ -757,29 +761,37 @@ e60198ac1650ec9210d7f4f5b27aeae2ada8f4adada555909edca75ce2ae506e
 ]]></artwork></figure>
         </section>
 
-	<section anchor="exampleKeysPrivateECDSA256" title='Private ECDSA P-256 256-bit COSE Key as Hex Encoded String'>
-	  <t>
-	    TBD It would be nice to show the public key and private key values separate from the COSE representation of them.
-	  </t>
-	  <figure><artwork><![CDATA[
+	<section anchor="exampleKeysECDSA256" title='ECDSA P-256 256-bit COSE Key'>
+    <t>
+    <figure align="center" anchor="fig:exampleKeysECDSA256"
+          title='ECDSA 256-bit COSE Key as hex string'>
+      <artwork align="left"><![CDATA[
 a6225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
 9f3ef2fc2358200657fada2568959c49a404583fe237290ebeb1956f3ad3d966
 ea09e33369d7b103260102215820c4f9160fc22682991c59c4d96e8accc2da3c
 c7b7a9bc197c7c1e1bc6d0c1dc612001
-]]></artwork></figure>
+            ]]></artwork>
+          </figure>
+        </t>
+        <t>
+          <figure align="center" anchor="fig:exampleKeysECDSA256CBORDiagnostic"
+                title='ECDSA 256-bit COSE Key in CBOR diagnostic notation'>
+            <artwork align="left"><![CDATA[
+{
+  / d / -4: h'0657fada2568959c49a404583fe237290ebeb1956f3ad3d966
+              ea09e33369d7b1',
+  / y / -3: h'feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb030
+              97ffee9f3ef2fc',
+  / x / -2: h'c4f9160fc22682991c59c4d96e8accc2da3cc7b7a9bc197c7c
+              1e1bc6d0c1dc61',
+  / crv / -1: 1 / P-256 /
+  / kty /  1: 2 / EC2 /,
+  / alg /  3: -7, \ ECDSA 256 \
+}
+            ]]></artwork>
+          </figure>
+        </t>
         </section>
-
-	<section anchor="exampleKeysPublicECDSA256" title='Public ECDSA P-256 256-bit COSE Key as Hex Encoded String'>
-	  <t>
-	    TBD It would be nice to show the public key value separate from the COSE representation of it.
-	  </t>
-	  <figure><artwork><![CDATA[
-a5225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
-9f3ef2fc0326215820c4f9160fc22682991c59c4d96e8accc2da3cc7b7a9bc19
-7c7c1e1bc6d0c1dc6101022001
-]]></artwork></figure>
-        </section>
-
       </section>
 
       <section anchor="exampleSigned" title='Example Signed CWT'>
@@ -787,8 +799,8 @@ a5225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
 	  This section shows a signed CWT with a single recipient and a full CWT Claims Set.
 	</t>
         <t>
-	  The signature is generated using the private ECDSA key from <xref target="exampleKeysPrivateECDSA256"/>
-	  and it can be validated using the public ECDSA key from <xref target="exampleKeysPublicECDSA256"/>.
+	  The signature is generated using the private ECDSA key from <xref target="exampleKeysECDSA256"/>
+	  and it can be validated using the public part of the ECDSA key from <xref target="exampleKeysECDSA256"/>.
 	  Line breaks are for display purposes only.
 	</t>
         <t>
@@ -809,12 +821,23 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
             <artwork><![CDATA[
 18(
   [
-    / protected / h'a203183d0126',
+    / protected / h'a203183d0126' / {
+      / content type / 3: 61, / CWT /
+      / alg / 1: -7 / ECDSA 256 /
+    } / ,
     / unprotected / {},
     / payload / h'a702656572696b77037818636f61703a2f2f6c69676874
                   2e6578616d706c652e636f6d041a5612aeb0051a5610d9
                   f0061a5610d9f00175636f61703a2f2f61732e6578616d
-                  706c652e636f6d07420b71',
+                  706c652e636f6d07420b71' / {
+        / iss / 1: "coap://as.example.com",
+        / sub / 2: "erikw",
+        / aud / 3: "coap://light.example.com",
+        / exp / 4: 1444064944,
+        / nbf / 5: 1443944944,
+        / iat / 6: 1443944944,
+        / cti / 7: h'0b71'
+      } / ,
     / signature / h'7eef29abe962ac185e5a372d95d69ce1b5683c5c25ef
                     b69a81710dc5173254f5179a639827694c2282881970
                     4eb026676ca78aaf8da76672a6b5537fb90e710d'
@@ -850,12 +873,23 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
             <artwork><![CDATA[
 17(
   [
-    / protected / h'a203183d0104',
+    / protected / h'a203183d0104' / {
+      / content type / 3: 61, / CWT /
+      / alg / 1: 4 / HMAC 256/64 /
+    } / ,
     / unprotected / {},
     / payload / h'a702656572696b77037818636f61703a2f2f6c69676874
                   2e6578616d706c652e636f6d041a5612aeb0051a5610d9
                   f0061a5610d9f00175636f61703a2f2f61732e6578616d
-                  706c652e636f6d07420b71',
+                  706c652e636f6d07420b71' / {
+        / iss / 1: "coap://as.example.com",
+        / sub / 2: "erikw",
+        / aud / 3: "coap://light.example.com",
+        / exp / 4: 1444064944,
+        / nbf / 5: 1443944944,
+        / iat / 6: 1443944944,
+        / cti / 7: h'0b71'
+      } / ,
     / tag / h'b598846f1ce93f9d'
   ]
 )
@@ -887,7 +921,10 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
             <artwork><![CDATA[
 16(
   [
-    / protected / h'a203183d010a',
+    / protected / h'a203183d010a' / {
+      / content type / 3: 61, / CWT /
+      / alg / 1: 10 / AES-CCM-16-64-128 /
+    } /,
     / unprotected / {
       / iv / 5: h'adbe290e8c9c23067a558b1579'
     },
@@ -903,20 +940,22 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
         </t>
       </section>
       <section anchor="exampleNested" title='Example Nested CWT'>
+
         <t>
 	  This section shows a Nested CWT, signed and then encrypted, with a single recipient and a full CWT Claims Set.
 	</t>
         <t>
-	  The signature is generated using the private ECDSA key from <xref target="exampleKeysPrivateECDSA256"/>
-	  and it can be validated using the public ECDSA from <xref target="exampleKeysPublicECDSA256"/>.
-	  The encryption is done with AES-CCM mode using the 128-bit symmetric key from <xref target="exampleKeysSymmetric128"/> with a 64-bit tag and 13-byte nonce, i.e., COSE AES-CCM-16-64-128.
+	  The signature is generated using the private ECDSA key from <xref target="exampleKeysECDSA256"/>
+	  and it can be validated using the public ECDSA parts from <xref target="exampleKeysECDSA256"/>.
+	  The encryption is done with AES-CCM mode using the 128-bit symmetric key from <xref target="exampleKeysSymmetric128"/>
+    with a 64-bit tag and 13-byte nonce, i.e., COSE AES-CCM-16-64-128.
+    The content type is set to COSE_sign1 to indicate that there is multiple
+    layers of COSE protection before finding the CWT claim set. The decrypted
+    ciphertext will be a COSE_sign1 structure, in this example it is the same
+    one as in <xref target="exampleSigned"/>, i.e. a Signed CWT claim set.
+    Note that there is no limitation to the number of layers this is just an
+    example with two layers.
 	  Line breaks are for display purposes only.
-	</t>
-	<t>
-	  TBD I would suggest breaking this down to first show the signed CWT and that it is then the payload of the encrypted CWT.
-	  I would describe the use of the content-type in Nested CWTs field here.
-	  It looks to me like the content-type field is missing from this example.
-	  I would note that the signed CWT is the same as that in <xref target="exampleSigned"/>.
 	</t>
         <t>
           <figure align="center" anchor="fig:exampleNestedHex"
@@ -937,7 +976,10 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
             <artwork><![CDATA[
 16(
   [
-    / protected / h'a2030b010a',
+    / protected / h'a2030b010a' / {
+      / content type / 3: 11, / cose-sign1 /
+      / alg / 1: 10 / AES-CCM-16-64-128 /
+    } / ,
     / unprotected / {
       / iv / 5: h'2653469d58937647a6a1bb0234'
     },
