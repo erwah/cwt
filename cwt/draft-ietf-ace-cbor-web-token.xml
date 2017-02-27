@@ -726,8 +726,18 @@
           examples the claim set is the CBOR encoding as a binary string.
         </t>
         <t>
+        <figure align="center" anchor="fig:exampleClaimSetHex"
+              title='Full example claim set as hex string'>
+          <artwork align="left"><![CDATA[
+a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
+636f6d041a5612aeb0051a5610d9f0061a5610d9f00175636f61703a2f2f6173
+2e6578616d706c652e636f6d07420b71
+                ]]></artwork>
+              </figure>
+        </t>
+        <t>
           <figure align="center" anchor="fig:exampleClaimSet"
-              title='Full example claim set'>
+              title='Full example claim set in CBOR diagnostic notation'>
               <artwork align="left"><![CDATA[
 {
   / iss / 1: "coap://as.example.com",
