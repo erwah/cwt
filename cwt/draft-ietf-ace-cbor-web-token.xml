@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="2" month="February" year="2017" />
+    <date day="22" month="February" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -409,7 +409,12 @@
 
     <section anchor="Security" title="Security Considerations">
 
-      <t>The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT an adversary is able to modify, add or remove claims. Since the claims conveyed in a CWT are used to make authorization decisions it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT. Without trust of the recipient in the party that created the CWT no sensible authorization decision can be made. Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.</t>
+      <t>
+	The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT, an adversary is able to modify, add or remove claims.
+	Since the claims conveyed in a CWT are used to make authorization decisions, it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT.
+	Without trust of the recipient in the party that created the CWT, no sensible authorization decision can be made.
+	Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.
+      </t>
 
     </section>
 
@@ -719,16 +724,16 @@
       <t>This appendix includes a set of CWT examples that show how the CWT claims set can be protected, signed MACed encrypted and nested signature and encryption</t>
       <t>To make the examples easier to read, they are presented both as hex string and the extended CBOR diagnostic notation (defined in
    <xref target="I-D.greevenbosch-appsawg-cbor-cddl" pageno="false" format="default"/>).</t>
-      <section anchor="exampleClaimSet" title='Example Claim Set'>
+      <section anchor="exampleClaimsSet" title='Example CWT Claims Set'>
         <t>
-          The claim set used for the different examples is a full claim set to
-          display usage of all the different claims. For signed and MACed
-          examples the claim set is the CBOR encoding as a binary string.
+          The CWT Claims Set used for the different examples
+          displays usage of all the defined claims. For signed and MACed
+          examples, the CWT Claims Set is the CBOR encoding as a binary string.
         </t>
         <t>
-        <figure align="center" anchor="fig:exampleClaimSetHex"
-              title='Full example claim set as hex string'>
-          <artwork align="left"><![CDATA[
+    <figure align="center" anchor="fig:exampleClaimsSetHex"
+          title='Example CWT Claims Set as hex string'>
+      <artwork align="left"><![CDATA[
 a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
 636f6d041a5612aeb0051a5610d9f0061a5610d9f00175636f61703a2f2f6173
 2e6578616d706c652e636f6d07420b71
@@ -736,8 +741,8 @@ a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
               </figure>
         </t>
         <t>
-          <figure align="center" anchor="fig:exampleClaimSet"
-              title='Full example claim set in CBOR diagnostic notation'>
+          <figure align="center" anchor="fig:exampleClaimsSetDiagnostic"
+              title='Example CWT Claims Set in CBOR diagnostic notation'>
               <artwork align="left"><![CDATA[
 {
   / iss / 1: "coap://as.example.com",
@@ -748,7 +753,7 @@ a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
   / iat / 6: 1443944944,
   / cti / 7: h'0b71'
 }
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
       </section>
@@ -780,7 +785,7 @@ a6225820feb11ca73b028a10cf77d58a2dfdf2a11eab8ffeeeaaeeb03097ffee
 9f3ef2fc2358200657fada2568959c49a404583fe237290ebeb1956f3ad3d966
 ea09e33369d7b103260102215820c4f9160fc22682991c59c4d96e8accc2da3c
 c7b7a9bc197c7c1e1bc6d0c1dc612001
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
         <t>
@@ -798,7 +803,7 @@ c7b7a9bc197c7c1e1bc6d0c1dc612001
   / kty /  1: 2 / EC2 /,
   / alg /  3: -7, \ ECDSA 256 \
 }
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
         </section>
@@ -822,7 +827,7 @@ d28446a203183d0126a05850a702656572696b77037818636f61703a2f2f6c69
 f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
 29abe962ac185e5a372d95d69ce1b5683c5c25efb69a81710dc5173254f5179a
 639827694c22828819704eb026676ca78aaf8da76672a6b5537fb90e710d
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
         <t>
@@ -853,7 +858,7 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7158407eef
                     4eb026676ca78aaf8da76672a6b5537fb90e710d'
   ]
 )
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
       </section>
@@ -874,7 +879,7 @@ d18446a203183d0104a05850a702656572696b77037818636f61703a2f2f6c69
 6768742e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9
 f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
 6f1ce93f9d
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
         <t>
@@ -903,7 +908,7 @@ f00175636f61703a2f2f61732e6578616d706c652e636f6d07420b7148b59884
     / tag / h'b598846f1ce93f9d'
   ]
 )
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
       </section>
@@ -922,7 +927,7 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
 3bb6e006e8aec087666f6fc0d65d7aa272f5f1dde1dfb52fd3a5e1ace97e5bfc
 8f05a146fd8a9feab7bb9e722254e2660612f956041264c06ea3b95afb0d8ce3
 138bc80baf2511565d3dad63ea7534699fa449
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
         <t>
@@ -945,7 +950,7 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
                      a449'
   ]
 )
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
       </section>
@@ -959,11 +964,11 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
 	  and it can be validated using the public ECDSA parts from <xref target="exampleKeysECDSA256"/>.
 	  The encryption is done with AES-CCM mode using the 128-bit symmetric key from <xref target="exampleKeysSymmetric128"/>
     with a 64-bit tag and 13-byte nonce, i.e., COSE AES-CCM-16-64-128.
-    The content type is set to COSE_sign1 to indicate that there is multiple
-    layers of COSE protection before finding the CWT claim set. The decrypted
-    ciphertext will be a COSE_sign1 structure, in this example it is the same
-    one as in <xref target="exampleSigned"/>, i.e. a Signed CWT claim set.
-    Note that there is no limitation to the number of layers this is just an
+    The content type is set to COSE_sign1 to indicate that there are multiple
+    layers of COSE protection before finding the CWT Claims Set. The decrypted
+    ciphertext will be a COSE_sign1 structure.  In this example it is the same
+    one as in <xref target="exampleSigned"/>, i.e., a Signed CWT Claims Set.
+    Note that there is no limitation to the number of layers; this is an
     example with two layers.
 	  Line breaks are for display purposes only.
 	</t>
@@ -977,7 +982,7 @@ ae72802bf65778593c7270b20683b1587824eb4074e03323ccf0541b495a3757
 f353a8424b6ceeaaec1898964d8a03e04e514a5b0ca143b57689a2a9f1c6c84d
 535d1966adf900dfaf0dd045d2325c40150a07d602b65c60e62894c870ad5fc2
 cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
         <t>
@@ -1003,7 +1008,7 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
                      c3facd0a0ac09d88ea73d4ed7e3b57c'
   ]
 )
-            ]]></artwork>
+]]></artwork>
           </figure>
         </t>
       </section>
