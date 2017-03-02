@@ -319,11 +319,36 @@
       </t>
 
     </section>
+
+    <section anchor="CWTCBORTag" title="CBOR Tag">
+      <t>
+        Whenever possible transport layer, e.g. CoAP, SHOULD indicate content
+        type CWT.  When transport layer does not support content type indication
+        a CWT CBOR tag MUST be used to indicate that content is a CWT.
+      </t>
+      <t>
+        The CWT tag expect its data Item to be a tagged COSE object.
+        The actual COSE object has been excluded.
+        <figure align="center" anchor="fig:CWTTagExample"
+            title='Example of a CWT tag usage'>
+            <artwork align="left"><![CDATA[
+99(
+  17(
+    / COSE object /
+  )
+)
+]]></artwork>
+        </figure>
+      </t>
+    </section>
+
     <section anchor="CreatingValidatingCWTs" title="Creating and Validating CWTs">
 
       <section anchor="CreatingCWT" title="Creating a CWT">
         <t>
-          To create a CWT, the following steps are performed.  The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.
+          To create a CWT, the following steps are performed.  The order of the
+          steps is not significant in cases where there are no dependencies
+          between the inputs and outputs of the steps.
         </t>
         <t>
         <list style="numbers">
@@ -334,77 +359,126 @@
             Let the Message be the binary representation of the CWT Claims Set.
           </t>
           <t>
-            Create a COSE Header containing the desired set of Header Parameters.  The COSE Header MUST be valid according to the <xref target="I-D.ietf-cose-msg"/> specification.
+            Create a COSE Header containing the desired set of Header
+            Parameters.  The COSE Header MUST be valid according to the
+            <xref target="I-D.ietf-cose-msg"/> specification.
           </t>
           <t>
-            Depending upon whether the CWT is signed, MACed or encrypted, there are three cases:
+            Depending upon whether the CWT is signed, MACed or encrypted,
+            there are three cases:
             <list style="symbols">
               <t>
-                If the CWT is signed, create a COSE_Sign/COSE_Sign1 object using the Message as the COSE_Sign/COSE_Sign1 Payload; all steps specified in <xref target="I-D.ietf-cose-msg" /> for creating a COSE_Sign/COSE_Sign1 object MUST be followed.
+                If the CWT is signed, create a COSE_Sign/COSE_Sign1 object
+                using the Message as the COSE_Sign/COSE_Sign1 Payload; all
+                steps specified in <xref target="I-D.ietf-cose-msg" /> for
+                creating a COSE_Sign/COSE_Sign1 object MUST be followed.
               </t>
               <t>
-                Else, if the CWT is MACed, create a COSE_Mac/COSE_Mac0 object using the Message as the COSE_Mac/COSE_Mac0 Payload; all steps specified in <xref target="I-D.ietf-cose-msg" /> for creating a COSE_Mac/COSE_Mac0 object MUST be followed.
+                Else, if the CWT is MACed, create a COSE_Mac/COSE_Mac0 object
+                using the Message as the COSE_Mac/COSE_Mac0 Payload; all
+                steps specified in <xref target="I-D.ietf-cose-msg" /> for
+                creating a COSE_Mac/COSE_Mac0 object MUST be followed.
               </t>
               <t>
-                Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object, create a COSE_Encrypt/COSE_Encrypt0 using the Message as the plaintext for the COSE_Encrypt/COSE_Encrypt0 object; all steps specified in <xref target="I-D.ietf-cose-msg" /> for creating a COSE_Encrypt/COSE_Encrypt0 object MUST be followed.
+                Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object,
+                create a COSE_Encrypt/COSE_Encrypt0 using the Message as
+                the plaintext for the COSE_Encrypt/COSE_Encrypt0 object;
+                all steps specified in <xref target="I-D.ietf-cose-msg" />
+                for creating a COSE_Encrypt/COSE_Encrypt0 object MUST be
+                followed.
               </t>
             </list>
           </t>
           <t>
-              If a nested signing, MACing or encryption operation will be performed, let the Message be the COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and return to Step 3, using a "content type" header value corresponding to the media type "application/cwt" in the new COSE Header created in that step.
+              Add the COSE tag to the COSE object to indicate type of
+              COSE object.  If transport layer cannot indicate that this is a
+              CWT object add the CWT tag too.
+          </t>
+          <t>
+              If a nested signing, MACing or encryption operation will be
+              performed, let the Message be the COSE_Sign/COSE_Sign1,
+              COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and
+              return to Step 3, using a "content type" header value
+              corresponding to the media type "application/cwt" in the new
+              COSE Header created in that step.
             <vspace/>
-              Note: If integrity (signing/MACing) and confidentiality (encryption) protection are needed, it is recommended to use an authenticated encryption algorithm to save space and processing.
+              Note: If integrity (signing/MACing) and confidentiality
+              (encryption) protection are needed, it is recommended to use an
+              authenticated encryption algorithm to save space and processing.
           </t>
         </list>
       </t>
       </section>
       <section anchor="ValidatingCWT" title="Validating a CWT">
         <t>
-          When validating a CWT, the following steps are performed.  The order of the steps is not significant in cases where there are no dependencies between the inputs and outputs of the steps.  If any of the listed steps fail, then the CWT MUST be rejected -- that is, treated by the application as an invalid input.
+          When validating a CWT, the following steps are performed.  The order
+          of the steps is not significant in cases where there are no
+          dependencies between the inputs and outputs of the steps.  If any of
+          the listed steps fail, then the CWT MUST be rejected -- that is,
+          treated by the application as an invalid input.
         </t>
         <t>
           <list style="numbers">
             <t>
+              If it was not indicated by the transport layer that this is a CWT
+              object verify that the CBOR tag indicates that this is a CWT.
+            </t>
+            <t>
               Verify that the CWT is a valid CBOR object.
             </t>
             <t>
-              Verify that the resulting COSE Header includes only parameters and values whose syntax and semantics are both understood and supported or that are specified as being ignored when not understood.
+              Verify that the resulting COSE Header includes only parameters
+              and values whose syntax and semantics are both understood and
+              supported or that are specified as being ignored when not
+              understood.
             </t>
             <t>
-              Use the CBOR tag to determine the type of the CWT, COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0, or COSE_Encrypt/COSE_Encrypt0.
+              Use the CBOR tag to determine the type of the CWT,
+              COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0, or
+              COSE_Encrypt/COSE_Encrypt0.
             </t>
             <t>
-              Depending upon whether the CWT is a COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, there are three cases:
+              Depending upon whether the CWT is a signed, MACed or encrypted,
+              there are three cases:
               <list style="symbols">
                 <t>
-                  If the CWT is a COSE_Sign/COSE_Sign1, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 4 (Signing Objects) for validating a COSE_Sign/COSE_Sign1 object.  Let the Message be the COSE_Sign/COSE_Sign1 payload.
+                  If the CWT is a COSE_Sign/COSE_Sign1, follow the steps
+                  specified in <xref target="I-D.ietf-cose-msg" /> Section 4
+                  (Signing Objects) for validating a COSE_Sign/COSE_Sign1
+                  object.  Let the Message be the COSE_Sign/COSE_Sign1 payload.
                 </t>
                 <t>
-                  Else, if the CWT is a COSE_Mac/COSE_Mac0, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 6 (MAC Objects) for validating a COSE_Mac/COSE_Mac0 object.  Let the Message be the COSE_Mac/COSE_Mac0 payload.
+                  Else, if the CWT is a COSE_Mac/COSE_Mac0, follow the steps
+                  specified in <xref target="I-D.ietf-cose-msg" /> Section 6
+                  (MAC Objects) for validating a COSE_Mac/COSE_Mac0 object.
+                  Let the Message be the COSE_Mac/COSE_Mac0 payload.
                 </t>
                 <t>
-                  Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object, follow the steps specified in <xref target="I-D.ietf-cose-msg" /> Section 5 (Encryption Objects) for validating a COSE_Encrypt/COSE_Encrypt0 object.  Let the Message be the resulting plaintext.
+                  Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object,
+                  follow the steps specified in
+                  <xref target="I-D.ietf-cose-msg" /> Section 5 (Encryption
+                  Objects) for validating a COSE_Encrypt/COSE_Encrypt0 object.
+                  Let the Message be the resulting plaintext.
                 </t>
               </list>
             </t>
             <t>
-              If the COSE Header contains a "content type" header value corresponding to the media type "application/cwt", then the Message is a CWT that was the subject of nested signing or encryption operations.  In this case, return to Step 1, using the Message as the CWT.
+              If the COSE Header contains a "content type" header value
+              corresponding to the media type "application/cwt", then
+              the Message is a CWT that was the subject of nested signing
+              or encryption operations.  In this case, return to Step 1,
+              using the Message as the CWT.
             </t>
             <t>
-              Verify that the Message is a valid CBOR object; let the CWT Claims Set be this CBOR object.
+              Verify that the Message is a valid CBOR object and that claims
+              are of correct type as defined in this specification; let the CWT
+              Claims Set be this CBOR object.
             </t>
           </list>
         </t>
       </section>
     </section>
 
-<!--
-	  <section anchor="DataTypeMapping" title="Data Type Mapping">
-
-      <t>The data types listed along with the claim definitions in <xref target="claims"/> need to be mapped to data types available with CBOR. This document has not yet attempted to provide such mapping.</t>
-
-    </section>
-  -->
 
 
     <section anchor="Security" title="Security Considerations">
@@ -421,6 +495,7 @@
     <!-- /////////////////////////////////////////////////////////////////////// -->
 
     <section anchor="IANA" title="IANA Considerations">
+
 
       <section anchor="IANACWTClaimsRegistry" title="CBOR Web Token (CWT) Claims Registry">
 	<t>
@@ -642,7 +717,7 @@
 	<?rfc subcompact="no"?>
       </section>
 
-      <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
+    <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
         <t>
           This section registers the CoAP Content-Format ID for the "application/cwt" media type
 	  in the "CoAP Content-Formats" registry <xref target="IANA.CoAP.Content-Formats"/>
@@ -655,14 +730,28 @@
 	    <list style='symbols'>
 	      <t>Media Type: application/cwt</t>
 	      <t>Encoding: - </t>
-	      <t>Id: TBD (maybe 61) </t>
+	      <t>Id: TBD (maybe 99 to align with CBOR Tag) </t>
 	      <t>Reference: [[ this specification ]]</t>
 	    </list>
 	  </t>
 	</section>
 	<?rfc subcompact="no"?>
+  </section>
+      <section anchor="IANACBORTagAssignment" title="CBOR Tag registration">
+        <t>It is requested that IANA assign a tag from the "CBOR Tags" registry
+        to CWT.</t>
       </section>
-
+      <section anchor="CBORTagReg" title="Registry Contents">
+    	  <t>
+    	    <?rfc subcompact="yes"?>
+    	    <list style='symbols'>
+    	      <t>CBOR Tag: TBD (maybe 99 to keep it close COSE)</t>
+    	      <t>Data Item: Tagged COSE object</t>
+    	      <t>Semantics: Tagged COSE object with CWT Claim Set as content</t>
+    	    </list>
+    	  </t>
+    	</section>
+    	<?rfc subcompact="no"?>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
@@ -992,7 +1081,7 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
 16(
   [
     / protected / h'a2030b010a' / {
-      / content type / 3: 11, / cose-sign1 /
+      / content type / 3: 11, / cose-sign1 TBD change to CWT/
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
     / unprotected / {
