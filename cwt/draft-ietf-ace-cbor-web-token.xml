@@ -319,6 +319,29 @@
       </t>
 
     </section>
+
+    <section anchor="CWTCBORTag" title="CBOR Tag">
+      <t>
+        Whenever possible transport layer, e.g. CoAP, SHOULD indicate content
+        type CWT.  When transport layer does not support content type indication
+        a CWT CBOR tag MUST be used to indicate that content is a CWT.
+      </t>
+      <t>
+        The CWT tag expect its data Item to be a tagged COSE object.
+        The actual COSE object has been excluded.
+        <figure align="center" anchor="fig:CWTTagExample"
+            title='Example of a CWT tag usage'>
+            <artwork align="left"><![CDATA[
+99(
+  17(
+    / COSE object /
+  )
+)
+]]></artwork>
+        </figure>
+      </t>
+    </section>
+
     <section anchor="CreatingValidatingCWTs" title="Creating and Validating CWTs">
 
       <section anchor="CreatingCWT" title="Creating a CWT">
@@ -421,6 +444,7 @@
     <!-- /////////////////////////////////////////////////////////////////////// -->
 
     <section anchor="IANA" title="IANA Considerations">
+
 
       <section anchor="IANACWTClaimsRegistry" title="CBOR Web Token (CWT) Claims Registry">
 	<t>
@@ -642,7 +666,7 @@
 	<?rfc subcompact="no"?>
       </section>
 
-      <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
+    <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
         <t>
           This section registers the CoAP Content-Format ID for the "application/cwt" media type
 	  in the "CoAP Content-Formats" registry <xref target="IANA.CoAP.Content-Formats"/>
@@ -655,14 +679,28 @@
 	    <list style='symbols'>
 	      <t>Media Type: application/cwt</t>
 	      <t>Encoding: - </t>
-	      <t>Id: TBD (maybe 61) </t>
+	      <t>Id: TBD (maybe 99 to align with CBOR Tag) </t>
 	      <t>Reference: [[ this specification ]]</t>
 	    </list>
 	  </t>
 	</section>
 	<?rfc subcompact="no"?>
+  </section>
+      <section anchor="IANACBORTagAssignment" title="CBOR Tag registration">
+        <t>It is requested that IANA assign a tag from the "CBOR Tags" registry
+        to CWT.</t>
       </section>
-
+      <section anchor="CoAPreg" title="Registry Contents">
+    	  <t>
+    	    <?rfc subcompact="yes"?>
+    	    <list style='symbols'>
+    	      <t>CBOR Tag: TBD (maybe 99 to keep it close COSE)</t>
+    	      <t>Data Item: Tagged COSE object</t>
+    	      <t>Semantics: Tagged COSE object with CWT Claim Set as content</t>
+    	    </list>
+    	  </t>
+    	</section>
+    	<?rfc subcompact="no"?>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
