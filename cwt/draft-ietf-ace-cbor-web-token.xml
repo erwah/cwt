@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="22" month="February" year="2017" />
+    <date day="2" month="March" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -273,21 +273,6 @@
             </t>
           </section>
 
-	  <!--
-	    Let's literally just reference all the claims defined in JWT and define other claims in other specs.
-          <section anchor="CWTCNcks" title="cks (COSE Key Structure) Claim">
-            <t>
-              The <spanx style="verb">cks</spanx> (COSE Key Structure) claim holds members representing a
-              COSE Key Structure.  The members of the structure can be found in
-              Section 7.1 of <xref target="I-D.ietf-cose-msg" />. The <spanx style="verb">cks</spanx>
-              value is a case-sensitive string and MUST be of CBOR major type 2,
-              byte string. The CBOR encoded claim key 8 MUST be used to identify
-              this claim.
-	      <!== TBD: Check this section number periodically ==>
-            </t>
-          </section>
-	  -->
-
       </section>
 
     </section>
@@ -320,21 +305,30 @@
 
     </section>
 
-    <section anchor="CWTCBORTag" title="CBOR Tag">
+    <section anchor="CWTCBORTag" title="CWT CBOR Tag">
       <t>
-        Whenever possible transport layer, e.g. CoAP, SHOULD indicate content
-        type CWT.  When transport layer does not support content type indication
-        a CWT CBOR tag MUST be used to indicate that content is a CWT.
+	How to determine that a CBOR data structure is a CWT is application-dependent.
+	In some cases, this information is known from the application context,
+	such as from the position of the CWT in a data structure at which the value must be a CWT.
+	One method of indicating that a CBOR object is a CWT is the use of
+	the "application/cwt" content type by a transport protocol.
       </t>
       <t>
-        The CWT tag expect its data Item to be a tagged COSE object.
-        The actual COSE object has been excluded.
+	This section defines the CWT CBOR tag as another means for applications to
+	declare that a CBOR data structure is a CWT.
+	Its use is optional, and is intended for use in cases in which
+	this information would not otherwise be known.
+      </t>
+      <t>
+        The CWT tag MUST prefix a tagged object using one of the COSE CBOR tags.
+	In this example, the COSE_Mac0 tag is used.
+        The actual COSE_Mac0 object has been excluded from this example.
         <figure align="center" anchor="fig:CWTTagExample"
             title='Example of a CWT tag usage'>
             <artwork align="left"><![CDATA[
-99(
-  17(
-    / COSE object /
+/ CWT CBOR tag / 61(
+  / COSE_Mac0 CBOR tag / 17(
+    / COSE_Mac0 object /
   )
 )
 ]]></artwork>
@@ -360,11 +354,11 @@
           </t>
           <t>
             Create a COSE Header containing the desired set of Header
-            Parameters.  The COSE Header MUST be valid according to the
+            Parameters.  The COSE Header MUST be valid per the
             <xref target="I-D.ietf-cose-msg"/> specification.
           </t>
           <t>
-            Depending upon whether the CWT is signed, MACed or encrypted,
+            Depending upon whether the CWT is signed, MACed, or encrypted,
             there are three cases:
             <list style="symbols">
               <t>
@@ -390,11 +384,6 @@
             </list>
           </t>
           <t>
-              Add the COSE tag to the COSE object to indicate type of
-              COSE object.  If transport layer cannot indicate that this is a
-              CWT object add the CWT tag too.
-          </t>
-          <t>
               If a nested signing, MACing or encryption operation will be
               performed, let the Message be the COSE_Sign/COSE_Sign1,
               COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and
@@ -405,6 +394,12 @@
               Note: If integrity (signing/MACing) and confidentiality
               (encryption) protection are needed, it is recommended to use an
               authenticated encryption algorithm to save space and processing.
+          </t>
+          <t>
+	    If needed by the application, add the appropriate COSE CBOR tag
+	    to the COSE object to indicate type of COSE object.
+	    If also needed by the application, add the CWT CBOR tag
+	    to indicate that the COSE object is a CWT.
           </t>
         </list>
       </t>
@@ -420,11 +415,15 @@
         <t>
           <list style="numbers">
             <t>
-              If it was not indicated by the transport layer that this is a CWT
-              object verify that the CBOR tag indicates that this is a CWT.
+              Verify that the CWT is a valid CBOR object.
             </t>
             <t>
-              Verify that the CWT is a valid CBOR object.
+              If the object begins with the CWT CBOR tag, remove it
+	      and verify that one of the COSE CBOR tags follows it.
+	    </t>
+	    <t>
+	      If the object is tagged with one of the COSE CBOR tags, remove it
+	      and verify that it corresponds to the structure of the following COSE object.
             </t>
             <t>
               Verify that the resulting COSE Header includes only parameters
@@ -438,7 +437,7 @@
               COSE_Encrypt/COSE_Encrypt0.
             </t>
             <t>
-              Depending upon whether the CWT is a signed, MACed or encrypted,
+              Depending upon whether the CWT is a signed, MACed, or encrypted,
               there are three cases:
               <list style="symbols">
                 <t>
@@ -470,24 +469,24 @@
               using the Message as the CWT.
             </t>
             <t>
-              Verify that the Message is a valid CBOR object and that claims
-              are of correct type as defined in this specification; let the CWT
-              Claims Set be this CBOR object.
+              Verify that the Message is a valid CBOR object; let the CWT Claims Set be this CBOR object.
             </t>
           </list>
         </t>
       </section>
     </section>
 
-
-
     <section anchor="Security" title="Security Considerations">
 
       <t>
-	The security of the CWT is dependent on the protection offered by COSE. Without protecting the claims contained in a CWT, an adversary is able to modify, add or remove claims.
-	Since the claims conveyed in a CWT are used to make authorization decisions, it is not only important to protect the CWT in transit but also to ensure that the recipient is able to authenticate the party that collected the claims and created the CWT.
+	The security of the CWT is dependent on the protections offered by COSE.
+	Unless the claims in a CWT are protected, an adversary can modify, add, or remove claims.
+	Since the claims conveyed in a CWT may be used to make authorization decisions,
+	it is not only important to protect the CWT in transit but also to ensure that
+	the recipient can authenticate the party that assembled the claims and created the CWT.
 	Without trust of the recipient in the party that created the CWT, no sensible authorization decision can be made.
-	Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT so that the recipient can be assured about the correctness of the provided information.
+	Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT
+	so that the recipient can be assured of the validity of the information provided.
       </t>
 
     </section>
@@ -717,7 +716,7 @@
 	<?rfc subcompact="no"?>
       </section>
 
-    <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
+      <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
         <t>
           This section registers the CoAP Content-Format ID for the "application/cwt" media type
 	  in the "CoAP Content-Formats" registry <xref target="IANA.CoAP.Content-Formats"/>
@@ -730,28 +729,35 @@
 	    <list style='symbols'>
 	      <t>Media Type: application/cwt</t>
 	      <t>Encoding: - </t>
-	      <t>Id: TBD (maybe 99 to align with CBOR Tag) </t>
+	      <t>Id: TBD (maybe 61) </t>
 	      <t>Reference: [[ this specification ]]</t>
 	    </list>
 	  </t>
 	</section>
 	<?rfc subcompact="no"?>
-  </section>
-      <section anchor="IANACBORTagAssignment" title="CBOR Tag registration">
-        <t>It is requested that IANA assign a tag from the "CBOR Tags" registry
-        to CWT.</t>
       </section>
-      <section anchor="CBORTagReg" title="Registry Contents">
-    	  <t>
-    	    <?rfc subcompact="yes"?>
-    	    <list style='symbols'>
-    	      <t>CBOR Tag: TBD (maybe 99 to keep it close COSE)</t>
-    	      <t>Data Item: Tagged COSE object</t>
-    	      <t>Semantics: Tagged COSE object with CWT Claim Set as content</t>
-    	    </list>
-    	  </t>
-    	</section>
-    	<?rfc subcompact="no"?>
+
+      <section anchor="IANACBORTagAssignment" title="CBOR Tag registration">
+	<t>
+	  This section registers the CWT CBOR tag
+	  in the "CBOR Tags" registry <xref target="IANA.CBOR.Tags"/>
+	  established by <xref target="RFC7049"/>.
+	</t>
+
+	<section anchor="CBORTagReg" title="Registry Contents">
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style='symbols'>
+	      <t>CBOR Tag: TBD (maybe 61 to use the same value as the Content-Format)</t>
+	      <t>Data Item: CBOR Web Token (CWT)</t>
+	      <t>Semantics: CBOR Web Token (CWT), as defined in [[ this specification ]]</t>
+	      <t>Reference: [[ this specification ]]</t>
+	      <t>Point of Contact: Michael B. Jones, mbj@microsoft.com</t>
+	    </list>
+	  </t>
+	</section>
+	<?rfc subcompact="no"?>
+      </section>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
@@ -803,16 +809,30 @@
         </front>
       </reference>
 
+      <reference anchor="IANA.CBOR.Tags" target="http://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml">
+        <front>
+          <title>Concise Binary Object Representation (CBOR) Tags</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
     </references>
 
     <references title='Informative References'>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-greevenbosch-appsawg-cbor-cddl-09"?>
     </references>
 
-    <section anchor="examples" title="Examples">
-      <t>This appendix includes a set of CWT examples that show how the CWT claims set can be protected, signed MACed encrypted and nested signature and encryption</t>
-      <t>To make the examples easier to read, they are presented both as hex string and the extended CBOR diagnostic notation (defined in
-   <xref target="I-D.greevenbosch-appsawg-cbor-cddl" pageno="false" format="default"/>).</t>
+    <section anchor="Examples" title="Examples">
+      <t>
+	This appendix includes a set of CWT examples that show how the CWT Claims Set can be protected.
+	There are examples that are signed, MACed, encrypted, and that use nested signing and encryption.
+	To make the examples easier to read, they are presented both as hex strings and
+	in the extended CBOR diagnostic notation <xref target="I-D.greevenbosch-appsawg-cbor-cddl"/>.
+      </t>
+
       <section anchor="exampleClaimsSet" title='Example CWT Claims Set'>
         <t>
           The CWT Claims Set used for the different examples
@@ -826,7 +846,7 @@
 a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
 636f6d041a5612aeb0051a5610d9f0061a5610d9f00175636f61703a2f2f6173
 2e6578616d706c652e636f6d07420b71
-                ]]></artwork>
+]]></artwork>
               </figure>
         </t>
         <t>
@@ -1053,9 +1073,9 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
 	  and it can be validated using the public ECDSA parts from <xref target="exampleKeysECDSA256"/>.
 	  The encryption is done with AES-CCM mode using the 128-bit symmetric key from <xref target="exampleKeysSymmetric128"/>
     with a 64-bit tag and 13-byte nonce, i.e., COSE AES-CCM-16-64-128.
-    The content type is set to COSE_sign1 to indicate that there are multiple
+    The content type is set to CWT to indicate that there are multiple
     layers of COSE protection before finding the CWT Claims Set. The decrypted
-    ciphertext will be a COSE_sign1 structure.  In this example it is the same
+    ciphertext will be a COSE_sign1 structure.  In this example, it is the same
     one as in <xref target="exampleSigned"/>, i.e., a Signed CWT Claims Set.
     Note that there is no limitation to the number of layers; this is an
     example with two layers.
@@ -1065,7 +1085,7 @@ d08346a203183d010aa1054dadbe290e8c9c23067a558b15795858f7a8ec3e32
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08345a2030b010aa1054d2653469d58937647a6a1bb023458a65da538206c33
+d08346a203183d010aa1054d2653469d58937647a6a1bb023458a65da538206c33
 cf941df7ea933ba7b93c60322017f9db9c904608fce2688b51028b5b912f9010
 ae72802bf65778593c7270b20683b1587824eb4074e03323ccf0541b495a3757
 f353a8424b6ceeaaec1898964d8a03e04e514a5b0ca143b57689a2a9f1c6c84d
@@ -1080,8 +1100,8 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
             <artwork><![CDATA[
 16(
   [
-    / protected / h'a2030b010a' / {
-      / content type / 3: 11, / cose-sign1 TBD change to CWT/
+    / protected / h'a203183d010a' / {
+      / content type / 3: 61, / CWT /
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
     / unprotected / {
@@ -1128,7 +1148,10 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
 	-03
         <list style="symbols">
 	  <t>
-	    Reworked examples to include signed, MACed, encrypted, and nested CWTs.
+	    Reworked the examples to include signed, MACed, encrypted, and nested CWTs.
+	  </t>
+	  <t>
+	    Defined the CWT CBOR tag and explained its usage.
 	  </t>
 	</list>
       </t>
