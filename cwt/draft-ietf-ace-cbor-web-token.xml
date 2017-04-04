@@ -157,7 +157,7 @@
             The "Type6NumericDate" term has the same meaning, syntax, and
             processing rules as the "NumericDate" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that Type6NumericDate uses
-            CBOR major type 6, with tag value 1, instead of a numeric JSON
+            CBOR major type 6.1, instead of a numeric JSON
             value.
           </t>
 
@@ -291,9 +291,9 @@
 | iss     | 1                      | 3                        |
 | sub     | 2                      | 3                        |
 | aud     | 3                      | 3                        |
-| exp     | 4                      | 6 tag value 1            |
-| nbf     | 5                      | 6 tag value 1            |
-| iat     | 6                      | 6 tag value 1            |
+| exp     | 4                      | 6.1                      |
+| nbf     | 5                      | 6.1                      |
+| iat     | 6                      | 6.1                      |
 | cti     | 7                      | 2                        |
 \---------+------------------------+--------------------------/
 ]]></artwork>
@@ -596,7 +596,7 @@
 	      <t>Claim Description: Expiration Time</t>
 	      <t>JWT Claim Name: <spanx style="verb">exp</spanx></t>
 	      <t>CBOR Key Value: 4</t>
-	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>CBOR Major Type: 6.1</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNexp"/> of [[ this specification ]]</t>
 	    </list>
@@ -607,7 +607,7 @@
 	      <t>Claim Description: Not Before</t>
 	      <t>JWT Claim Name: <spanx style="verb">nbf</spanx></t>
 	      <t>CBOR Key Value: 5</t>
-	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>CBOR Major Type: 6.1</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNnbf"/> of [[ this specification ]]</t>
 	    </list>
@@ -618,7 +618,7 @@
 	      <t>Claim Description: Issued At</t>
 	      <t>JWT Claim Name: <spanx style="verb">iat</spanx></t>
 	      <t>CBOR Key Value: 6</t>
-	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>CBOR Major Type: 6.1</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNiat"/> of [[ this specification ]]</t>
 	    </list>
