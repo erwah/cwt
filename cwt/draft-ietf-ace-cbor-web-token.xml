@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="9" month="April" year="2017" />
+    <date day="11" month="April" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -337,7 +337,7 @@
 	this information would not otherwise be known.
       </t>
       <t>
-        The CWT tag MUST prefix a tagged object using one of the COSE CBOR tags.
+        If present, the CWT tag MUST prefix a tagged object using one of the COSE CBOR tags.
 	In this example, the COSE_Mac0 tag is used.
         The actual COSE_Mac0 object has been excluded from this example.
         <figure align="center" anchor="fig:CWTTagExample"
