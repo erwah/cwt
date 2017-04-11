@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-03">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-04">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="2" month="March" year="2017" />
+    <date day="9" month="April" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -144,21 +144,25 @@
 
       <t>
         <list style="hanging">
-          <t hangText="Type3StringOrURI:">
+          <t hangText="StringOrURI:">
 	    <vspace/>
-            The "Type3StringOrURI" term has the same meaning, syntax, and
+            The "StringOrURI" term has the same meaning, syntax, and
             processing rules as the "StringOrUri" term defined in Section 2
-            of JWT <xref target="RFC7519" />, except that Type3StringOrURI uses
-            CBOR major type 3 instead of a JSON string value.
+            of JWT <xref target="RFC7519" />, except that a CWT StringOrURI uses
+            CBOR major type 3 (text string) instead of a JSON string value.
            </t>
 
-          <t hangText="Type6NumericDate:">
+          <t hangText="NumericDate:">
 	    <vspace/>
-            The "Type6NumericDate" term has the same meaning, syntax, and
+            The "NumericDate" term has the same meaning, syntax, and
             processing rules as the "NumericDate" term defined in Section 2
-            of JWT <xref target="RFC7519" />, except that Type6NumericDate uses
-            CBOR major type 6, with tag value 1, instead of a numeric JSON
-            value.
+            of JWT <xref target="RFC7519" />, except that a CWT NumericDate uses
+	    one of the CBOR numeric types (0, 1, or 7 with subtypes 25, 26, or 27),
+	    instead of a numeric JSON value.
+	    The numeric date values that can used for a CWT NumericDate
+	    are identical to the epoch-based date/time values that are specified
+	    to follow the tag defined in Section 2.4.1 (Date and Time) of <xref target="RFC7049"/>,
+	    except that the tag itself need not be present.
           </t>
 
           <t hangText="CBOR encoded claim key:">
@@ -208,7 +212,7 @@
               The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning, syntax, and
               processing rules as the <spanx style="verb">iss</spanx> claim defined in Section 4.1.1
               of JWT <xref target="RFC7519" />, except that the format MUST be a
-              Type3StringOrURI. The CBOR encoded claim key 1 MUST be used to
+              StringOrURI. The CBOR encoded claim key 1 MUST be used to
               identify this claim.
             </t>
          </section>
@@ -218,7 +222,7 @@
               The <spanx style="verb">sub</spanx> (subject) claim has the same meaning, syntax, and
               processing rules as the <spanx style="verb">sub</spanx> claim defined in Section 4.1.2
               of JWT <xref target="RFC7519" />, except that the format MUST be a
-              Type3StringOrURI. The CBOR encoded claim key 2 MUST be used to
+              StringOrURI. The CBOR encoded claim key 2 MUST be used to
               identify this claim.
             </t>
           </section>
@@ -228,7 +232,7 @@
               The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
               processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
               of JWT <xref target="RFC7519" />, except that the format MUST be a
-              Type3StringOrURI. The CBOR encoded claim key 3 MUST be used to
+              StringOrURI. The CBOR encoded claim key 3 MUST be used to
               identify this claim.
             </t>
           </section>
@@ -238,7 +242,7 @@
               The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning, syntax,
               and processing rules as the <spanx style="verb">exp</spanx> claim defined in Section
               4.1.4 of JWT <xref target="RFC7519" />, except that the format
-              MUST be a Type6NumericDate. The CBOR encoded claim key 4 MUST be
+              MUST be a CWT NumericDate. The CBOR encoded claim key 4 MUST be
               used to identify this claim.
             </t>
           </section>
@@ -248,7 +252,7 @@
               The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning, syntax,
               and processing rules as the <spanx style="verb">nbf</spanx> claim defined in Section
               4.1.5 of JWT <xref target="RFC7519" />, except that the format
-              MUST be a Type6NumericDate. The CBOR encoded claim key 5 MUST be
+              MUST be a CWT NumericDate. The CBOR encoded claim key 5 MUST be
               used to identify this claim.
             </t>
           </section>
@@ -258,7 +262,7 @@
               The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning, syntax,
               and processing rules as the <spanx style="verb">iat</spanx> claim defined in Section
               4.1.6 of JWT <xref target="RFC7519" />, except that the format
-              MUST be a Type6NumericDate. The CBOR encoded claim key 6 MUST be
+              MUST be a CWT NumericDate. The CBOR encoded claim key 6 MUST be
               used to identify this claim.
             </t>
           </section>
@@ -285,24 +289,37 @@
         <figure align="center" anchor="fig:cborMappingValuesAccessTokens"
                 title="Summary of the values, CBOR major types and encoded claim keys.">
           <artwork><![CDATA[
-/---------+------------------------+--------------------------\
-| Claim   | CBOR encoded claim key | CBOR major type of value |
-|---------+------------------------+--------------------------|
-| iss     | 1                      | 3                        |
-| sub     | 2                      | 3                        |
-| aud     | 3                      | 3                        |
-| exp     | 4                      | 6 tag value 1            |
-| nbf     | 5                      | 6 tag value 1            |
-| iat     | 6                      | 6 tag value 1            |
-| cti     | 7                      | 2                        |
-\---------+------------------------+--------------------------/
+/---------+------------------------+-------------------------------\
+| Claim   | CBOR encoded claim key | CBOR major type of value      |
+|---------+------------------------+-------------------------------|
+| iss     | 1                      | 3                             |
+| sub     | 2                      | 3                             |
+| aud     | 3                      | 3                             |
+| exp     | 4                      | 0, 1, or 7 with float subtype |
+| nbf     | 5                      | 0, 1, or 7 with float subtype |
+| iat     | 6                      | 0, 1, or 7 with float subtype |
+| cti     | 7                      | 2                             |
+\---------+------------------------+-------------------------------/
 ]]></artwork>
-<!--
-| cks     | 8                      | 3                        |
--->
         </figure>
       </t>
 
+    </section>
+
+    <section anchor="TaggedValues" title="CBOR Tags and Claim Values">
+      <t>
+	The use of CBOR tags to prefix any of the claim values defined in this specifiction
+	is NOT RECOMMENDED.  For instance, while CBOR tag 6.1 (seconds-since-the-epoch)
+	could logically be prefixed to values of the
+	<spanx style="verb">exp</spanx>,
+	<spanx style="verb">nbf</spanx>, and
+	<spanx style="verb">iat</spanx>
+	claims, this is unnecessary, since the representation of the claim values
+	is already specified by the claim definitions.
+	Tagging claim values would only take up extra space, without adding information.
+	However, other claims defined by other specifications
+	can specify that a tag prefix the claim value, when appropriate.
+      </t>
     </section>
 
     <section anchor="CWTCBORTag" title="CWT CBOR Tag">
@@ -390,10 +407,6 @@
               return to Step 3, using a "content type" header value
               corresponding to the media type "application/cwt" in the new
               COSE Header created in that step.
-            <vspace/>
-              Note: If integrity (signing/MACing) and confidentiality
-              (encryption) protection are needed, it is recommended to use an
-              authenticated encryption algorithm to save space and processing.
           </t>
           <t>
 	    If needed by the application, add the appropriate COSE CBOR tag
@@ -410,7 +423,7 @@
           of the steps is not significant in cases where there are no
           dependencies between the inputs and outputs of the steps.  If any of
           the listed steps fail, then the CWT MUST be rejected -- that is,
-          treated by the application as an invalid input.
+          treated by the application as invalid input.
         </t>
         <t>
           <list style="numbers">
@@ -596,7 +609,7 @@
 	      <t>Claim Description: Expiration Time</t>
 	      <t>JWT Claim Name: <spanx style="verb">exp</spanx></t>
 	      <t>CBOR Key Value: 4</t>
-	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>CBOR Major Type: 0, 1, or 7 with subtypes 25, 26, or 27</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNexp"/> of [[ this specification ]]</t>
 	    </list>
@@ -607,7 +620,7 @@
 	      <t>Claim Description: Not Before</t>
 	      <t>JWT Claim Name: <spanx style="verb">nbf</spanx></t>
 	      <t>CBOR Key Value: 5</t>
-	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>CBOR Major Type: 0, 1, or 7 with subtypes 25, 26, or 27</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNnbf"/> of [[ this specification ]]</t>
 	    </list>
@@ -618,7 +631,7 @@
 	      <t>Claim Description: Issued At</t>
 	      <t>JWT Claim Name: <spanx style="verb">iat</spanx></t>
 	      <t>CBOR Key Value: 6</t>
-	      <t>CBOR Major Type: 6, tag value 1</t>
+	      <t>CBOR Major Type: 0, 1, or 7 with subtypes 25, 26, or 27</t>
 	      <t>Change Controller: IESG</t>
 	      <t>Specification Document(s): <xref target="CWTCNiat"/> of [[ this specification ]]</t>
 	    </list>
@@ -1143,6 +1156,15 @@ cb709e4d17d381806797b6cf118608e18c3facd0a0ac09d88ea73d4ed7e3b57c
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+
+      <t>
+	-04
+        <list style="symbols">
+	  <t>
+	    Specified that the use of CBOR tags to prefix any of the claim values defined in this specifiction is NOT RECOMMENDED.
+	  </t>
+	</list>
+      </t>
 
       <t>
 	-03
