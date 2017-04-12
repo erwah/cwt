@@ -1113,7 +1113,7 @@ f2218ddac2b992ff2e6b21ec843c5275e895c6ef03a354b8dcac8d9cbe4b381f
             <artwork><![CDATA[
 16(
   [
-    h'a203183d010a' / {
+    / protected / h'a203183d010a' / {
       / content type / 3: 61, / CWT /
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
