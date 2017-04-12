@@ -856,9 +856,9 @@
     <figure align="center" anchor="fig:exampleClaimsSetHex"
           title='Example CWT Claims Set as hex string'>
       <artwork align="left"><![CDATA[
-a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
-636f6d041a5612aeb0051a5610d9f0061a5610d9f00175636f61703a2f2f6173
-2e6578616d706c652e636f6d07420b71
+a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b7703
+7818636f61703a2f2f6c696768742e6578616d706c652e636f6d041a5612aeb0
+051a5610d9f0061a5610d9f007420b71
 ]]></artwork>
               </figure>
         </t>
@@ -867,12 +867,12 @@ a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
               title='Example CWT Claims Set in CBOR diagnostic notation'>
               <artwork align="left"><![CDATA[
 {
+  / iss / 1: "coap://as.example.com",
   / sub / 2: "erikw",
   / aud / 3: "coap://light.example.com",
   / exp / 4: 1444064944,
   / nbf / 5: 1443944944,
   / iat / 6: 1443944944,
-  / iss / 1: "coap://as.example.com",
   / cti / 7: h'0b71'
 }
 ]]></artwork>
@@ -888,13 +888,13 @@ a702656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e
 
 	<section anchor="exampleKeysSymmetric128" title='128-bit Symmetric Key as Hex Encoded String'>
 	  <figure><artwork><![CDATA[
-330f24bee539b2d2d190ec8f1e1f3618
+8e82e68e61654ecb5a369fe8be7572dd
 ]]></artwork></figure>
         </section>
 
 	<section anchor="exampleKeysSymmetric256" title='256-bit Symmetric Key as Hex Encoded String'>
 	  <figure><artwork><![CDATA[
-af4f43d95c7c0ed1e4a1fc6aa2fd8a4b51244ed6861a23a649a0d6c5308e610c
+403697de87af64611c1d32a05dab0fe1fcb715a86ab435f1ec99192d79569388
 ]]></artwork></figure>
         </section>
 
@@ -903,10 +903,10 @@ af4f43d95c7c0ed1e4a1fc6aa2fd8a4b51244ed6861a23a649a0d6c5308e610c
     <figure align="center" anchor="fig:exampleKeysECDSA256"
           title='ECDSA 256-bit COSE Key as hex string'>
       <artwork align="left"><![CDATA[
-a6225820c7ee1eeacbdd8c4d34c2efe2ff5c7332b4a7028ad04db92822907aea
-823fed0e23582100ed3e811eb399bd293addec6107c29955dcb5e6063a6fedb1
-1169be5b02ace2b403260102215820f56b74fc35055196f6bf8d6044cb19b6ab
-b4e6f7207e43acf6435f34c57b6b382001
+a622582060f7f1a780d8a783bfb7a2dd6b2796e8128dbbcef9d3d168db952997
+1a36e7b92358206c1382765aec5358f117733d281c1c7bdc39884d04a45a1e6c
+67c858bc206c1903260102215820143329cce7868e416927599cf65a34f3ce2f
+fda55a7eca69ed8919a394d42f0f2001
 ]]></artwork>
           </figure>
         </t>
@@ -915,15 +915,15 @@ b4e6f7207e43acf6435f34c57b6b382001
                 title='ECDSA 256-bit COSE Key in CBOR diagnostic notation'>
             <artwork align="left"><![CDATA[
 {
-  / y /   -3: h'c7ee1eeacbdd8c4d34c2efe2ff5c7332b4a7028ad04db92822
-              907aea823fed0e',
-  / d /   -4: h'00ed3e811eb399bd293addec6107c29955dcb5e6063a6fedb1
-              1169be5b02ace2b4',
-  / alg /  3: -7, \ ECDSA 256 \
-  / kty /  1: 2 / EC2 /,
-  / x /   -2: h'f56b74fc35055196f6bf8d6044cb19b6abb4e6f7207e43acf6
-              435f34c57b6b38',
-  / crv / -1: 1 / P-256 /
+  / d /   -4: h'6c1382765aec5358f117733d281c1c7bdc39884d04a45a1e
+                6c67c858bc206c19',
+  / y /   -3: h'60f7f1a780d8a783bfb7a2dd6b2796e8128dbbcef9d3d168
+                db9529971a36e7b9',
+  / x /   -2: h'143329cce7868e416927599cf65a34f3ce2ffda55a7eca69
+                ed8919a394d42f0f',
+  / crv / -1: 1 / P-256 / ,
+  / kty /  1: 2 / EC2 / ,
+  / alg /  3: -7 / ECDSA 256 /
 }
 ]]></artwork>
           </figure>
@@ -944,11 +944,11 @@ b4e6f7207e43acf6435f34c57b6b382001
           <figure align="center" anchor="fig:exampleSignedHex"
                 title='Signed CWT as hex string'>
             <artwork><![CDATA[
-d83dd28443a10126a05850a702656572696b77037818636f61703a2f2f6c6967
-68742e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9f0
-0175636f61703a2f2f61732e6578616d706c652e636f6d07420b715840298107
-5b304ec3684b242846563da5844bb71765b6e03206195dc076e3f8e9a95f7695
-580f428771129aae4a5912d4c0f23c75b0dd02e12b13f61863d7b1e3d4
+d28443a10126a05850a70175636f61703a2f2f61732e6578616d706c652e636f6
+d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
+6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b7158401fe410abce650
+effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
+36c64f22e7691abb464bed2ff23176cdba9fd9e213f637d082
 ]]></artwork>
           </figure>
         </t>
@@ -956,31 +956,29 @@ d83dd28443a10126a05850a702656572696b77037818636f61703a2f2f6c6967
           <figure align="center" anchor="fig:exampleSignedCBORDiagnostic"
                 title='Signed CWT in CBOR diagnostic notation'>
             <artwork><![CDATA[
-61(
-  18(
-    [
-      / protected / h'a10126' / {
-        / alg / 1: -7 / ECDSA 256 /
+18(
+  [
+    / protected / h'a10126' / {
+      / alg / 1: -7 / ECDSA 256 /
+    } / ,
+    / unprotected / {},
+    / payload / h'a70175636f61703a2f2f61732e6578616d706c652e63
+                  6f6d02656572696b77037818636f61703a2f2f6c6967
+                  68742e6578616d706c652e636f6d041a5612aeb0051a
+                  5610d9f0061a5610d9f007420b71' / {
+        / iss / 1: "coap://as.example.com",
+        / sub / 2: "erikw",
+        / aud / 3: "coap://light.example.com",
+        / exp / 4: 1444064944,
+        / nbf / 5: 1443944944,
+        / iat / 6: 1443944944,
+        / cti / 7: h'0b71'
       } / ,
-      / unprotected / {},
-      / payload / h'a702656572696b77037818636f61703a2f2f6c696768
-                    742e6578616d706c652e636f6d041a5612aeb0051a56
-                    10d9f0061a5610d9f00175636f61703a2f2f61732e65
-                    78616d706c652e636f6d07420b71' / {
-          / sub / 2: "erikw",
-          / aud / 3: "coap://light.example.com",
-          / exp / 4: 1444064944,
-          / nbf / 5: 1443944944,
-          / iat / 6: 1443944944,
-          / iss / 1: "coap://as.example.com",
-          / cti / 7: h'0b71'
-        } / ,
-      / signature / h'2981075b304ec3684b242846563da5844bb71765b6
-                      e03206195dc076e3f8e9a95f7695580f428771129a
-                      ae4a5912d4c0f23c75b0dd02e12b13f61863d7b1e3
-                      d4'
-    ]
-  )
+    / signature / h'1fe410abce650effed497f05d7f9462de67d571384
+                    097de0d96f1e2514d284cdd85634f269af6c36c64f
+                    22e7691abb464bed2ff23176cdba9fd9e213f637d0
+                    82'
+  ]
 )
 ]]></artwork>
           </figure>
@@ -997,39 +995,41 @@ d83dd28443a10126a05850a702656572696b77037818636f61703a2f2f6c6967
 	</t>
         <t>
           <figure align="center" anchor="fig:exampleMACedHex"
-                title='MACed CWT as hex string'>
+                title='MACed CWT with CWT tag as hex string'>
             <artwork><![CDATA[
-d18443a10104a05850a702656572696b77037818636f61703a2f2f6c69676874
-2e6578616d706c652e636f6d041a5612aeb0051a5610d9f0061a5610d9f00175
-636f61703a2f2f61732e6578616d706c652e636f6d07420b71484cfa735ae8fd
-9ae8
+d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
+636f6d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c
+652e636f6d041a5612aeb0051a5610d9f0061a5610d9f007420b7148093101ef
+6d789200
 ]]></artwork>
           </figure>
         </t>
         <t>
           <figure align="center" anchor="fig:exampleMACedCBORDiagnostic"
-                title='MACed CWT in CBOR diagnostic notation'>
+                title='MACed CWT with CWT tag in CBOR diagnostic notation'>
             <artwork><![CDATA[
-17(
-  [
-    / protected / h'a10104' / {
-      / alg / 1: 4 / HMAC 256/64 /
-    } / ,
-    / unprotected / {},
-    / payload / h'a702656572696b77037818636f61703a2f2f6c69676874
-                  2e6578616d706c652e636f6d041a5612aeb0051a5610d9
-                  f0061a5610d9f00175636f61703a2f2f61732e6578616d
-                  706c652e636f6d07420b71' / {
-        / iss / 1: "coap://as.example.com",
-        / sub / 2: "erikw",
-        / aud / 3: "coap://light.example.com",
-        / exp / 4: 1444064944,
-        / nbf / 5: 1443944944,
-        / iat / 6: 1443944944,
-        / cti / 7: h'0b71'
+61(
+  17(
+    [
+      / protected / h'a10104' / {
+        / alg / 1: 4 / HMAC 256/64 /
       } / ,
-    / tag / h'4cfa735ae8fd9ae8'
-  ]
+      / unprotected / {},
+      / payload / h'a70175636f61703a2f2f61732e6578616d706c652e636f
+                    6d02656572696b77037818636f61703a2f2f6c69676874
+                    2e6578616d706c652e636f6d041a5612aeb0051a5610d9
+                    f0061a5610d9f007420b71' / {
+          / iss / 1: "coap://as.example.com",
+          / sub / 2: "erikw",
+          / aud / 3: "coap://light.example.com",
+          / exp / 4: 1444064944,
+          / nbf / 5: 1443944944,
+          / iat / 6: 1443944944,
+          / cti / 7: h'0b71'
+        } / ,
+      / tag / h'093101ef6d789200'
+    ]
+  )
 )
 ]]></artwork>
           </figure>
@@ -1046,10 +1046,10 @@ d18443a10104a05850a702656572696b77037818636f61703a2f2f6c69676874
         <t>
           <figure align="center" anchor="fig:exampleEncryptedHex" title='Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08343a1010aa1054de2da8827ef996fc5405ebf8d2e5858d70cc6f24abbf38a
-cbaf462d3c9f4a86125ec4eab6f86462c4dd24cadd838e5d593fd96cdf996861
-b7113e197913faac743a2a00269fceec7c835a81873e8d6ca0d2807b33d96324
-c4305ac419ef85dd461430c5c96cfa7f
+d08343a1010aa1054d3a869e378e72b77d077c29be025858d275ad9cd7df1b10
+ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
+1319aec4dcc379fe47115a5d62632727c05f4567fc84dd79554db86676a14978
+42de805d8be93180af4d6ff3043886a0
 ]]></artwork>
           </figure>
         </t>
@@ -1063,13 +1063,13 @@ c4305ac419ef85dd461430c5c96cfa7f
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } /,
     / unprotected / {
-      / iv / 5: h'e2da8827ef996fc5405ebf8d2e'
+      / iv / 5: h'3a869e378e72b77d077c29be02'
     },
-    / ciphertext / h'd70cc6f24abbf38acbaf462d3c9f4a86125ec4eab6f
-                     86462c4dd24cadd838e5d593fd96cdf996861b7113e
-                     197913faac743a2a00269fceec7c835a81873e8d6ca
-                     0d2807b33d96324c4305ac419ef85dd461430c5c96c
-                     fa7f'
+    / ciphertext / h'd275ad9cd7df1b10ba8cde785c74b1e1e6ada287e2b
+                     af1451b06862529b784d230b0111773b6c3691319ae
+                     c4dcc379fe47115a5d62632727c05f4567fc84dd795
+                     54db86676a1497842de805d8be93180af4d6ff30438
+                     86a0'
   ]
 )
 ]]></artwork>
@@ -1098,12 +1098,12 @@ c4305ac419ef85dd461430c5c96cfa7f
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08346a203183d010aa1054d3b67cd7756c3a70587a87d5dc858a5ef0154f1e1
-323e0b41a58313c2fce5eb65ce04c7fda9e02a87a2bfcc961bf2d70452bc0902
-a52c2517c6a47f5b91e3e4ed76294e3e2a7954b61ea83d92616c49102534f2bc
-f2218ddac2b992ff2e6b21ec843c5275e895c6ef03a354b8dcac8d9cbe4b381f
-8031555638cfd30d34d3247b8674235f680781559d2ef36bf951b6e43a79d6ba
-669a5aa6b4b951cd61bc89d18abba54faaabf97e6a80037cc99ab512471c19b6
+d08346a203183d010aa1054d9120e5dc42c9f9aec05ebe8a4858a538be026c02
+4a40b19d6dbea3ddb18b31021f874a097a05ff3cdaa4665bafc8e46a3d7f37ad
+f002fe57eee267f8f62a9c1621af75e1ecd742a3d801c2cc82358cf104a8d902
+4d38a599ea6027d482dc2948a88fe83f9734804299c832401029e2d32a984789
+c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
+7908e89b3b7c3d59d8a80e22f70a1b6ee8c162c564341c2f15cec252d3da038c
 ]]></artwork>
           </figure>
         </t>
@@ -1118,16 +1118,16 @@ f2218ddac2b992ff2e6b21ec843c5275e895c6ef03a354b8dcac8d9cbe4b381f
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
     / unprotected / {
-      / iv / 5: h'3b67cd7756c3a70587a87d5dc8'
+      / iv / 5: h'9120e5dc42c9f9aec05ebe8a48'
     },
-    / ciphertext / h'ef0154f1e1323e0b41a58313c2fce5eb65ce04c7fda
-                     9e02a87a2bfcc961bf2d70452bc0902a52c2517c6a4
-                     7f5b91e3e4ed76294e3e2a7954b61ea83d92616c491
-                     02534f2bcf2218ddac2b992ff2e6b21ec843c5275e8
-                     95c6ef03a354b8dcac8d9cbe4b381f8031555638cfd
-                     30d34d3247b8674235f680781559d2ef36bf951b6e4
-                     3a79d6ba669a5aa6b4b951cd61bc89d18abba54faaa
-                     bf97e6a80037cc99ab512471c19b6'
+    / ciphertext / h'38be026c024a40b19d6dbea3ddb18b31021f874a097
+                     a05ff3cdaa4665bafc8e46a3d7f37adf002fe57eee2
+                     67f8f62a9c1621af75e1ecd742a3d801c2cc82358cf
+                     104a8d9024d38a599ea6027d482dc2948a88fe83f97
+                     34804299c832401029e2d32a984789c8e9563e8d2a7
+                     51323bb7e4462b549e0fa89ef93f78bf6425635fba7
+                     6b4aa8047908e89b3b7c3d59d8a80e22f70a1b6ee8c
+                     162c564341c2f15cec252d3da038c'
   ]
 )
 ]]></artwork>
