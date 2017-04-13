@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="11" month="April" year="2017" />
+    <date day="13" month="April" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -102,7 +102,7 @@
       <t>
         The JSON Web Token (JWT) <xref target="RFC7519"/> is a standardized security token format
         that has found use in OAuth 2.0 and OpenID Connect deployments, among other applications.
-	JWT uses JSON Web Signatures (JWS) <xref target="RFC7515"/> and
+	JWT uses JSON Web Signature (JWS) <xref target="RFC7515"/> and
 	JSON Web Encryption (JWE) <xref target="RFC7516"/> to secure the contents of the JWT,
 	which is a set of claims represented in JSON.
 	The use of JSON for encoding information is popular for
@@ -111,7 +111,7 @@
       </t>
 
       <t>
-        In this document an alternative encoding of claims is defined. Instead
+        An alternative encoding of claims is defined in this document. Instead
         of using JSON, as provided by JWTs, this specification uses
         CBOR <xref target="RFC7049"/> and calls this new structure "CBOR Web Token (CWT)", which is a
         compact means of representing secured claims to be transferred between two
@@ -308,7 +308,7 @@
 
     <section anchor="TaggedValues" title="CBOR Tags and Claim Values">
       <t>
-	The use of CBOR tags to prefix any of the claim values defined in this specifiction
+	The use of CBOR tags to prefix any of the claim values defined in this specification
 	is NOT RECOMMENDED.  For instance, while CBOR tag 6.1 (seconds-since-the-epoch)
 	could logically be prefixed to values of the
 	<spanx style="verb">exp</spanx>,
@@ -779,7 +779,6 @@
     <references title='Normative References'>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7252.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml' ?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-cose-msg-24"?>
 
@@ -1157,7 +1156,7 @@ c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
 	-04
         <list style="symbols">
 	  <t>
-	    Specified that the use of CBOR tags to prefix any of the claim values defined in this specifiction is NOT RECOMMENDED.
+	    Specified that the use of CBOR tags to prefix any of the claim values defined in this specification is NOT RECOMMENDED.
 	  </t>
 	</list>
       </t>
