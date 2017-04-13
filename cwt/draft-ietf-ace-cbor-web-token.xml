@@ -104,7 +104,7 @@
         that has found use in OAuth 2.0 and OpenID Connect deployments, among other applications.
 	JWT uses JSON Web Signatures (JWS) <xref target="RFC7515"/> and
 	JSON Web Encryption (JWE) <xref target="RFC7516"/> to secure the contents of the JWT,
-	which is a set of claims represented in JSON <xref target="RFC7519"/>.
+	which is a set of claims represented in JSON.
 	The use of JSON for encoding information is popular for
         Web and native applications, but it is considered inefficient for some
         Internet of Things (IoT) systems that use low power radio technologies.
@@ -542,7 +542,7 @@
               </t>
 	      <t hangText='JWT Claim Name:'>
 		<vspace/>
-		Claim Name of the equivalent JWT claim as registered in <xref target="IANA.JWT.Claims"/>.
+		Claim Name of the equivalent JWT claim, as registered in <xref target="IANA.JWT.Claims"/>.
 		CWT claims should normally have a corresponding JWT claim.
 		If a corresponding JWT claim would not make sense,
 		the Designated Experts can choose to accept registrations
@@ -657,7 +657,7 @@
       <section title="Media Type Registration" anchor="MediaReg">
 	<t>
 	  This section registers the <spanx
-	  style="verb">application/cwt</spanx> media type <xref target="RFC2046"/>
+	  style="verb">application/cwt</spanx> media type
 	  in the "Media Types" registry <xref target="IANA.MediaTypes"/>
 	  in the manner described in <xref target="RFC6838">RFC 6838</xref>,
 	  which can be used to indicate that the content is a CWT.
@@ -732,8 +732,7 @@
       <section anchor="IANACoAPContentFormatRegistration" title="CoAP Content-Formats Registration">
         <t>
           This section registers the CoAP Content-Format ID for the "application/cwt" media type
-	  in the "CoAP Content-Formats" registry <xref target="IANA.CoAP.Content-Formats"/>
-	  established by <xref target="RFC7252"/>.
+	  in the "CoAP Content-Formats" registry <xref target="IANA.CoAP.Content-Formats"/>.
         </t>
 
 	<section anchor="CoAPreg" title="Registry Contents">
@@ -753,8 +752,7 @@
       <section anchor="IANACBORTagAssignment" title="CBOR Tag registration">
 	<t>
 	  This section registers the CWT CBOR tag
-	  in the "CBOR Tags" registry <xref target="IANA.CBOR.Tags"/>
-	  established by <xref target="RFC7049"/>.
+	  in the "CBOR Tags" registry <xref target="IANA.CBOR.Tags"/>.
 	</t>
 
 	<section anchor="CBORTagReg" title="Registry Contents">
@@ -780,27 +778,10 @@
   <back>
     <references title='Normative References'>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2046.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7252.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7515.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml' ?>
-
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-cose-msg-24"?>
-
-      <reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
-        <front>
-          <title>JSON Web Token Claims</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-	  <date/>
-        </front>
-      </reference>
 
       <reference anchor="IANA.MediaTypes" target="http://www.iana.org/assignments/media-types">
         <front>
@@ -835,7 +816,22 @@
     </references>
 
     <references title='Informative References'>
-      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-greevenbosch-appsawg-cbor-cddl-09"?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7515.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml' ?>
+
+
+      <reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
+        <front>
+          <title>JSON Web Token Claims</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+	  <date/>
+        </front>
+      </reference>
+
     </references>
 
     <section anchor="Examples" title="Examples">
@@ -843,7 +839,7 @@
 	This appendix includes a set of CWT examples that show how the CWT Claims Set can be protected.
 	There are examples that are signed, MACed, encrypted, and that use nested signing and encryption.
 	To make the examples easier to read, they are presented both as hex strings and
-	in the extended CBOR diagnostic notation <xref target="I-D.greevenbosch-appsawg-cbor-cddl"/>.
+	in the extended CBOR diagnostic notation described in Section 6 of <xref target="RFC7049"/>.
       </t>
 
       <section anchor="exampleClaimsSet" title='Example CWT Claims Set'>
@@ -936,8 +932,8 @@ fda55a7eca69ed8919a394d42f0f2001
 	  This section shows a signed CWT with a single recipient and a full CWT Claims Set.
 	</t>
         <t>
-	  The signature is generated using the private ECDSA key from <xref target="exampleKeysECDSA256"/>
-	  and it can be validated using the public part of the ECDSA key from <xref target="exampleKeysECDSA256"/>.
+	  The signature is generated using the private key listed in <xref target="exampleKeysECDSA256"/>
+	  and it can be validated using the public key from <xref target="exampleKeysECDSA256"/>.
 	  Line breaks are for display purposes only.
 	</t>
         <t>
