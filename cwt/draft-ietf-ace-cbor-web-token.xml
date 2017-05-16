@@ -410,7 +410,7 @@
           </t>
           <t>
 	    If needed by the application, add the appropriate COSE CBOR tag
-	    to the COSE object to indicate type of COSE object.
+	    to the COSE object to indicate the type of COSE object.
 	    If also needed by the application, add the CWT CBOR tag
 	    to indicate that the COSE object is a CWT.
           </t>
@@ -1136,7 +1136,7 @@ c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
       <t>
 	This specification is based on JSON Web Token (JWT) <xref target="RFC7519"/>,
 	the authors of which also include Nat Sakimura and John Bradley.
-	Ludwig Seitz and Göran Selander have made contributions the specification.
+	Ludwig Seitz and Göran Selander have made contributions to the specification.
       </t>
       <!--
       <t>
