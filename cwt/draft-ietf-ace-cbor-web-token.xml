@@ -565,14 +565,12 @@
 	      </t>
 	      <t hangText='CBOR Key Value:'>
 		<vspace/>
-    Key value for the claim.  The key can be either an integer or a string.
-    Registration in the table is based on the value of the key requested.
-    Integer values between 1 and 255 and strings of length 1 are designated as
-    Standards Track Document required.  Integer values from 256 to 65535 and
-    strings of length 2 are designated as Specification Required.  Integer
+    Integer values between -256 and 255 and strings of length 1 are designated
+    as Standards Track Document required. Integer values from -65536 to 65535
+    and strings of length 2 are designated as Specification Required. Integer
     values of greater than 65535 and strings of length greater than 2 are
-    designated as expert review.  Negative integer values are marked as
-    private use.
+    designated as expert review. Integer values less than -65536 are marked
+    as private use.
 	      </t>
 	      <t hangText='CBOR Major Type:'>
 		<vspace/>
@@ -591,8 +589,19 @@
 	</section>
 
 	<section anchor="IANACWTClaimsKeyRegistryInitial" title="Initial Registry Contents">
-	  <t>
-	    <?rfc subcompact="yes"?>
+    <t>
+      <?rfc subcompact="yes"?>
+      <list style='symbols'>
+        <t>Claim Name: N/A</t>
+        <t>Claim Description: This registration is done to reserve the key value 0.</t>
+        <t>JWT Claim Name: N/A</t>
+        <t>CBOR Key Value: 0</t>
+        <t>CBOR Major Type: N/A</t>
+        <t>Change Controller: IESG</t>
+        <t>Specification Document(s): <xref target="CWTCNiss"/> of [[ this specification ]]</t>
+      </list>
+    </t>
+    <t>
 	    <list style='symbols'>
 	      <t>Claim Name: <spanx style="verb">iss</spanx></t>
 	      <t>Claim Description: Issuer</t>
