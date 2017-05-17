@@ -126,6 +126,21 @@
         The suggested pronunciation of CWT is the same as the English word
         "cot".
       </t>
+      <section anchor="CBORRelatedTerminology" title="CBOR Related Terminology">
+        <t>
+          In JSON, maps are called objects and only have one kind of map key: a
+          string.  In COSE, we use strings, negative integers and unsigned
+          integers as map keys.  The integers are used for compactness of
+          encoding and easy comparison.  The inclusion of strings allows for an
+          additional range of short encoded values to be used as well.
+        </t>
+        <t>
+          The presence of a key in a COSE map which is not a string or an
+          integer is an error.  Applications can either fail processing or
+          process messages with incorrect keys, however they MUST NOT create
+          messages with incorrect keys.
+        </t>
+      </section>
 
     </section>
 
@@ -550,7 +565,14 @@
 	      </t>
 	      <t hangText='CBOR Key Value:'>
 		<vspace/>
-		Key value for the claim.  The key value MUST be an integer in the range of 1 to 65536.
+    Key value for the claim.  The key can be either an integer or a string.
+    Registration in the table is based on the value of the key requested.
+    Integer values between 1 and 255 and strings of length 1 are designated as
+    Standards Track Document required.  Integer values from 256 to 65535 and
+    strings of length 2 are designated as Specification Required.  Integer
+    values of greater than 65535 and strings of length greater than 2 are
+    designated as expert review.  Negative integer values are marked as
+    private use.
 	      </t>
 	      <t hangText='CBOR Major Type:'>
 		<vspace/>
