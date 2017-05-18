@@ -126,6 +126,15 @@
         The suggested pronunciation of CWT is the same as the English word
         "cot".
       </t>
+      <section anchor="CBORRelatedTerminology" title="CBOR Related Terminology">
+        <t>
+          In JSON, maps are called objects and only have one kind of map key: a
+          string.  In COSE, we use strings, negative integers and unsigned
+          integers as map keys.  The integers are used for compactness of
+          encoding and easy comparison.  The inclusion of strings allows for an
+          additional range of short encoded values to be used as well.
+        </t>
+      </section>
 
     </section>
 
@@ -558,7 +567,12 @@
 	      </t>
 	      <t hangText='CBOR Key Value:'>
 		<vspace/>
-		Key value for the claim.  The key value MUST be an integer in the range of 1 to 65536.
+    Integer values between -256 and 255 and strings of length 1 are designated
+    as Standards Track Document required. Integer values from -65536 to 65535
+    and strings of length 2 are designated as Specification Required. Integer
+    values of greater than 65535 and strings of length greater than 2 are
+    designated as expert review. Integer values less than -65536 are marked
+    as private use.
 	      </t>
 	      <t hangText='CBOR Major Type:'>
 		<vspace/>
@@ -577,8 +591,19 @@
 	</section>
 
 	<section anchor="IANACWTClaimsKeyRegistryInitial" title="Initial Registry Contents">
-	  <t>
-	    <?rfc subcompact="yes"?>
+    <t>
+      <?rfc subcompact="yes"?>
+      <list style='symbols'>
+        <t>Claim Name: N/A</t>
+        <t>Claim Description: This registration is done to reserve the key value 0.</t>
+        <t>JWT Claim Name: N/A</t>
+        <t>CBOR Key Value: 0</t>
+        <t>CBOR Major Type: N/A</t>
+        <t>Change Controller: IESG</t>
+        <t>Specification Document(s): [[ this specification ]]</t>
+      </list>
+    </t>
+    <t>
 	    <list style='symbols'>
 	      <t>Claim Name: <spanx style="verb">iss</spanx></t>
 	      <t>Claim Description: Issuer</t>
