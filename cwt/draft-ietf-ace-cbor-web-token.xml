@@ -406,18 +406,16 @@
             </list>
           </t>
           <t>
-              If a nested signing, MACing or encryption operation will be
-              performed, let the Message be the COSE_Sign/COSE_Sign1,
-              COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, and
-              return to Step 3, using a "content type" header value
-              corresponding to the media type "application/cwt" in the new
-              COSE Header created in that step.
+            If a nested signing, MACing or encryption operation will be
+            performed, let the Message be the COSE_Sign/COSE_Sign1,
+            COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, add the
+            matching COSE CBOR tag, and return to Step 3.
           </t>
           <t>
-	    If needed by the application, add the appropriate COSE CBOR tag
-	    to the COSE object to indicate the type of COSE object.
-	    If also needed by the application, add the CWT CBOR tag
-	    to indicate that the COSE object is a CWT.
+            If needed by the application, add the appropriate COSE CBOR tag
+            to the COSE object to indicate the type of COSE object.
+            If needed by the application, add the CWT CBOR tag
+            to indicate that the COSE object is a CWT.
           </t>
         </list>
       </t>
@@ -436,23 +434,22 @@
               Verify that the CWT is a valid CBOR object.
             </t>
             <t>
-              If the object begins with the CWT CBOR tag, remove it
-	      and verify that one of the COSE CBOR tags follows it.
-	    </t>
-	    <t>
-	      If the object is tagged with one of the COSE CBOR tags, remove it
-	      and verify that it corresponds to the structure of the following COSE object.
+              If the object begins with the CWT CBOR tag, remove it and verify
+              that one of the COSE CBOR tags follows it.
+            </t>
+            <t>
+              If the object is tagged with one of the COSE CBOR tags, remove it
+              and use it to determine the type of the CWT,
+              COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0, or
+              COSE_Encrypt/COSE_Encrypt0.
+              If the object does not have a COSE CBOR tag, the COSE message
+              type is determined from the application context.
             </t>
             <t>
               Verify that the resulting COSE Header includes only parameters
               and values whose syntax and semantics are both understood and
               supported or that are specified as being ignored when not
               understood.
-            </t>
-            <t>
-              Use the CBOR tag to determine the type of the CWT,
-              COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0, or
-              COSE_Encrypt/COSE_Encrypt0.
             </t>
             <t>
               Depending upon whether the CWT is a signed, MACed, or encrypted,
@@ -480,10 +477,9 @@
               </list>
             </t>
             <t>
-              If the COSE Header contains a "content type" header value
-              corresponding to the media type "application/cwt", then
-              the Message is a CWT that was the subject of nested signing
-              or encryption operations.  In this case, return to Step 1,
+              If the Message begins with a COSE CBOR tag, then
+              the Message is a CWT that was the subject of nested signing,
+              MACing or encryption operations.  In this case, return to Step 1,
               using the Message as the CWT.
             </t>
             <t>
