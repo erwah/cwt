@@ -486,18 +486,30 @@
     </section>
 
     <section anchor="Security" title="Security Considerations">
-
       <t>
-	The security of the CWT is dependent on the protections offered by COSE.
-	Unless the claims in a CWT are protected, an adversary can modify, add, or remove claims.
-	Since the claims conveyed in a CWT may be used to make authorization decisions,
-	it is not only important to protect the CWT in transit but also to ensure that
-	the recipient can authenticate the party that assembled the claims and created the CWT.
-	Without trust of the recipient in the party that created the CWT, no sensible authorization decision can be made.
-	Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT
-	so that the recipient can be assured of the validity of the information provided.
+        The security of the CWT relies upon on the protections offered by COSE.
+        Unless the claims in a CWT are protected, an adversary can modify, add,
+        or remove claims.
       </t>
-
+      <t>
+        Since the claims conveyed in a CWT may be used to make authorization
+        decisions, it is not only important to protect the CWT in transit but
+        also to ensure that the recipient can authenticate the party that
+        assembled the claims and created the CWT. Without trust of the recipient
+        in the party that created the CWT, no sensible authorization decision
+        can be made.  Furthermore, the creator of the CWT needs to carefully
+        evaluate each claim value prior to including it in the CWT so that the
+        recipient can be assured of the validity of the information provided.
+      </t>
+      <t>
+        While syntactically the signing and encryption operations for Nested
+        CWTs may be applied in any order, if both signing and encryption are
+        necessary, normally producers should sign the message and then encrypt
+        the result (thus encrypting the signature).  This prevents attacks in
+        which the signature is stripped, leaving just an encrypted message, as
+        well as providing privacy for the signer.  Furthermore, signatures
+        over encrypted text are not considered valid in many jurisdictions.
+      </t>
     </section>
 
     <!-- /////////////////////////////////////////////////////////////////////// -->
