@@ -134,12 +134,6 @@
           encoding and easy comparison.  The inclusion of strings allows for an
           additional range of short encoded values to be used as well.
         </t>
-        <t>
-          The presence of a key in a COSE map which is not a string or an
-          integer is an error.  Applications can either fail processing or
-          process messages with incorrect keys, however they MUST NOT create
-          messages with incorrect keys.
-        </t>
       </section>
 
     </section>
