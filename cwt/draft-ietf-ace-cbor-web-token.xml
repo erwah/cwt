@@ -404,7 +404,7 @@
           </t>
           <t>
             If needed by the application, add the appropriate COSE CBOR tag
-            COSE object to indicate the type of COSE object.
+            to the COSE object to indicate the type of COSE object.
             If needed by the application, add the CWT CBOR tag
             to indicate that the COSE object is a CWT.
           </t>
@@ -425,16 +425,16 @@
               Verify that the CWT is a valid CBOR object.
             </t>
             <t>
-              If the object begins with the CWT CBOR tag, remove it and
-              continue verification.
+              If the object begins with the CWT CBOR tag, remove it and verify
+              that one of the COSE CBOR tags follows it.
             </t>
             <t>
               If the object is tagged with one of the COSE CBOR tags, remove it
               and use it to determine the type of the CWT,
               COSE_Sign/COSE_Sign1, COSE_Mac/COSE_Mac0, or
               COSE_Encrypt/COSE_Encrypt0.
-              If object does not have a have a COSE CBOR tag the type has to be
-              determine based on the application context.
+              If the object does not have a COSE CBOR tag, the COSE message
+              type is determined from the application context.
             </t>
             <t>
               Verify that the resulting COSE Header includes only parameters
@@ -474,8 +474,7 @@
               using the Message as the CWT.
             </t>
             <t>
-              Verify that the Message is a valid CBOR object; let the CWT
-              Claims Set be this CBOR object.
+              Verify that the Message is a valid CBOR object; let the CWT Claims Set be this CBOR object.
             </t>
           </list>
         </t>
