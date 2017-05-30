@@ -158,7 +158,7 @@
             The "StringOrURI" term has the same meaning, syntax, and
             processing rules as the "StringOrUri" term defined in Section 2
             of JWT <xref target="RFC7519" />, except that a CWT StringOrURI uses
-            CBOR major type 3 (text string) instead of a JSON string value.
+            CBOR text string instead of a JSON string value.
            </t>
 
           <t hangText="NumericDate:">
@@ -198,7 +198,7 @@
 
       <t>
         To keep CWTs as small as possible, the CBOR encoded claim keys are
-        represented using CBOR major type 0.
+        represented using integers or text strings.
         <xref target="CWTCNMajorTypesSummary" /> summarizes all keys
 	used to identify the claims defined in this document.
       </t>
@@ -278,7 +278,7 @@
               The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
               and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
               4.1.7 of JWT <xref target="RFC7519" />, except that the format
-              MUST be of major type 2, binary string. The
+              MUST be binary string. The
               CBOR encoded claim key 7 MUST be used to identify this claim.
             </t>
           </section>
@@ -289,23 +289,23 @@
 
 
     <section anchor="CWTCNMajorTypesSummary"
-       title="Summary of the values, CBOR major types and encoded claim keys">
+       title="Summary of the values, value types and encoded claim keys">
 
       <t>
         <figure align="center" anchor="fig:cborMappingValuesAccessTokens"
-                title="Summary of the values, CBOR major types and encoded claim keys.">
+                title="Summary of the values, value types and encoded claim keys.">
           <artwork><![CDATA[
-/---------+------------------------+-------------------------------\
-| Claim   | CBOR encoded claim key | CBOR major type of value      |
-|---------+------------------------+-------------------------------|
-| iss     | 1                      | 3                             |
-| sub     | 2                      | 3                             |
-| aud     | 3                      | 3                             |
-| exp     | 4                      | 0, 1, or 7 with float subtype |
-| nbf     | 5                      | 0, 1, or 7 with float subtype |
-| iat     | 6                      | 0, 1, or 7 with float subtype |
-| cti     | 7                      | 2                             |
-\---------+------------------------+-------------------------------/
+/---------+-----+----------------------------------\
+| Name    | Key | Value type                       |
+|---------+-----+----------------------------------|
+| iss     | 1   | text string                      |
+| sub     | 2   | text string                      |
+| aud     | 3   | text string                      |
+| exp     | 4   | integer or floating-point number |
+| nbf     | 5   | integer or floating-point number |
+| iat     | 6   | integer or floating-point number |
+| cti     | 7   | binary string                    |
+\---------+-----+----------------------------------/
 ]]></artwork>
         </figure>
       </t>
