@@ -1017,7 +1017,8 @@ f9d1d984b11854dcfcee1f219746800ce76112c21f58c45dea1d7f01cec1ab394
 
       <section anchor="exampleMACed" title='Example MACed CWT'>
         <t>
-	  This section shows a MACed CWT with a single recipient and a full CWT Claims Set.
+	  This section shows a MACed CWT with a single recipient, a full CWT
+    Claims Set and an outer CWT tag.
 	</t>
         <t>
 	  The MAC is generated using the 256-bit symmetric key from <xref target="exampleKeysSymmetric256"/> with a 64-bit truncation.
@@ -1164,7 +1165,7 @@ a32af56cf7cfe99929f81e276268dbec91a1c9f4beb56df0c8774032cac1
           </figure>
         </t>
       </section>
-      <section anchor="exampleMACed" title='Example MACed CWT'>
+      <section anchor="exampleMACedFloat" title='Example MACed CWT with a floating point value'>
         <t>
           This section shows a MACed CWT with a single recipient and a simple
           CWT Claims Set. The CWT Claims Set with a floating point 'iat' value.
@@ -1175,14 +1176,16 @@ a32af56cf7cfe99929f81e276268dbec91a1c9f4beb56df0c8774032cac1
       	  Line breaks are for display purposes only.
       	</t>
         <t>
-          <figure align="center" anchor="fig:exampleMACedHex"
-                  title='MACed CWT with CWT tag as hex string'>
-            <artwork><![CDATA[]]></artwork>
+          <figure align="center" anchor="fig:exampleMACedFloatHex"
+                  title='MACed CWT with a floating point value as hex string'>
+            <artwork><![CDATA[
+d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
+              ]]></artwork>
           </figure>
         </t>
         <t>
-          <figure align="center" anchor="fig:exampleMACedCBORDiagnostic"
-                  title='MACed CWT with CWT tag in CBOR diagnostic notation'>
+          <figure align="center" anchor="fig:exampleMACedFloatCBORDiagnostic"
+                  title='MACed CWT with a floating point value in CBOR diagnostic notation'>
             <artwork><![CDATA[
 17(
   [
