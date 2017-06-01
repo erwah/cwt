@@ -912,7 +912,7 @@ a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b7703
 
 	<section anchor="exampleKeysSymmetric128" title='128-bit Symmetric Key as Hex Encoded String'>
 	  <figure><artwork><![CDATA[
-8e82e68e61654ecb5a369fe8be7572dd
+8e82e68e61654ecb5a369fe8be7572
 ]]></artwork></figure>
         </section>
 
@@ -973,6 +973,12 @@ d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
 6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b7158401fe410abce650
 effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
 36c64f22e7691abb464bed2ff23176cdba9fd9e213f637d082
+
+d28443a10126a05850a70175636f61703a2f2f61732e6578616d706c652e636f6
+d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
+6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b715840b9b2821b6b2c2
+f9d1d984b11854dcfcee1f219746800ce76112c21f58c45dea1d7f01cec1ab394
+0f75c459305365210a23a9ed463b4f6fc984c2f1c08e504d90
 ]]></artwork>
           </figure>
         </t>
@@ -998,10 +1004,10 @@ effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
         / iat / 6: 1443944944,
         / cti / 7: h'0b71'
       } / ,
-    / signature / h'1fe410abce650effed497f05d7f9462de67d571384
-                    097de0d96f1e2514d284cdd85634f269af6c36c64f
-                    22e7691abb464bed2ff23176cdba9fd9e213f637d0
-                    82'
+    / signature / h'b9b2821b6b2c2f9d1d984b11854dcfcee1f2197468
+                    00ce76112c21f58c45dea1d7f01cec1ab3940f75c4
+                    59305365210a23a9ed463b4f6fc984c2f1c08e504d
+                    90'
   ]
 )
 ]]></artwork>
@@ -1070,10 +1076,10 @@ d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
         <t>
           <figure align="center" anchor="fig:exampleEncryptedHex" title='Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08343a1010aa1054d3a869e378e72b77d077c29be025858d275ad9cd7df1b10
-ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
-1319aec4dcc379fe47115a5d62632727c05f4567fc84dd79554db86676a14978
-42de805d8be93180af4d6ff3043886a0
+d08343a1010aa1054d9779a24a44d37b522a87b0df6f5858e31487a047d3e4a0
+0f430878dc010ef582fdb92697e027e8ac55d0dc69828613f89f5b5dc6715cc6
+4e75a99596b9005cee3f4dd383ea6b0e4c001fc359cd124ebe10861ef3b44280
+4cb033a6caa273129fd73fab584721ae
 ]]></artwork>
           </figure>
         </t>
@@ -1087,13 +1093,13 @@ ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } /,
     / unprotected / {
-      / iv / 5: h'3a869e378e72b77d077c29be02'
+      / iv / 5: h'9779a24a44d37b522a87b0df6f'
     },
-    / ciphertext / h'd275ad9cd7df1b10ba8cde785c74b1e1e6ada287e2b
-                     af1451b06862529b784d230b0111773b6c3691319ae
-                     c4dcc379fe47115a5d62632727c05f4567fc84dd795
-                     54db86676a1497842de805d8be93180af4d6ff30438
-                     86a0'
+    / ciphertext / h'e31487a047d3e4a00f430878dc010ef582fdb92697e
+                     027e8ac55d0dc69828613f89f5b5dc6715cc64e75a9
+                     9596b9005cee3f4dd383ea6b0e4c001fc359cd124eb
+                     e10861ef3b442804cb033a6caa273129fd73fab5847
+                     21ae'
   ]
 )
 ]]></artwork>
@@ -1122,12 +1128,12 @@ ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08346a203183d010aa1054d9120e5dc42c9f9aec05ebe8a4858a538be026c02
-4a40b19d6dbea3ddb18b31021f874a097a05ff3cdaa4665bafc8e46a3d7f37ad
-f002fe57eee267f8f62a9c1621af75e1ecd742a3d801c2cc82358cf104a8d902
-4d38a599ea6027d482dc2948a88fe83f9734804299c832401029e2d32a984789
-c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
-7908e89b3b7c3d59d8a80e22f70a1b6ee8c162c564341c2f15cec252d3da038c
+d08346a203183d010aa1054d1c3dda66b133eef5c9dc1e99b758a300ac8f88a6
+4cc4e669a064d8965e88efaeb7acfb9617aee89091dc80cbeb4d6724bfb58303
+aeea61dd50de96550aa396613999b80d870de3d0d8e33663bedabeaf482709c4
+ef25dcfb0f56b382b32c7bd921ccd7dcedeb906653faf77563d4302706fcf2e4
+a76a7d237ad20eebdd168601b391108f958e606ba0a7c570e6713a033b92470a
+a32af56cf7cfe99929f81e276268dbec91a1c9f4beb56df0c8774032cac1
 ]]></artwork>
           </figure>
         </t>
@@ -1142,16 +1148,52 @@ c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
     / unprotected / {
-      / iv / 5: h'9120e5dc42c9f9aec05ebe8a48'
+      / iv / 5: h'1c3dda66b133eef5c9dc1e99b7'
     },
-    / ciphertext / h'38be026c024a40b19d6dbea3ddb18b31021f874a097
-                     a05ff3cdaa4665bafc8e46a3d7f37adf002fe57eee2
-                     67f8f62a9c1621af75e1ecd742a3d801c2cc82358cf
-                     104a8d9024d38a599ea6027d482dc2948a88fe83f97
-                     34804299c832401029e2d32a984789c8e9563e8d2a7
-                     51323bb7e4462b549e0fa89ef93f78bf6425635fba7
-                     6b4aa8047908e89b3b7c3d59d8a80e22f70a1b6ee8c
-                     162c564341c2f15cec252d3da038c'
+    / ciphertext / h'00ac8f88a64cc4e669a064d8965e88efaeb7acfb961
+                     7aee89091dc80cbeb4d6724bfb58303aeea61dd50de
+                     96550aa396613999b80d870de3d0d8e33663bedabea
+                     f482709c4ef25dcfb0f56b382b32c7bd921ccd7dced
+                     eb906653faf77563d4302706fcf2e4a76a7d237ad20
+                     eebdd168601b391108f958e606ba0a7c570e6713a03
+                     3b92470aa32af56cf7cfe99929f81e276268dbec91a
+                     1c9f4beb56df0c8774032cac1'
+  ]
+)
+]]></artwork>
+          </figure>
+        </t>
+      </section>
+      <section anchor="exampleMACed" title='Example MACed CWT'>
+        <t>
+          This section shows a MACed CWT with a single recipient and a simple
+          CWT Claims Set. The CWT Claims Set with a floating point 'iat' value.
+      	</t>
+        <t>
+      	  The MAC is generated using the 256-bit symmetric key from
+          <xref target="exampleKeysSymmetric256"/> with a 64-bit truncation.
+      	  Line breaks are for display purposes only.
+      	</t>
+        <t>
+          <figure align="center" anchor="fig:exampleMACedHex"
+                  title='MACed CWT with CWT tag as hex string'>
+            <artwork><![CDATA[]]></artwork>
+          </figure>
+        </t>
+        <t>
+          <figure align="center" anchor="fig:exampleMACedCBORDiagnostic"
+                  title='MACed CWT with CWT tag in CBOR diagnostic notation'>
+            <artwork><![CDATA[
+17(
+  [
+    / protected / h'a10104' / {
+      / alg / 1: 4 / HMAC 256/64 /
+    } / ,
+    / unprotected / {},
+    / payload / h'a106fb41d584367c200000' / {
+        / iat / 6: 1443944944.5
+      } / ,
+    / tag / h'b8816f34c0542892'
   ]
 )
 ]]></artwork>
