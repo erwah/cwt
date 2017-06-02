@@ -912,7 +912,7 @@ a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b7703
 
 	<section anchor="exampleKeysSymmetric128" title='128-bit Symmetric Key as Hex Encoded String'>
 	  <figure><artwork><![CDATA[
-8e82e68e61654ecb5a369fe8be7572
+231f4c4d4d3051fdc2ec0a3851d5b383
 ]]></artwork></figure>
         </section>
 
@@ -1077,10 +1077,10 @@ d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
         <t>
           <figure align="center" anchor="fig:exampleEncryptedHex" title='Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08343a1010aa1054d9779a24a44d37b522a87b0df6f5858e31487a047d3e4a0
-0f430878dc010ef582fdb92697e027e8ac55d0dc69828613f89f5b5dc6715cc6
-4e75a99596b9005cee3f4dd383ea6b0e4c001fc359cd124ebe10861ef3b44280
-4cb033a6caa273129fd73fab584721ae
+d08343a1010aa1054d3d9624bfb90a612bdcfc5077c45858e06d4b57cf3b3c9d
+a3a16325dadcb9d2a0748f00ecd728f4b79030b56a292ee9cc8cc75349c120fc
+1ba5d67ee29affde28df75a20f344812453ff68270ad5f46295660558168e1d1
+85cb308226cdad0a50417dcd4a8d4b47
 ]]></artwork>
           </figure>
         </t>
@@ -1094,13 +1094,13 @@ d08343a1010aa1054d9779a24a44d37b522a87b0df6f5858e31487a047d3e4a0
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } /,
     / unprotected / {
-      / iv / 5: h'9779a24a44d37b522a87b0df6f'
+      / iv / 5: h'3d9624bfb90a612bdcfc5077c4'
     },
-    / ciphertext / h'e31487a047d3e4a00f430878dc010ef582fdb92697e
-                     027e8ac55d0dc69828613f89f5b5dc6715cc64e75a9
-                     9596b9005cee3f4dd383ea6b0e4c001fc359cd124eb
-                     e10861ef3b442804cb033a6caa273129fd73fab5847
-                     21ae'
+    / ciphertext / h'e06d4b57cf3b3c9da3a16325dadcb9d2a0748f00ecd
+                     728f4b79030b56a292ee9cc8cc75349c120fc1ba5d6
+                     7ee29affde28df75a20f344812453ff68270ad5f462
+                     95660558168e1d185cb308226cdad0a50417dcd4a8d
+                     4b47'
   ]
 )
 ]]></artwork>
@@ -1129,12 +1129,12 @@ d08343a1010aa1054d9779a24a44d37b522a87b0df6f5858e31487a047d3e4a0
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08346a203183d010aa1054d1c3dda66b133eef5c9dc1e99b758a300ac8f88a6
-4cc4e669a064d8965e88efaeb7acfb9617aee89091dc80cbeb4d6724bfb58303
-aeea61dd50de96550aa396613999b80d870de3d0d8e33663bedabeaf482709c4
-ef25dcfb0f56b382b32c7bd921ccd7dcedeb906653faf77563d4302706fcf2e4
-a76a7d237ad20eebdd168601b391108f958e606ba0a7c570e6713a033b92470a
-a32af56cf7cfe99929f81e276268dbec91a1c9f4beb56df0c8774032cac1
+d08343a1010aa1054dd3bdeeb4daaa50625a5b576cc458a3318af5c80a11e081
+91ca790b0793156451afc144e0f9f892679dff1d01cd52d7fe1e43ac8dabace0
+f74af095f918197da1550a76d59c2a89db6331e12451fc87fef56f2ff179fb33
+d6132ca34eb7fa8de0960d5f02a2b625792ccc8e5b3d59c0bede9d7438dc5c4f
+e0c403c8fc32e874fbb7516c52edddfc09d4444a762dcd0cd486895131c343ae
+040620cdd4448c6ce0b7803022ff3d7877a83c345c05a57b36105a
 ]]></artwork>
           </figure>
         </t>
@@ -1145,20 +1145,19 @@ a32af56cf7cfe99929f81e276268dbec91a1c9f4beb56df0c8774032cac1
 16(
   [
     / protected / h'a203183d010a' / {
-      / content type / 3: 61, / CWT /
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
     / unprotected / {
-      / iv / 5: h'1c3dda66b133eef5c9dc1e99b7'
+      / iv / 5: h'd3bdeeb4daaa50625a5b576cc4'
     },
-    / ciphertext / h'00ac8f88a64cc4e669a064d8965e88efaeb7acfb961
-                     7aee89091dc80cbeb4d6724bfb58303aeea61dd50de
-                     96550aa396613999b80d870de3d0d8e33663bedabea
-                     f482709c4ef25dcfb0f56b382b32c7bd921ccd7dced
-                     eb906653faf77563d4302706fcf2e4a76a7d237ad20
-                     eebdd168601b391108f958e606ba0a7c570e6713a03
-                     3b92470aa32af56cf7cfe99929f81e276268dbec91a
-                     1c9f4beb56df0c8774032cac1'
+    / ciphertext / h'318af5c80a11e08191ca790b0793156451afc144e0f
+                     9f892679dff1d01cd52d7fe1e43ac8dabace0f74af0
+                     95f918197da1550a76d59c2a89db6331e12451fc87f
+                     ef56f2ff179fb33d6132ca34eb7fa8de0960d5f02a2
+                     b625792ccc8e5b3d59c0bede9d7438dc5c4fe0c403c
+                     8fc32e874fbb7516c52edddfc09d4444a762dcd0cd4
+                     86895131c343ae040620cdd4448c6ce0b7803022ff3
+                     d7877a83c345c05a57b36105a'
   ]
 )
 ]]></artwork>
