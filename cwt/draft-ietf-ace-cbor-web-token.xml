@@ -912,7 +912,7 @@ a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b7703
 
 	<section anchor="exampleKeysSymmetric128" title='128-bit Symmetric Key as Hex Encoded String'>
 	  <figure><artwork><![CDATA[
-8e82e68e61654ecb5a369fe8be7572dd
+231f4c4d4d3051fdc2ec0a3851d5b383
 ]]></artwork></figure>
         </section>
 
@@ -973,6 +973,12 @@ d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
 6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b7158401fe410abce650
 effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
 36c64f22e7691abb464bed2ff23176cdba9fd9e213f637d082
+
+d28443a10126a05850a70175636f61703a2f2f61732e6578616d706c652e636f6
+d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
+6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b715840b9b2821b6b2c2
+f9d1d984b11854dcfcee1f219746800ce76112c21f58c45dea1d7f01cec1ab394
+0f75c459305365210a23a9ed463b4f6fc984c2f1c08e504d90
 ]]></artwork>
           </figure>
         </t>
@@ -998,10 +1004,10 @@ effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
         / iat / 6: 1443944944,
         / cti / 7: h'0b71'
       } / ,
-    / signature / h'1fe410abce650effed497f05d7f9462de67d571384
-                    097de0d96f1e2514d284cdd85634f269af6c36c64f
-                    22e7691abb464bed2ff23176cdba9fd9e213f637d0
-                    82'
+    / signature / h'b9b2821b6b2c2f9d1d984b11854dcfcee1f2197468
+                    00ce76112c21f58c45dea1d7f01cec1ab3940f75c4
+                    59305365210a23a9ed463b4f6fc984c2f1c08e504d
+                    90'
   ]
 )
 ]]></artwork>
@@ -1011,7 +1017,8 @@ effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
 
       <section anchor="exampleMACed" title='Example MACed CWT'>
         <t>
-	  This section shows a MACed CWT with a single recipient and a full CWT Claims Set.
+	  This section shows a MACed CWT with a single recipient, a full CWT
+    Claims Set and an outer CWT tag.
 	</t>
         <t>
 	  The MAC is generated using the 256-bit symmetric key from <xref target="exampleKeysSymmetric256"/> with a 64-bit truncation.
@@ -1070,10 +1077,10 @@ d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
         <t>
           <figure align="center" anchor="fig:exampleEncryptedHex" title='Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08343a1010aa1054d3a869e378e72b77d077c29be025858d275ad9cd7df1b10
-ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
-1319aec4dcc379fe47115a5d62632727c05f4567fc84dd79554db86676a14978
-42de805d8be93180af4d6ff3043886a0
+d08343a1010aa1054d3d9624bfb90a612bdcfc5077c45858e06d4b57cf3b3c9d
+a3a16325dadcb9d2a0748f00ecd728f4b79030b56a292ee9cc8cc75349c120fc
+1ba5d67ee29affde28df75a20f344812453ff68270ad5f46295660558168e1d1
+85cb308226cdad0a50417dcd4a8d4b47
 ]]></artwork>
           </figure>
         </t>
@@ -1087,13 +1094,13 @@ ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } /,
     / unprotected / {
-      / iv / 5: h'3a869e378e72b77d077c29be02'
+      / iv / 5: h'3d9624bfb90a612bdcfc5077c4'
     },
-    / ciphertext / h'd275ad9cd7df1b10ba8cde785c74b1e1e6ada287e2b
-                     af1451b06862529b784d230b0111773b6c3691319ae
-                     c4dcc379fe47115a5d62632727c05f4567fc84dd795
-                     54db86676a1497842de805d8be93180af4d6ff30438
-                     86a0'
+    / ciphertext / h'e06d4b57cf3b3c9da3a16325dadcb9d2a0748f00ecd
+                     728f4b79030b56a292ee9cc8cc75349c120fc1ba5d6
+                     7ee29affde28df75a20f344812453ff68270ad5f462
+                     95660558168e1d185cb308226cdad0a50417dcd4a8d
+                     4b47'
   ]
 )
 ]]></artwork>
@@ -1122,12 +1129,12 @@ ba8cde785c74b1e1e6ada287e2baf1451b06862529b784d230b0111773b6c369
           <figure align="center" anchor="fig:exampleNestedHex"
                 title='Signed and Encrypted CWT as hex string'>
             <artwork><![CDATA[
-d08346a203183d010aa1054d9120e5dc42c9f9aec05ebe8a4858a538be026c02
-4a40b19d6dbea3ddb18b31021f874a097a05ff3cdaa4665bafc8e46a3d7f37ad
-f002fe57eee267f8f62a9c1621af75e1ecd742a3d801c2cc82358cf104a8d902
-4d38a599ea6027d482dc2948a88fe83f9734804299c832401029e2d32a984789
-c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
-7908e89b3b7c3d59d8a80e22f70a1b6ee8c162c564341c2f15cec252d3da038c
+d08343a1010aa1054dd3bdeeb4daaa50625a5b576cc458a3318af5c80a11e081
+91ca790b0793156451afc144e0f9f892679dff1d01cd52d7fe1e43ac8dabace0
+f74af095f918197da1550a76d59c2a89db6331e12451fc87fef56f2ff179fb33
+d6132ca34eb7fa8de0960d5f02a2b625792ccc8e5b3d59c0bede9d7438dc5c4f
+e0c403c8fc32e874fbb7516c52edddfc09d4444a762dcd0cd486895131c343ae
+040620cdd4448c6ce0b7803022ff3d7877a83c345c05a57b36105a
 ]]></artwork>
           </figure>
         </t>
@@ -1138,20 +1145,57 @@ c8e9563e8d2a751323bb7e4462b549e0fa89ef93f78bf6425635fba76b4aa804
 16(
   [
     / protected / h'a203183d010a' / {
-      / content type / 3: 61, / CWT /
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } / ,
     / unprotected / {
-      / iv / 5: h'9120e5dc42c9f9aec05ebe8a48'
+      / iv / 5: h'd3bdeeb4daaa50625a5b576cc4'
     },
-    / ciphertext / h'38be026c024a40b19d6dbea3ddb18b31021f874a097
-                     a05ff3cdaa4665bafc8e46a3d7f37adf002fe57eee2
-                     67f8f62a9c1621af75e1ecd742a3d801c2cc82358cf
-                     104a8d9024d38a599ea6027d482dc2948a88fe83f97
-                     34804299c832401029e2d32a984789c8e9563e8d2a7
-                     51323bb7e4462b549e0fa89ef93f78bf6425635fba7
-                     6b4aa8047908e89b3b7c3d59d8a80e22f70a1b6ee8c
-                     162c564341c2f15cec252d3da038c'
+    / ciphertext / h'318af5c80a11e08191ca790b0793156451afc144e0f
+                     9f892679dff1d01cd52d7fe1e43ac8dabace0f74af0
+                     95f918197da1550a76d59c2a89db6331e12451fc87f
+                     ef56f2ff179fb33d6132ca34eb7fa8de0960d5f02a2
+                     b625792ccc8e5b3d59c0bede9d7438dc5c4fe0c403c
+                     8fc32e874fbb7516c52edddfc09d4444a762dcd0cd4
+                     86895131c343ae040620cdd4448c6ce0b7803022ff3
+                     d7877a83c345c05a57b36105a'
+  ]
+)
+]]></artwork>
+          </figure>
+        </t>
+      </section>
+      <section anchor="exampleMACedFloat" title='Example MACed CWT with a floating point value'>
+        <t>
+          This section shows a MACed CWT with a single recipient and a simple
+          CWT Claims Set. The CWT Claims Set with a floating point 'iat' value.
+      	</t>
+        <t>
+      	  The MAC is generated using the 256-bit symmetric key from
+          <xref target="exampleKeysSymmetric256"/> with a 64-bit truncation.
+      	  Line breaks are for display purposes only.
+      	</t>
+        <t>
+          <figure align="center" anchor="fig:exampleMACedFloatHex"
+                  title='MACed CWT with a floating point value as hex string'>
+            <artwork><![CDATA[
+d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
+              ]]></artwork>
+          </figure>
+        </t>
+        <t>
+          <figure align="center" anchor="fig:exampleMACedFloatCBORDiagnostic"
+                  title='MACed CWT with a floating point value in CBOR diagnostic notation'>
+            <artwork><![CDATA[
+17(
+  [
+    / protected / h'a10104' / {
+      / alg / 1: 4 / HMAC 256/64 /
+    } / ,
+    / unprotected / {},
+    / payload / h'a106fb41d584367c200000' / {
+        / iat / 6: 1443944944.5
+      } / ,
+    / tag / h'b8816f34c0542892'
   ]
 )
 ]]></artwork>
