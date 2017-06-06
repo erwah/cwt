@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-04">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-05">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="13" month="April" year="2017" />
+    <date day="5" month="June" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -81,13 +81,13 @@
     <abstract>
       <t>
         CBOR Web Token (CWT) is a compact means of representing claims to be
-        transferred between two parties.  CWT is a profile of the JSON Web
-        Token (JWT) that is optimized for constrained devices. The claims in a
+        transferred between two parties. The claims in a
         CWT are encoded in the Concise Binary Object Representation (CBOR) and
         CBOR Object Signing and Encryption (COSE) is used for added application
         layer security protection.  A claim is a piece of information asserted
         about a subject and is represented as a name/value pair consisting of a
         claim name and a claim value.
+	CWT is derived from JSON Web Token (JWT), but uses CBOR rather than JSON.
       </t>
     </abstract>
 
@@ -129,7 +129,7 @@
       <section anchor="CBORRelatedTerminology" title="CBOR Related Terminology">
         <t>
           In JSON, maps are called objects and only have one kind of map key: a
-          string.  In COSE, we use strings, negative integers and unsigned
+          string.  In COSE, we use strings, negative integers, and unsigned
           integers as map keys.  The integers are used for compactness of
           encoding and easy comparison.  The inclusion of strings allows for an
           additional range of short encoded values to be used as well.
@@ -157,16 +157,16 @@
 	    <vspace/>
             The "StringOrURI" term has the same meaning, syntax, and
             processing rules as the "StringOrUri" term defined in Section 2
-            of JWT <xref target="RFC7519" />, except that a CWT StringOrURI uses
+            of JWT <xref target="RFC7519" />, except that it uses a
             CBOR text string instead of a JSON string value.
            </t>
 
           <t hangText="NumericDate:">
              <vspace/>
-             The "NumericDate" term has the same meaning, syntax and
-             Processing rules as the "NumericDate" term defined in Section 2 of
-             JWT <xref target="RFC7519" />, except that the CBOR numeric
-             representation (Section 2.4.1 of <xref target="RFC7049"/>) is used.
+             The "NumericDate" term has the same meaning, syntax, and
+             processing rules as the "NumericDate" term defined in Section 2
+	     of JWT <xref target="RFC7519" />, except that the CBOR numeric date
+             representation (from Section 2.4.1 of <xref target="RFC7049"/>) is used.
              The encoding is modified so that the leading tag (6.1 or 0xC1) MUST
              be omitted.
           </t>
@@ -289,11 +289,11 @@
 
 
     <section anchor="CWTCNMajorTypesSummary"
-       title="Summary of the values, value types and encoded claim keys">
+       title="Summary of the values, value types, and encoded claim keys">
 
       <t>
         <figure align="center" anchor="fig:cborMappingValuesAccessTokens"
-                title="Summary of the values, value types and encoded claim keys.">
+                title="Summary of the values, value types, and encoded claim keys">
           <artwork><![CDATA[
 /---------+-----+----------------------------------\
 | Name    | Key | Value type                       |
@@ -314,16 +314,17 @@
 
     <section anchor="TaggedValues" title="CBOR Tags and Claim Values">
       <t>
-        The claim values defined in this specification MUST NOT be prefix with
-        any CBOR tag.  For instance, while CBOR tag 6.1
-        (seconds-since-the-epoch) could logically be prefixed to values of the
-        <spanx style="verb">exp</spanx>, <spanx style="verb">nbf</spanx>, and
-        <spanx style="verb">iat</spanx> claims, this is unnecessary, since the
-        representation of the claim values is already specified by the claim
-        definitions. Tagging claim values would only take up extra space,
-        without adding information.  However, this does not prohibit future
-        claim definitions from requiring the use of CBOR tags for those
-        specific claims.
+        The claim values defined in this specification MUST NOT be prefixed with
+        any CBOR tag.  For instance, while CBOR tag 6.1 (seconds-since-the-epoch)
+	could logically be prefixed to values of the
+        <spanx style="verb">exp</spanx>,
+	<spanx style="verb">nbf</spanx>, and
+        <spanx style="verb">iat</spanx>
+	claims, this is unnecessary, since the representation of the claim values
+	is already specified by the claim definitions.
+	Tagging claim values would only take up extra space without adding information.
+	However, this does not prohibit future claim definitions
+	from requiring the use of CBOR tags for those specific claims.
       </t>
     </section>
 
@@ -406,14 +407,14 @@
             </list>
           </t>
           <t>
-            If a nested signing, MACing or encryption operation will be
+            If a nested signing, MACing, or encryption operation will be
             performed, let the Message be the COSE_Sign/COSE_Sign1,
-            COSE_Mac/COSE_Mac0 or COSE_Encrypt/COSE_Encrypt0, add the
+            COSE_Mac/COSE_Mac0, or COSE_Encrypt/COSE_Encrypt0, add the
             matching COSE CBOR tag, and return to Step 3.
           </t>
           <t>
             If needed by the application, add the appropriate COSE CBOR tag
-            to the COSE object to indicate the type of COSE object.
+            to the COSE object to indicate the type of the COSE object.
             If needed by the application, add the CWT CBOR tag
             to indicate that the COSE object is a CWT.
           </t>
@@ -434,8 +435,8 @@
               Verify that the CWT is a valid CBOR object.
             </t>
             <t>
-              If the object begins with the CWT CBOR tag, remove it and verify
-              that one of the COSE CBOR tags follows it.
+              If the object begins with the CWT CBOR tag, remove it
+	      and verify that one of the COSE CBOR tags follows it.
             </t>
             <t>
               If the object is tagged with one of the COSE CBOR tags, remove it
@@ -478,8 +479,8 @@
             </t>
             <t>
               If the Message begins with a COSE CBOR tag, then
-              the Message is a CWT that was the subject of nested signing,
-              MACing or encryption operations.  In this case, return to Step 1,
+              the Message is a CWT that was the subject of nested signing, MACing,
+	      or encryption operations.  In this case, return to Step 1,
               using the Message as the CWT.
             </t>
             <t>
@@ -493,21 +494,18 @@
     <section anchor="Security" title="Security Considerations">
       <t>
         The security of the CWT relies upon on the protections offered by COSE.
-        Unless the claims in a CWT are protected, an adversary can modify, add,
-        or remove claims.
+        Unless the claims in a CWT are protected, an adversary can modify, add, or remove claims.
       </t>
       <t>
-        Since the claims conveyed in a CWT may be used to make authorization
-        decisions, it is not only important to protect the CWT in transit but
-        also to ensure that the recipient can authenticate the party that
-        assembled the claims and created the CWT. Without trust of the recipient
-        in the party that created the CWT, no sensible authorization decision
-        can be made.  Furthermore, the creator of the CWT needs to carefully
-        evaluate each claim value prior to including it in the CWT so that the
-        recipient can be assured of the validity of the information provided.
+        Since the claims conveyed in a CWT may be used to make authorization decisions,
+	it is not only important to protect the CWT in transit but also to ensure that
+	the recipient can authenticate the party that assembled the claims and created the CWT.
+	Without trust of the recipient in the party that created the CWT, no sensible authorization decision can be made.
+	Furthermore, the creator of the CWT needs to carefully evaluate each claim value prior to including it in the CWT
+	so that the recipient can be assured of the validity of the information provided.
       </t>
       <t>
-        While syntactically the signing and encryption operations for Nested
+        While syntactically, the signing and encryption operations for Nested
         CWTs may be applied in any order, if both signing and encryption are
         necessary, normally producers should sign the message and then encrypt
         the result (thus encrypting the signature).  This prevents attacks in
@@ -521,18 +519,29 @@
 
     <section anchor="IANA" title="IANA Considerations">
 
-
       <section anchor="IANACWTClaimsRegistry" title="CBOR Web Token (CWT) Claims Registry">
 	<t>
 	  This section establishes the
 	  IANA "CBOR Web Token (CWT) Claims" registry.
 	</t>
 	<t>
-	  Values are registered on a Specification Required
-	  <xref target="RFC5226"/> basis, on the advice of one or more Designated Experts.
+	  Values are registered on a Specification Required <xref target="RFC5226"/> basis
+	  after a three-week review period on the cwt-reg-review@ietf.org mailing list,
+	  on the advice of one or more Designated Experts.
 	  However, to allow for the
 	  allocation of values prior to publication, the Designated Experts may approve
 	  registration once they are satisfied that such a specification will be published.
+	  [[ Note to the RFC Editor:
+	  The name of the mailing list should be determined in consultation
+	  with the IESG and IANA. Suggested name: cwt-reg-review@ietf.org. ]]
+	</t>
+	<t>
+	  Registration requests sent to the mailing list for review should use
+	  an appropriate subject
+	  (e.g., "Request to register claim: example").
+	  Registration requests that are undetermined for
+	  a period longer than 21 days can be brought to the IESG's attention
+	  (using the iesg@ietf.org mailing list) for resolution.
 	</t>
 	<t>
 	  Criteria that should be applied by the Designated Experts includes
@@ -540,6 +549,14 @@
 	  whether it is likely to be of general applicability
 	  or whether it is useful only for a single application,
 	  and whether the registration description is clear.
+	</t>
+	<t>
+	  It is suggested that multiple Designated Experts be appointed who are able to
+	  represent the perspectives of different applications using this specification
+	  in order to enable broadly informed review of registration decisions.
+	  In cases where a registration decision could be perceived as
+	  creating a conflict of interest for a particular Expert,
+	  that Expert should defer to the judgment of the other Experts.
 	</t>
 
 	<section anchor="IANACWTClaimsKeyRegistryTemplate" title="Registration Template">
@@ -563,12 +580,12 @@
 	      </t>
 	      <t hangText='CBOR Key Value:'>
 		<vspace/>
-    Integer values between -256 and 255 and strings of length 1 are designated
-    as Standards Track Document required. Integer values from -65536 to 65535
-    and strings of length 2 are designated as Specification Required. Integer
-    values of greater than 65535 and strings of length greater than 2 are
-    designated as expert review. Integer values less than -65536 are marked
-    as private use.
+		Integer values between -256 and 255 and strings of length 1 are designated
+		as Standards Track Document required. Integer values from -65536 to 65535
+		and strings of length 2 are designated as Specification Required. Integer
+		values of greater than 65535 and strings of length greater than 2 are
+		designated as expert review. Integer values less than -65536 are marked
+		as private use.
 	      </t>
 	      <t hangText='CBOR Major Type:'>
 		<vspace/>
@@ -587,19 +604,19 @@
 	</section>
 
 	<section anchor="IANACWTClaimsKeyRegistryInitial" title="Initial Registry Contents">
-    <t>
-      <?rfc subcompact="yes"?>
-      <list style='symbols'>
-        <t>Claim Name: N/A</t>
-        <t>Claim Description: This registration is done to reserve the key value 0.</t>
-        <t>JWT Claim Name: N/A</t>
-        <t>CBOR Key Value: 0</t>
-        <t>CBOR Major Type: N/A</t>
-        <t>Change Controller: IESG</t>
-        <t>Specification Document(s): [[ this specification ]]</t>
-      </list>
-    </t>
-    <t>
+	  <t>
+	    <?rfc subcompact="yes"?>
+	    <list style='symbols'>
+	      <t>Claim Name: N/A</t>
+	      <t>Claim Description: This registration reserves the key value 0.</t>
+	      <t>JWT Claim Name: N/A</t>
+	      <t>CBOR Key Value: 0</t>
+	      <t>CBOR Major Type: N/A</t>
+	      <t>Change Controller: IESG</t>
+	      <t>Specification Document(s): [[ this specification ]]</t>
+	    </list>
+	  </t>
+	  <t>
 	    <list style='symbols'>
 	      <t>Claim Name: <spanx style="verb">iss</spanx></t>
 	      <t>Claim Description: Issuer</t>
@@ -970,12 +987,6 @@ fda55a7eca69ed8919a394d42f0f2001
             <artwork><![CDATA[
 d28443a10126a05850a70175636f61703a2f2f61732e6578616d706c652e636f6
 d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
-6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b7158401fe410abce650
-effed497f05d7f9462de67d571384097de0d96f1e2514d284cdd85634f269af6c
-36c64f22e7691abb464bed2ff23176cdba9fd9e213f637d082
-
-d28443a10126a05850a70175636f61703a2f2f61732e6578616d706c652e636f6
-d02656572696b77037818636f61703a2f2f6c696768742e6578616d706c652e63
 6f6d041a5612aeb0051a5610d9f0061a5610d9f007420b715840b9b2821b6b2c2
 f9d1d984b11854dcfcee1f219746800ce76112c21f58c45dea1d7f01cec1ab394
 0f75c459305365210a23a9ed463b4f6fc984c2f1c08e504d90
@@ -1017,8 +1028,8 @@ f9d1d984b11854dcfcee1f219746800ce76112c21f58c45dea1d7f01cec1ab394
 
       <section anchor="exampleMACed" title='Example MACed CWT'>
         <t>
-	  This section shows a MACed CWT with a single recipient, a full CWT
-    Claims Set and an outer CWT tag.
+	  This section shows a MACed CWT with a single recipient, a full CWT Claims Set,
+	  and a CWT tag.
 	</t>
         <t>
 	  The MAC is generated using the 256-bit symmetric key from <xref target="exampleKeysSymmetric256"/> with a 64-bit truncation.
@@ -1164,10 +1175,10 @@ e0c403c8fc32e874fbb7516c52edddfc09d4444a762dcd0cd486895131c343ae
           </figure>
         </t>
       </section>
-      <section anchor="exampleMACedFloat" title='Example MACed CWT with a floating point value'>
+      <section anchor="exampleMACedFloat" title='Example MACed CWT with a floating-point value'>
         <t>
           This section shows a MACed CWT with a single recipient and a simple
-          CWT Claims Set. The CWT Claims Set with a floating point 'iat' value.
+          CWT Claims Set. The CWT Claims Set with a floating-point 'iat' value.
       	</t>
         <t>
       	  The MAC is generated using the 256-bit symmetric key from
@@ -1176,7 +1187,7 @@ e0c403c8fc32e874fbb7516c52edddfc09d4444a762dcd0cd486895131c343ae
       	</t>
         <t>
           <figure align="center" anchor="fig:exampleMACedFloatHex"
-                  title='MACed CWT with a floating point value as hex string'>
+                  title='MACed CWT with a floating-point value as hex string'>
             <artwork><![CDATA[
 d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
               ]]></artwork>
@@ -1184,7 +1195,7 @@ d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
         </t>
         <t>
           <figure align="center" anchor="fig:exampleMACedFloatCBORDiagnostic"
-                  title='MACed CWT with a floating point value in CBOR diagnostic notation'>
+                  title='MACed CWT with a floating-point value in CBOR diagnostic notation'>
             <artwork><![CDATA[
 17(
   [
@@ -1207,27 +1218,45 @@ d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>
-        This specification is based on JSON Web Token (JWT)
-        <xref target="RFC7519"/>, the authors of which also include Nat
-        Sakimura and John Bradley.
+        This specification is based on JSON Web Token (JWT) <xref target="RFC7519"/>,
+	the authors of which also include Nat Sakimura and John Bradley.
+        It also incorporates suggestions made by many people, notably
+	Carsten Bormann, Jim Schaad, Ludwig Seitz, and Göran Selander.
       </t>
-      <t>
-        This specification also incorporates suggestions made by many people,
-        notably Carsten Bormann, Jim Schaad, Ludwig Seitz and Göran Selander.
-      </t>
-      <!--
-      <t>
-	The following individuals contributed ideas,
-	feedback, and wording that influenced this specification:
-      </t>
-      <t>
-	TBD
-      </t>
-      -->
     </section>
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+
+      <t>
+	-05
+        <list style="symbols">
+	  <t>
+	    Addressed working group last call comments with the following changes:
+	  </t>
+	  <t>
+	    Say that CWT is derived from JWT, rather than CWT is a profile of JWT.
+	  </t>
+	  <t>
+	    Used CBOR type names in descriptions, rather than major/minor type numbers.
+	  </t>
+	  <t>
+	    Clarified the NumericDate and StringOrURI descriptions.
+	  </t>
+	  <t>
+	    Changed to allow CWT claim names to use values of any legal CBOR map key type.
+	  </t>
+	  <t>
+	    Changed to use the CWT tag to identify nested CWTs instead of the CWT content type.
+	  </t>
+	  <t>
+	    Added an example using a floating-point date value.
+	  </t>
+	  <t>
+	    Acknowledged reviewers.
+	  </t>
+	</list>
+      </t>
 
       <t>
 	-04
