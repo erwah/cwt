@@ -890,6 +890,12 @@
 	To make the examples easier to read, they are presented both as hex strings and
 	in the extended CBOR diagnostic notation described in Section 6 of <xref target="RFC7049"/>.
       </t>
+      <t>
+        Where a byte string is to carry an embedded CBOR-encoded item, the
+        diagnostic notation for this CBOR data item can be enclosed
+        in '&lt;&lt;' and '&gt;&gt;' to notate the byte string resulting from encoding the
+        data item, e.g h’63666F6F' translates to &lt;&lt;"foo”&gt;&gt;.
+      </t>
 
       <section anchor="exampleClaimsSet" title='Example CWT Claims Set'>
 	<t>
@@ -961,11 +967,11 @@ fda55a7eca69ed8919a394d42f0f2001
 	    <artwork align="left"><![CDATA[
 {
   / d /   -4: h'6c1382765aec5358f117733d281c1c7bdc39884d04a45a1e
-               6c67c858bc206c19',
+                6c67c858bc206c19',
   / y /   -3: h'60f7f1a780d8a783bfb7a2dd6b2796e8128dbbcef9d3d168
-               db9529971a36e7b9',
+                db9529971a36e7b9',
   / x /   -2: h'143329cce7868e416927599cf65a34f3ce2ffda55a7eca69
-               ed8919a394d42f0f',
+                ed8919a394d42f0f',
   / crv / -1: 1 / P-256 / ,
   / kty /  1: 2 / EC2 / ,
   / alg /  3: -7 / ECDSA 256 /
@@ -1003,26 +1009,23 @@ fbad1f29c4c7c6a555e601d6fa29f9179bc3d7438bacaca5acd08c8d4d4f96131
 	    <artwork><![CDATA[
 18(
   [
-    / protected / h'a10126' / {
+    / protected / << {
       / alg / 1: -7 / ECDSA 256 /
-    } / ,
+    } >> ,
     / unprotected / {},
-    / payload / h'a70175636f61703a2f2f61732e6578616d706c652e63
-                 6f6d02656572696b77037818636f61703a2f2f6c6967
-                 68742e6578616d706c652e636f6d041a5612aeb0051a
-                 5610d9f0061a5610d9f007420b71' / {
-	/ iss / 1: "coap://as.example.com",
-	/ sub / 2: "erikw",
-	/ aud / 3: "coap://light.example.com",
-	/ exp / 4: 1444064944,
-	/ nbf / 5: 1443944944,
-	/ iat / 6: 1443944944,
-	/ cti / 7: h'0b71'
-      } / ,
+    / payload / << {
+      / iss / 1: "coap://as.example.com",
+      / sub / 2: "erikw",
+      / aud / 3: "coap://light.example.com",
+      / exp / 4: 1444064944,
+      / nbf / 5: 1443944944,
+      / iat / 6: 1443944944,
+      / cti / 7: h'0b71'
+    } >> ,
     / signature / h'5427c1ff28d23fbad1f29c4c7c6a555e601d6fa29f
-                   9179bc3d7438bacaca5acd08c8d4d4f96131680c42
-                   9a01f85951ecee743a52b9b63632c57209120e1c9e
-                   30'
+                    9179bc3d7438bacaca5acd08c8d4d4f96131680c42
+                    9a01f85951ecee743a52b9b63632c57209120e1c9e
+                    30'
   ]
 )
 ]]></artwork>
@@ -1057,22 +1060,19 @@ d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
 61(
   17(
     [
-      / protected / h'a10104' / {
-	/ alg / 1: 4 / HMAC 256/64 /
-      } / ,
+      / protected / << {
+        / alg / 1: 4 / HMAC-256-64 /
+      } >> ,
       / unprotected / {},
-      / payload / h'a70175636f61703a2f2f61732e6578616d706c652e636f
-                   6d02656572696b77037818636f61703a2f2f6c69676874
-                   2e6578616d706c652e636f6d041a5612aeb0051a5610d9
-                   f0061a5610d9f007420b71' / {
-	  / iss / 1: "coap://as.example.com",
-	  / sub / 2: "erikw",
-	  / aud / 3: "coap://light.example.com",
-	  / exp / 4: 1444064944,
-	  / nbf / 5: 1443944944,
-	  / iat / 6: 1443944944,
-	  / cti / 7: h'0b71'
-	} / ,
+      / payload / << {
+        / iss / 1: "coap://as.example.com",
+        / sub / 2: "erikw",
+        / aud / 3: "coap://light.example.com",
+        / exp / 4: 1444064944,
+        / nbf / 5: 1443944944,
+        / iat / 6: 1443944944,
+        / cti / 7: h'0b71'
+      } >> ,
       / tag / h'093101ef6d789200'
     ]
   )
@@ -1105,17 +1105,17 @@ d08343a1010aa1054d99a0d7846e762c49ffe8a63e0b5858b918a11fd81e438b
 	    <artwork><![CDATA[
 16(
   [
-    / protected / h'a1010a' / {
+    / protected / << {
       / alg / 1: 10 / AES-CCM-16-64-128 /
-    } /,
+    } >> ,
     / unprotected / {
       / iv / 5: h'99a0d7846e762c49ffe8a63e0b'
     },
     / ciphertext / h'b918a11fd81e438b7f973d9e2e119bcb22424ba0f38
-                    a80f27562f400ee1d0d6c0fdb559c02421fd384fc2e
-                    be22d7071378b0ea7428fff157444d45f7e6afcda1a
-                    ae5f6495830c58627087fc5b4974f319a8707a635dd
-                    643b'
+                     a80f27562f400ee1d0d6c0fdb559c02421fd384fc2e
+                     be22d7071378b0ea7428fff157444d45f7e6afcda1a
+                     ae5f6495830c58627087fc5b4974f319a8707a635dd
+                     643b'
   ]
 )
 ]]></artwork>
@@ -1159,20 +1159,20 @@ d8bb2c8334e3b92a42c0078983e753c054e647ad5387ed149f802f52b5a95ebf
 	    <artwork><![CDATA[
 16(
   [
-    / protected / h'a203183d010a' / {
+    / protected / << {
       / alg / 1: 10 / AES-CCM-16-64-128 /
-    } / ,
+    } >> ,
     / unprotected / {
       / iv / 5: h'86bbd41cc32604396324b7f380'
     },
     / ciphertext / h'72439fbff538aa7b601ebfb29454050a3c99fd13b27
-                    216d084556496c7355c4bb462510f8e0e8479dbe087
-                    22d620e96bcb7764d75140d96220f062679b46b897e
-                    7abe0c325dc2c96d8bb2c8334e3b92a42c0078983e7
-                    53c054e647ad5387ed149f802f52b5a95ebf5f153c4
-                    fd64854ab7531e082b7f22721f939d257c94f8bc248
-                    e1d9cf04f9dd4e5de7ab62df37842fabec230a657d4
-                    abf7162bc786345ebb8eb3af0'
+                     216d084556496c7355c4bb462510f8e0e8479dbe087
+                     22d620e96bcb7764d75140d96220f062679b46b897e
+                     7abe0c325dc2c96d8bb2c8334e3b92a42c0078983e7
+                     53c054e647ad5387ed149f802f52b5a95ebf5f153c4
+                     fd64854ab7531e082b7f22721f939d257c94f8bc248
+                     e1d9cf04f9dd4e5de7ab62df37842fabec230a657d4
+                     abf7162bc786345ebb8eb3af0'
   ]
 )
 ]]></artwork>
@@ -1203,13 +1203,13 @@ d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
 	    <artwork><![CDATA[
 17(
   [
-    / protected / h'a10104' / {
-      / alg / 1: 4 / HMAC 256/64 /
-    } / ,
+    / protected / << {
+      / alg / 1: 4 / HMAC-256-64 /
+    } >> ,
     / unprotected / {},
-    / payload / h'a106fb41d584367c200000' / {
-	/ iat / 6: 1443944944.5
-      } / ,
+    / payload / << {
+      / iat / 6: 1443944944.5
+    } >> ,
     / tag / h'b8816f34c0542892'
   ]
 )
