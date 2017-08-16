@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-07">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-08">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="29" month="June" year="2017" />
+    <date day="16" month="August" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -118,7 +118,7 @@
 	parties. CWT is closely related to JWT. It references the JWT claims
 	and both its name and pronunciation are derived from JWT. To protect the
 	claims contained in CWTs, the CBOR Object Signing and Encryption (COSE)
-	<xref target="I-D.ietf-cose-msg"/>
+	<xref target="RFC8152"/>
 	specification is used.
       </t>
 
@@ -148,7 +148,7 @@
 
        <t>
 	 This document reuses terminology from JWT
-	 <xref target="RFC7519"/> and COSE <xref target="I-D.ietf-cose-msg" />.
+	 <xref target="RFC7519"/> and COSE <xref target="RFC8152"/>.
        </t>
 
       <t>
@@ -157,7 +157,7 @@
 	    <vspace/>
 	    The "StringOrURI" term has the same meaning, syntax, and
 	    processing rules as the "StringOrUri" term defined in Section 2
-	    of JWT <xref target="RFC7519" />, except that it uses a
+	    of JWT <xref target="RFC7519"/>, except that it uses a
 	    CBOR text string instead of a JSON string value.
 	   </t>
 
@@ -165,7 +165,7 @@
 	     <vspace/>
 	     The "NumericDate" term has the same meaning, syntax, and
 	     processing rules as the "NumericDate" term defined in Section 2
-	     of JWT <xref target="RFC7519" />, except that the CBOR numeric date
+	     of JWT <xref target="RFC7519"/>, except that the CBOR numeric date
 	     representation (from Section 2.4.1 of <xref target="RFC7049"/>) is used.
 	     The encoding is modified so that the leading tag 1 (epoch-based date/time) MUST
 	     be omitted.
@@ -209,7 +209,7 @@
       <t>
 	To keep CWTs as small as possible, the Claim Keys are
 	represented using integers or text strings.
-	<xref target="CWTCNMajorTypesSummary" /> summarizes all keys
+	<xref target="CWTCNMajorTypesSummary"/> summarizes all keys
 	used to identify the claims defined in this document.
       </t>
 
@@ -227,7 +227,7 @@
 	    <t>
 	      The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">iss</spanx> claim defined in Section 4.1.1
-	      of JWT <xref target="RFC7519" />, except that the value is of type StringOrURI.
+	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 1 is used to identify this claim.
 	    </t>
 	 </section>
@@ -236,7 +236,7 @@
 	    <t>
 	      The <spanx style="verb">sub</spanx> (subject) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">sub</spanx> claim defined in Section 4.1.2
-	      of JWT <xref target="RFC7519" />, except that the value is of type StringOrURI.
+	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 2 is used to identify this claim.
 	    </t>
 	  </section>
@@ -245,7 +245,7 @@
 	    <t>
 	      The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
-	      of JWT <xref target="RFC7519" />, except that the value is of type StringOrURI.
+	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 3 is used to identify this claim.
 	    </t>
 	  </section>
@@ -254,7 +254,7 @@
 	    <t>
 	      The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">exp</spanx> claim defined in Section
-	      4.1.4 of JWT <xref target="RFC7519" />, except that the value is of type NumericDate.
+	      4.1.4 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 4 is used to identify this claim.
 	    </t>
 	  </section>
@@ -263,7 +263,7 @@
 	    <t>
 	      The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">nbf</spanx> claim defined in Section
-	      4.1.5 of JWT <xref target="RFC7519" />, except that the value is of type NumericDate.
+	      4.1.5 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 5 is used to identify this claim.
 	    </t>
 	  </section>
@@ -272,7 +272,7 @@
 	    <t>
 	      The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">iat</spanx> claim defined in Section
-	      4.1.6 of JWT <xref target="RFC7519" />, except that the value is of type NumericDate.
+	      4.1.6 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 6 is used to identify this claim.
 	    </t>
 	  </section>
@@ -281,7 +281,7 @@
 	    <t>
 	      The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
-	      4.1.7 of JWT <xref target="RFC7519" />, except that the value is of type binary string.
+	      4.1.7 of JWT <xref target="RFC7519"/>, except that the value is of type binary string.
 	      The Claim Key 7 is used to identify this claim.
 	    </t>
 	  </section>
@@ -299,15 +299,15 @@
 		title="Summary of the claim names, keys, and value types">
 	  <artwork><![CDATA[
 /---------+-----+----------------------------------\
-| Name    | Key | Value type		       |
+| Name    | Key | Value type                       |
 |---------+-----+----------------------------------|
-| iss     | 1   | text string		      |
-| sub     | 2   | text string		      |
-| aud     | 3   | text string		      |
+| iss     | 1   | text string                      |
+| sub     | 2   | text string                      |
+| aud     | 3   | text string                      |
 | exp     | 4   | integer or floating-point number |
 | nbf     | 5   | integer or floating-point number |
 | iat     | 6   | integer or floating-point number |
-| cti     | 7   | binary string		    |
+| cti     | 7   | binary string                    |
 \---------+-----+----------------------------------/
 ]]></artwork>
 	</figure>
@@ -381,7 +381,7 @@
 	  <t>
 	    Create a COSE Header containing the desired set of Header
 	    Parameters.  The COSE Header MUST be valid per the
-	    <xref target="I-D.ietf-cose-msg"/> specification.
+	    <xref target="RFC8152"/> specification.
 	  </t>
 	  <t>
 	    Depending upon whether the CWT is signed, MACed, or encrypted,
@@ -390,20 +390,20 @@
 	      <t>
 		If the CWT is signed, create a COSE_Sign/COSE_Sign1 object
 		using the Message as the COSE_Sign/COSE_Sign1 Payload; all
-		steps specified in <xref target="I-D.ietf-cose-msg" /> for
+		steps specified in <xref target="RFC8152"/> for
 		creating a COSE_Sign/COSE_Sign1 object MUST be followed.
 	      </t>
 	      <t>
 		Else, if the CWT is MACed, create a COSE_Mac/COSE_Mac0 object
 		using the Message as the COSE_Mac/COSE_Mac0 Payload; all
-		steps specified in <xref target="I-D.ietf-cose-msg" /> for
+		steps specified in <xref target="RFC8152"/> for
 		creating a COSE_Mac/COSE_Mac0 object MUST be followed.
 	      </t>
 	      <t>
 		Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object,
 		create a COSE_Encrypt/COSE_Encrypt0 using the Message as
 		the plaintext for the COSE_Encrypt/COSE_Encrypt0 object;
-		all steps specified in <xref target="I-D.ietf-cose-msg" />
+		all steps specified in <xref target="RFC8152"/>
 		for creating a COSE_Encrypt/COSE_Encrypt0 object MUST be
 		followed.
 	      </t>
@@ -461,20 +461,20 @@
 	      <list style="symbols">
 		<t>
 		  If the CWT is a COSE_Sign/COSE_Sign1, follow the steps
-		  specified in <xref target="I-D.ietf-cose-msg" /> Section 4
+		  specified in <xref target="RFC8152"/> Section 4
 		  (Signing Objects) for validating a COSE_Sign/COSE_Sign1
 		  object.  Let the Message be the COSE_Sign/COSE_Sign1 payload.
 		</t>
 		<t>
 		  Else, if the CWT is a COSE_Mac/COSE_Mac0, follow the steps
-		  specified in <xref target="I-D.ietf-cose-msg" /> Section 6
+		  specified in <xref target="RFC8152"/> Section 6
 		  (MAC Objects) for validating a COSE_Mac/COSE_Mac0 object.
 		  Let the Message be the COSE_Mac/COSE_Mac0 payload.
 		</t>
 		<t>
 		  Else, if the CWT is a COSE_Encrypt/COSE_Encrypt0 object,
 		  follow the steps specified in
-		  <xref target="I-D.ietf-cose-msg" /> Section 5 (Encryption
+		  <xref target="RFC8152"/> Section 5 (Encryption
 		  Objects) for validating a COSE_Encrypt/COSE_Encrypt0 object.
 		  Let the Message be the resulting plaintext.
 		</t>
@@ -830,7 +830,7 @@
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7049.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7519.xml' ?>
-      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-cose-msg-24"?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8152.xml' ?>
 
       <reference anchor="IANA.MediaTypes" target="http://www.iana.org/assignments/media-types">
 	<front>
@@ -894,7 +894,7 @@
         Where a byte string is to carry an embedded CBOR-encoded item, the
         diagnostic notation for this CBOR data item can be enclosed
         in '&lt;&lt;' and '&gt;&gt;' to notate the byte string resulting from encoding the
-        data item, e.g h’63666F6F' translates to &lt;&lt;"foo”&gt;&gt;.
+        data item, e.g., h'63666F6F' translates to &lt;&lt;"foo"&gt;&gt;.
       </t>
 
       <section anchor="exampleClaimsSet" title='Example CWT Claims Set'>
@@ -904,19 +904,19 @@
 	  examples, the CWT Claims Set is the CBOR encoding as a binary string.
 	</t>
 	<t>
-    <figure align="center" anchor="fig:exampleClaimsSetHex"
-	  title='Example CWT Claims Set as hex string'>
-      <artwork align="left"><![CDATA[
+	  <figure align="center" anchor="fig:exampleClaimsSetHex"
+		  title='Example CWT Claims Set as hex string'>
+	    <artwork align="left"><![CDATA[
 a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b7703
 7818636f61703a2f2f6c696768742e6578616d706c652e636f6d041a5612aeb0
 051a5610d9f0061a5610d9f007420b71
 ]]></artwork>
-	      </figure>
+	  </figure>
 	</t>
 	<t>
 	  <figure align="center" anchor="fig:exampleClaimsSetDiagnostic"
 	      title='Example CWT Claims Set in CBOR diagnostic notation'>
-	      <artwork align="left"><![CDATA[
+	    <artwork align="left"><![CDATA[
 {
   / iss / 1: "coap://as.example.com",
   / sub / 2: "erikw",
@@ -972,8 +972,8 @@ fda55a7eca69ed8919a394d42f0f2001
                 db9529971a36e7b9',
   / x /   -2: h'143329cce7868e416927599cf65a34f3ce2ffda55a7eca69
                 ed8919a394d42f0f',
-  / crv / -1: 1 / P-256 / ,
-  / kty /  1: 2 / EC2 / ,
+  / crv / -1: 1 / P-256 /,
+  / kty /  1: 2 / EC2 /,
   / alg /  3: -7 / ECDSA 256 /
 }
 ]]></artwork>
@@ -1011,7 +1011,7 @@ fbad1f29c4c7c6a555e601d6fa29f9179bc3d7438bacaca5acd08c8d4d4f96131
   [
     / protected / << {
       / alg / 1: -7 / ECDSA 256 /
-    } >> ,
+    } >>,
     / unprotected / {},
     / payload / << {
       / iss / 1: "coap://as.example.com",
@@ -1021,7 +1021,7 @@ fbad1f29c4c7c6a555e601d6fa29f9179bc3d7438bacaca5acd08c8d4d4f96131
       / nbf / 5: 1443944944,
       / iat / 6: 1443944944,
       / cti / 7: h'0b71'
-    } >> ,
+    } >>,
     / signature / h'5427c1ff28d23fbad1f29c4c7c6a555e601d6fa29f
                     9179bc3d7438bacaca5acd08c8d4d4f96131680c42
                     9a01f85951ecee743a52b9b63632c57209120e1c9e
@@ -1062,7 +1062,7 @@ d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
     [
       / protected / << {
         / alg / 1: 4 / HMAC-256-64 /
-      } >> ,
+      } >>,
       / unprotected / {},
       / payload / << {
         / iss / 1: "coap://as.example.com",
@@ -1072,7 +1072,7 @@ d83dd18443a10104a05850a70175636f61703a2f2f61732e6578616d706c652e
         / nbf / 5: 1443944944,
         / iat / 6: 1443944944,
         / cti / 7: h'0b71'
-      } >> ,
+      } >>,
       / tag / h'093101ef6d789200'
     ]
   )
@@ -1107,7 +1107,7 @@ d08343a1010aa1054d99a0d7846e762c49ffe8a63e0b5858b918a11fd81e438b
   [
     / protected / << {
       / alg / 1: 10 / AES-CCM-16-64-128 /
-    } >> ,
+    } >>,
     / unprotected / {
       / iv / 5: h'99a0d7846e762c49ffe8a63e0b'
     },
@@ -1161,7 +1161,7 @@ d8bb2c8334e3b92a42c0078983e753c054e647ad5387ed149f802f52b5a95ebf
   [
     / protected / << {
       / alg / 1: 10 / AES-CCM-16-64-128 /
-    } >> ,
+    } >>,
     / unprotected / {
       / iv / 5: h'86bbd41cc32604396324b7f380'
     },
@@ -1194,7 +1194,7 @@ d8bb2c8334e3b92a42c0078983e753c054e647ad5387ed149f802f52b5a95ebf
 		  title='MACed CWT with a floating-point value as hex string'>
 	    <artwork><![CDATA[
 d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
-	      ]]></artwork>
+]]></artwork>
 	  </figure>
 	</t>
 	<t>
@@ -1205,11 +1205,11 @@ d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
   [
     / protected / << {
       / alg / 1: 4 / HMAC-256-64 /
-    } >> ,
+    } >>,
     / unprotected / {},
     / payload / << {
       / iat / 6: 1443944944.5
-    } >> ,
+    } >>,
     / tag / h'b8816f34c0542892'
   ]
 )
@@ -1231,6 +1231,15 @@ d18443a10104a04ba106fb41d584367c20000048b8816f34c0542892
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+      <t>
+        -08
+        <list style="symbols">
+          <t>
+	    Updated the diagnostic notation for embedded objects in the examples,
+            addressing feedback by Carsten Bormann.
+          </t>
+        </list>
+      </t>
       <t>
         -07
         <list style="symbols">
