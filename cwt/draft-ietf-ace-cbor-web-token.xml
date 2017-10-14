@@ -998,7 +998,8 @@ ca69ed8919a394d42f0f2001010202524173796d6d6574726963454344534132
                 ed8919a394d42f0f',
   / crv / -1: 1 / P-256 /,
   / kty /  1: 2 / EC2 /,
-  / kid /  2: h'4173796d6d65747269634543445341323536' / 'AsymmetricECDSA256' /,
+  / kid /  2: h'4173796d6d657472696345434453413
+                23536' / 'AsymmetricECDSA256' /,
   / alg /  3: -7 / ECDSA 256 /
 }
 ]]></artwork>
@@ -1039,7 +1040,8 @@ a29f9179bc3d7438bacaca5acd08c8d4d4f96131680c429a01f85951ecee743a5
       / alg / 1: -7 / ECDSA 256 /
     } >>,
     / unprotected / {
-      / kid / 4: h'4173796d6d65747269634543445341323536' / 'AsymmetricECDSA256' /
+      / kid / 4: h'4173796d6d657472696345434453413
+                   23536' / 'AsymmetricECDSA256' /
     },
     / payload / << {
       / iss / 1: "coap://as.example.com",
