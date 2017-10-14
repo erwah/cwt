@@ -1195,8 +1195,8 @@ d67c2a05414ce331b5b8f1ed8ff7138f45905db2c4d5bc8045ab372bff142631
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } >>,
     / unprotected / {
-      / iv /  5: h'86bbd41cc32604396324b7f380',
-      / kid / 4: 'Symmetric128'
+      / kid / 4: 'Symmetric128',
+      / iv /  5: h'86bbd41cc32604396324b7f380'
     },
     / ciphertext / h'f6b0914f993de822cc47e5e57a188d7960b528a7474
                      46fe12f0e7de05650dec74724366763f167a29c002d
