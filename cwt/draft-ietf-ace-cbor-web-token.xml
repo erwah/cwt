@@ -948,7 +948,7 @@ title='128-bit symmetric COSE key in CBOR diagnostic notation'><artwork align="l
 {
   / k /   -1: h’231f4c4d4d3051fdc2ec0a3851d5b383’
   / kty /  1: 4 / Symmetric /,
-  / kid /  2: 'Symmetric128',
+  / kid /  2: h'53796d6d6574726963313238' / 'Symmetric128' /,
   / alg /  3: 10 / AES-CCM-16-64-128 /
 }
 ]]></artwork></figure>
@@ -966,7 +966,7 @@ title='256-bit symmetric COSE key in CBOR diagnostic notation'><artwork align="l
   / k /   -1: h’403697de87af64611c1d32a05dab0fe1fcb715a86ab435f1
                 ec99192d79569388’
   / kty /  1: 4 / Symmetric /,
-  / kid /  4: 'Symmetric256',
+  / kid /  4: h'53796d6d6574726963323536' / 'Symmetric256' /,
   / alg /  3: 4 / HMAC 256/64 /
 }
 ]]></artwork></figure>
@@ -998,7 +998,7 @@ ca69ed8919a394d42f0f2001010202524173796d6d6574726963454344534132
                 ed8919a394d42f0f',
   / crv / -1: 1 / P-256 /,
   / kty /  1: 2 / EC2 /,
-  / kid /  2: 'AsymmetricECDSA256',
+  / kid /  2: h'4173796d6d65747269634543445341323536' / 'AsymmetricECDSA256' /,
   / alg /  3: -7 / ECDSA 256 /
 }
 ]]></artwork>
@@ -1039,7 +1039,7 @@ a29f9179bc3d7438bacaca5acd08c8d4d4f96131680c429a01f85951ecee743a5
       / alg / 1: -7 / ECDSA 256 /
     } >>,
     / unprotected / {
-      / kid / 4: 'AsymmetricECDSA256'
+      / kid / 4: h'4173796d6d65747269634543445341323536' / 'AsymmetricECDSA256' /
     },
     / payload / << {
       / iss / 1: "coap://as.example.com",
@@ -1092,7 +1092,7 @@ d83dd18443a10104a1044c53796d6d65747269633235365850a70175636f6170
         / alg / 1: 4 / HMAC-256-64 /
       } >>,
       / unprotected / {
-        / kid / 4: 'Symmetric256'
+        / kid / 4: h'53796d6d6574726963323536' / 'Symmetric256' /
       },
       / payload / << {
         / iss / 1: "coap://as.example.com",
@@ -1139,7 +1139,7 @@ f400ee1d0d6c0fdb559c02421fd384fc2ebe22d7071378b0ea7428fff157444d
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } >>,
     / unprotected / {
-      / kid / 4: 'Symmetric128',
+      / kid / 4: h'53796d6d6574726963313238' / 'Symmetric128' /,
       / iv /  5: h'99a0d7846e762c49ffe8a63e0b'
     },
     / ciphertext / h'b918a11fd81e438b7f973d9e2e119bcb22424ba0f38
@@ -1195,8 +1195,8 @@ d67c2a05414ce331b5b8f1ed8ff7138f45905db2c4d5bc8045ab372bff142631
       / alg / 1: 10 / AES-CCM-16-64-128 /
     } >>,
     / unprotected / {
-      / iv /  5: h'86bbd41cc32604396324b7f380',
-      / kid / 4: 'Symmetric128'
+      / kid / 4: h'53796d6d6574726963313238' / 'Symmetric128' /,
+      / iv /  5: h'86bbd41cc32604396324b7f380'
     },
     / ciphertext / h'f6b0914f993de822cc47e5e57a188d7960b528a7474
                      46fe12f0e7de05650dec74724366763f167a29c002d
@@ -1242,7 +1242,7 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
       / alg / 1: 4 / HMAC-256-64 /
     } >>,
     / unprotected / {
-      / kid / 4: 'Symmetric256'
+      / kid / 4: h'53796d6d6574726963323536' / 'Symmetric256' /,
     },
     / payload / << {
       / iat / 6: 1443944944.5
