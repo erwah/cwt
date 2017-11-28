@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 
-<?xml-stylesheet type='text/xsl' href='http://xml2rfc.tools.ietf.org/authoring/rfc2629.xslt' ?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt" ?>
 <?rfc toc="yes"?>
 <?rfc tocdepth="4"?>
 <?rfc symrefs="yes"?>
@@ -226,8 +226,9 @@
 	 <section anchor="CWTCNiss" title="iss (Issuer) Claim">
 	    <t>
 	      The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning, syntax, and
-	      processing rules as the <spanx style="verb">iss</spanx> claim defined in Section 4.1.1
-	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
+	      processing rules as the <spanx style="verb">iss</spanx> claim defined in
+        <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.1">Section 4.1.1
+	      of JWT</eref>, except that the value is of type StringOrURI.
 	      The Claim Key 1 is used to identify this claim.
 	    </t>
 	 </section>
@@ -235,8 +236,8 @@
 	 <section anchor="CWTCNsub" title="sub (Subject) Claim">
 	    <t>
 	      The <spanx style="verb">sub</spanx> (subject) claim has the same meaning, syntax, and
-	      processing rules as the <spanx style="verb">sub</spanx> claim defined in Section 4.1.2
-	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
+	      processing rules as the <spanx style="verb">sub</spanx> claim defined in <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.2">Section 4.1.2
+	      of JWT</eref>, except that the value is of type StringOrURI.
 	      The Claim Key 2 is used to identify this claim.
 	    </t>
 	  </section>
@@ -244,8 +245,8 @@
 	  <section anchor="CWTCNaud" title="aud (Audience) Claim">
 	    <t>
 	      The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
-	      processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
-	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
+	      processing rules as the <spanx style="verb">aud</spanx> claim defined in <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.3">Section 4.1.3
+	      of JWT</eref>, except that the value is of type StringOrURI.
 	      The Claim Key 3 is used to identify this claim.
 	    </t>
 	  </section>
@@ -253,8 +254,8 @@
 	  <section anchor="CWTCNexp" title="exp (Expiration Time) Claim">
 	    <t>
 	      The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning, syntax,
-	      and processing rules as the <spanx style="verb">exp</spanx> claim defined in Section
-	      4.1.4 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
+	      and processing rules as the <spanx style="verb">exp</spanx> claim defined <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.4">Section 4.1.4
+	      of JWT</eref>, except that the value is of type NumericDate.
 	      The Claim Key 4 is used to identify this claim.
 	    </t>
 	  </section>
@@ -262,8 +263,8 @@
 	  <section anchor="CWTCNnbf" title="nbf (Not Before) Claim">
 	    <t>
 	      The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning, syntax,
-	      and processing rules as the <spanx style="verb">nbf</spanx> claim defined in Section
-	      4.1.5 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
+	      and processing rules as the <spanx style="verb">nbf</spanx> claim defined in <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.5">Section 4.1.5
+	      of JWT</eref>, except that the value is of type NumericDate.
 	      The Claim Key 5 is used to identify this claim.
 	    </t>
 	  </section>
@@ -271,8 +272,8 @@
 	  <section anchor="CWTCNiat" title="iat (Issued At) Claim">
 	    <t>
 	      The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning, syntax,
-	      and processing rules as the <spanx style="verb">iat</spanx> claim defined in Section
-	      4.1.6 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
+	      and processing rules as the <spanx style="verb">iat</spanx> claim defined in <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.6">Section 4.1.6
+	      of JWT</eref>, except that the value is of type NumericDate.
 	      The Claim Key 6 is used to identify this claim.
 	    </t>
 	  </section>
@@ -280,8 +281,8 @@
 	  <section anchor="CWTCNcti" title="cti (CWT ID) Claim">
 	    <t>
 	      The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
-	      and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
-	      4.1.7 of JWT <xref target="RFC7519"/>, except that the value is of type binary string.
+	      and processing rules as the <spanx style="verb">jti</spanx> claim defined in <eref target="https://tools.ietf.org/html/rfc7519#section-4.1.7">Section 4.1.7
+	      of JWT</eref>, except that the value is of type binary string.
 	      The Claim Key 7 is used to identify this claim.
 	    </t>
 	  </section>
