@@ -293,26 +293,38 @@
 
     <section anchor="CWTCNMajorTypesSummary"
        title="Summary of the claim names, keys, and value types">
+      <texttable title="Summary of the claim names, keys, and value types" anchor="fig:cborMappingValuesAccessTokens">
+        <ttcol align='left'>Name</ttcol>
+        <ttcol align='left'>Key</ttcol>
+        <ttcol align='left'>Value type</ttcol>
+        <c>iss</c>
+        <c>1</c>
+        <c>text string</c>
 
-      <t>
-	<figure align="center" anchor="fig:cborMappingValuesAccessTokens"
-		title="Summary of the claim names, keys, and value types">
-	  <artwork><![CDATA[
-/---------+-----+----------------------------------\
-| Name    | Key | Value type                       |
-|---------+-----+----------------------------------|
-| iss     | 1   | text string                      |
-| sub     | 2   | text string                      |
-| aud     | 3   | text string                      |
-| exp     | 4   | integer or floating-point number |
-| nbf     | 5   | integer or floating-point number |
-| iat     | 6   | integer or floating-point number |
-| cti     | 7   | binary string                    |
-\---------+-----+----------------------------------/
-]]></artwork>
-	</figure>
-      </t>
+        <c>sub</c>
+        <c>2</c>
+        <c>text string</c>
 
+        <c>aud</c>
+        <c>3</c>
+        <c>text string</c>
+
+        <c>exp</c>
+        <c>4</c>
+        <c>integer or floating-point number</c>
+
+        <c>nbf</c>
+        <c>5</c>
+        <c>integer or floating-point number</c>
+
+        <c>iat</c>
+        <c>6</c>
+        <c>integer or floating-point number</c>
+
+        <c>cti</c>
+        <c>7</c>
+        <c>binary string </c>
+      </texttable>
     </section>
 
     <section anchor="TaggedValues" title="CBOR Tags and Claim Values">
