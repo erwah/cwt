@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-08">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-09">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="16" month="August" year="2017" />
+    <date day="26" month="October" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -939,14 +939,14 @@ a70175636f61703a2f2f61732e6578616d706c652e636f6d02656572696b7703
 
 	<section anchor="exampleKeysSymmetric128" title='128-bit Symmetric Key'>
     <figure align="center" anchor="fig:exampleKeysShared128Hex"
-title='128-bit symmetric COSE key as hex string'><artwork align="left"><![CDATA[
+title='128-bit symmetric COSE_Key as hex string'><artwork align="left"><![CDATA[
 a42050231f4c4d4d3051fdc2ec0a3851d5b3830104024c53796d6d6574726963
 313238030a
 ]]></artwork></figure>
 <figure align="center" anchor="fig:exampleKeysShared128Diag"
-title='128-bit symmetric COSE key in CBOR diagnostic notation'><artwork align="left"><![CDATA[
+title='128-bit symmetric COSE_Key in CBOR diagnostic notation'><artwork align="left"><![CDATA[
 {
-  / k /   -1: h’231f4c4d4d3051fdc2ec0a3851d5b383’
+  / k /   -1: h'231f4c4d4d3051fdc2ec0a3851d5b383'
   / kty /  1: 4 / Symmetric /,
   / kid /  2: h'53796d6d6574726963313238' / 'Symmetric128' /,
   / alg /  3: 10 / AES-CCM-16-64-128 /
@@ -956,15 +956,15 @@ title='128-bit symmetric COSE key in CBOR diagnostic notation'><artwork align="l
 
 	<section anchor="exampleKeysSymmetric256" title='256-bit Symmetric Key'>
 	  <figure align="center" anchor="fig:exampleKeysShared256Hex"
-	  title='256-bit symmetric COSE key as hex string'><artwork align="left"><![CDATA[
+	  title='256-bit symmetric COSE_Key as hex string'><artwork align="left"><![CDATA[
 a4205820403697de87af64611c1d32a05dab0fe1fcb715a86ab435f1ec99192d
 795693880104024c53796d6d6574726963323536030a
 ]]></artwork></figure>
     <figure align="center" anchor="fig:exampleKeysShared256Diag"
-title='256-bit symmetric COSE key in CBOR diagnostic notation'><artwork align="left"><![CDATA[
+title='256-bit symmetric COSE_Key in CBOR diagnostic notation'><artwork align="left"><![CDATA[
 {
-  / k /   -1: h’403697de87af64611c1d32a05dab0fe1fcb715a86ab435f1
-                ec99192d79569388’
+  / k /   -1: h'403697de87af64611c1d32a05dab0fe1fcb715a86ab435f1
+                ec99192d79569388'
   / kty /  1: 4 / Symmetric /,
   / kid /  4: h'53796d6d6574726963323536' / 'Symmetric256' /,
   / alg /  3: 4 / HMAC 256/64 /
@@ -1270,6 +1270,18 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+      <t>
+        -09
+        <list style="symbols">
+          <t>
+	    Added key ID values to the examples.
+          </t>
+          <t>
+	    Key values for the examples are now represented in COSE_Key format
+	    using CBOR diagnostic notation.
+          </t>
+        </list>
+      </t>
       <t>
         -08
         <list style="symbols">
