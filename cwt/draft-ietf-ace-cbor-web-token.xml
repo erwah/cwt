@@ -425,14 +425,13 @@
 	  </t>
 	  <t>
 	    If a nested signing, MACing, or encryption operation will be
-	    performed, let the Message be the COSE_Sign/COSE_Sign1,
-	    COSE_Mac/COSE_Mac0, or COSE_Encrypt/COSE_Encrypt0, add the
-	    matching COSE CBOR tag, and return to Step 3.
+	    performed, let the Message be the tagged COSE_Sign/COSE_Sign1,
+	    COSE_Mac/COSE_Mac0, or COSE_Encrypt/COSE_Encrypt0, and return to Step 3.
 	  </t>
 	  <t>
-	    If needed by the application, add the appropriate COSE CBOR tag
-	    to the COSE object to indicate the type of the COSE object.
-	    If needed by the application, add the CWT CBOR tag
+	    If needed by the application, prepend the COSE object with the appropriate
+      COSE CBOR tag to indicate the type of the COSE object.
+	    If needed by the application, prepend the COSE object with the CWT CBOR tag
 	    to indicate that the COSE object is a CWT.
 	  </t>
 	</list>
