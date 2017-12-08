@@ -341,7 +341,9 @@
 	is already specified by the claim definitions.
 	Tagging claim values would only take up extra space without adding information.
 	However, this does not prohibit future claim definitions
-	from requiring the use of CBOR tags for those specific claims.
+	from requiring the use of CBOR tags for those specific claims. In case a claim
+  value has an unrecognised tag the receiver MUST ignore the tag and read the
+  value as untagged.
       </t>
     </section>
 
