@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="28" month="November" year="2017" />
+    <date day="15" month="December" year="2017" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -73,7 +73,9 @@
     <keyword>JSON Web Token</keyword>
     <keyword>JWT</keyword>
     <keyword>Claims</keyword>
+    <keyword>Concise Binary Object Representation</keyword>
     <keyword>CBOR</keyword>
+    <keyword>CBOR Object Signing and Encryption</keyword>
     <keyword>COSE</keyword>
     <keyword>OAuth</keyword>
     <keyword>ACE</keyword>
@@ -87,7 +89,7 @@
 	layer security protection.  A claim is a piece of information asserted
 	about a subject and is represented as a name/value pair consisting of a
 	claim name and a claim value.
-	CWT is derived from JSON Web Token (JWT), but uses CBOR rather than JSON.
+	CWT is derived from JSON Web Token (JWT) but uses CBOR rather than JSON.
       </t>
     </abstract>
 
@@ -247,7 +249,10 @@
 	    <t>
 	      The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
-	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
+	      of JWT <xref target="RFC7519"/>, except that the value of the audience claim
+	      is of type StringOrURI when it is not an array
+	      or the values of the audience array elements are of type StringOrURI
+	      when the audience claim value is an array.
 	      The Claim Key 3 is used to identify this claim.
 	    </t>
 	  </section>
@@ -356,7 +361,7 @@
       <t>
 	This section defines the CWT CBOR tag as another means for applications to
 	declare that a CBOR data structure is a CWT.
-	Its use is optional, and is intended for use in cases in which
+	Its use is optional and is intended for use in cases in which
 	this information would not otherwise be known.
       </t>
       <t>
@@ -1277,8 +1282,13 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
       <t>
 	This specification is based on JSON Web Token (JWT) <xref target="RFC7519"/>,
 	the authors of which also include Nat Sakimura and John Bradley.
-	It also incorporates suggestions made by many people, notably
-	Carsten Bormann, Jim Schaad, Ludwig Seitz, and Göran Selander.
+	It also incorporates suggestions made by many people, including
+	Carsten Bormann,
+	Esko Dijk,
+	Jim Schaad,
+	Ludwig Seitz,
+	and
+	Göran Selander.
       </t>
     </section>
 
@@ -1288,8 +1298,15 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
         -10
         <list style="symbols">
           <t>
-	    Removed ambiguity from audience claim description.
+	    Clarified that the audience claim value can be a single audience value or
+	    an array of audience values, just as is the case for the JWT "aud" claim.
           </t>
+	  <t>
+	    Clarified the nested CWT description.
+	  </t>
+	  <t>
+	    Changed uses of "binary string" to "byte string".
+	  </t>
         </list>
       </t>
       <t>
