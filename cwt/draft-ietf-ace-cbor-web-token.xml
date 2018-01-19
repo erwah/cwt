@@ -1217,7 +1217,7 @@ d67c2a05414ce331b5b8f1ed8ff7138f45905db2c4d5bc8045ab372bff142631
     } >>,
     / unprotected / {
       / kid / 4: h'53796d6d6574726963313238' / 'Symmetric128' /,
-      / iv /  5: h'86bbd41cc32604396324b7f380'
+      / iv /  5: h'4a0694c0e69ee6b5956655c7b2'
     },
     / ciphertext / h'f6b0914f993de822cc47e5e57a188d7960b528a7474
                      46fe12f0e7de05650dec74724366763f167a29c002d
