@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-10">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-11">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="17" month="December" year="2017" />
+    <date day="21" month="January" year="2018" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -161,7 +161,7 @@
 	    <vspace/>
 	    The "StringOrURI" term has the same meaning, syntax, and
 	    processing rules as the "StringOrURI" term defined in Section 2
-	    of JWT <xref target="RFC7519"/>, except that it uses a
+	    of <xref target="RFC7519"/>, except that it uses a
 	    CBOR text string instead of a JSON string value.
 	   </t>
 
@@ -169,7 +169,7 @@
 	     <vspace/>
 	     The "NumericDate" term has the same meaning, syntax, and
 	     processing rules as the "NumericDate" term defined in Section 2
-	     of JWT <xref target="RFC7519"/>, except that the CBOR numeric date
+	     of <xref target="RFC7519"/>, except that the CBOR numeric date
 	     representation (from Section 2.4.1 of <xref target="RFC7049"/>) is used.
 	     The encoding is modified so that the leading tag 1 (epoch-based date/time) MUST
 	     be omitted.
@@ -231,7 +231,7 @@
 	    <t>
 	      The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">iss</spanx> claim defined in Section 4.1.1
-	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
+	      of <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 1 is used to identify this claim.
 	    </t>
 	 </section>
@@ -240,7 +240,7 @@
 	    <t>
 	      The <spanx style="verb">sub</spanx> (subject) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">sub</spanx> claim defined in Section 4.1.2
-	      of JWT <xref target="RFC7519"/>, except that the value is of type StringOrURI.
+	      of <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 2 is used to identify this claim.
 	    </t>
 	  </section>
@@ -249,7 +249,7 @@
 	    <t>
 	      The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
 	      processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
-	      of JWT <xref target="RFC7519"/>, except that the value of the audience claim
+	      of <xref target="RFC7519"/>, except that the value of the audience claim
 	      is of type StringOrURI when it is not an array
 	      or the values of the audience array elements are of type StringOrURI
 	      when the audience claim value is an array.
@@ -261,7 +261,7 @@
 	    <t>
 	      The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">exp</spanx> claim defined in Section
-	      4.1.4 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
+	      4.1.4 of <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 4 is used to identify this claim.
 	    </t>
 	  </section>
@@ -270,7 +270,7 @@
 	    <t>
 	      The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">nbf</spanx> claim defined in Section
-	      4.1.5 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
+	      4.1.5 of <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 5 is used to identify this claim.
 	    </t>
 	  </section>
@@ -279,7 +279,7 @@
 	    <t>
 	      The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">iat</spanx> claim defined in Section
-	      4.1.6 of JWT <xref target="RFC7519"/>, except that the value is of type NumericDate.
+	      4.1.6 of <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 6 is used to identify this claim.
 	    </t>
 	  </section>
@@ -288,7 +288,7 @@
 	    <t>
 	      The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
 	      and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
-	      4.1.7 of JWT <xref target="RFC7519"/>, except that the value is of type byte string.
+	      4.1.7 of <xref target="RFC7519"/>, except that the value is of type byte string.
 	      The Claim Key 7 is used to identify this claim.
 	    </t>
 	  </section>
@@ -759,7 +759,7 @@
 	      </t>
 	      <t>
 		Applications that use this media type:
-		IoT applications sending security tokens over HTTP(S) and other transports.
+		IoT applications sending security tokens over HTTP(S), CoAP(S), and other transports.
 	      </t>
 	      <t>
 		Fragment identifier considerations: N/A
@@ -1285,6 +1285,7 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
 	It also incorporates suggestions made by many people, including
 	Carsten Bormann,
 	Esko Dijk,
+	Benjamin Kaduk,
 	Jim Schaad,
 	Ludwig Seitz,
 	and
@@ -1294,6 +1295,25 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+      <t>
+        -11
+        <list style="symbols">
+          <t>
+	    Corrected the "iv" value in the signed and encrypted CWT example.
+	  </t>
+	  <t>
+	    Mention CoAP in the <spanx style="verb">application/cwt</spanx> media type registration.
+	  </t>
+	  <t>
+	    Changed references of the form "Section 4.1.1 of JWT &lt;xref target="RFC7519"/&gt;"
+	    to "Section 4.1.1 of &lt;xref target="RFC7519"/&gt;" so that rfcmarkup will generate
+	    correct external section reference links.
+	  </t>
+	  <t>
+	    Updated Acknowledgements.
+	  </t>
+        </list>
+      </t>
       <t>
         -10
         <list style="symbols">
