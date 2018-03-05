@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-12">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-13">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="2" month="February" year="2018" />
+    <date day="5" month="March" year="2018" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -159,7 +159,7 @@
 	<list style="hanging">
 	  <t hangText="StringOrURI">
 	    <vspace/>
-	    The "StringOrURI" term has the same meaning, syntax, and
+	    The "StringOrURI" term has the same meaning and
 	    processing rules as the "StringOrURI" term defined in Section 2
 	    of <xref target="RFC7519"/>, except that it uses a
 	    CBOR text string instead of a JSON string value.
@@ -167,7 +167,7 @@
 
 	  <t hangText="NumericDate">
 	     <vspace/>
-	     The "NumericDate" term has the same meaning, syntax, and
+	     The "NumericDate" term has the same meaning and
 	     processing rules as the "NumericDate" term defined in Section 2
 	     of <xref target="RFC7519"/>, except that the CBOR numeric date
 	     representation (from Section 2.4.1 of <xref target="RFC7049"/>) is used.
@@ -229,7 +229,7 @@
 
 	 <section anchor="CWTCNiss" title="iss (Issuer) Claim">
 	    <t>
-	      The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning, syntax, and
+	      The <spanx style="verb">iss</spanx> (issuer) claim has the same meaning and
 	      processing rules as the <spanx style="verb">iss</spanx> claim defined in Section 4.1.1
 	      of <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 1 is used to identify this claim.
@@ -238,7 +238,7 @@
 
 	 <section anchor="CWTCNsub" title="sub (Subject) Claim">
 	    <t>
-	      The <spanx style="verb">sub</spanx> (subject) claim has the same meaning, syntax, and
+	      The <spanx style="verb">sub</spanx> (subject) claim has the same meaning and
 	      processing rules as the <spanx style="verb">sub</spanx> claim defined in Section 4.1.2
 	      of <xref target="RFC7519"/>, except that the value is of type StringOrURI.
 	      The Claim Key 2 is used to identify this claim.
@@ -247,7 +247,7 @@
 
 	  <section anchor="CWTCNaud" title="aud (Audience) Claim">
 	    <t>
-	      The <spanx style="verb">aud</spanx> (audience) claim has the same meaning, syntax, and
+	      The <spanx style="verb">aud</spanx> (audience) claim has the same meaning and
 	      processing rules as the <spanx style="verb">aud</spanx> claim defined in Section 4.1.3
 	      of <xref target="RFC7519"/>, except that the value of the audience claim
 	      is of type StringOrURI when it is not an array
@@ -259,7 +259,7 @@
 
 	  <section anchor="CWTCNexp" title="exp (Expiration Time) Claim">
 	    <t>
-	      The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning, syntax,
+	      The <spanx style="verb">exp</spanx> (expiration time) claim has the same meaning
 	      and processing rules as the <spanx style="verb">exp</spanx> claim defined in Section
 	      4.1.4 of <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 4 is used to identify this claim.
@@ -268,7 +268,7 @@
 
 	  <section anchor="CWTCNnbf" title="nbf (Not Before) Claim">
 	    <t>
-	      The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning, syntax,
+	      The <spanx style="verb">nbf</spanx> (not before) claim has the same meaning
 	      and processing rules as the <spanx style="verb">nbf</spanx> claim defined in Section
 	      4.1.5 of <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 5 is used to identify this claim.
@@ -277,7 +277,7 @@
 
 	  <section anchor="CWTCNiat" title="iat (Issued At) Claim">
 	    <t>
-	      The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning, syntax,
+	      The <spanx style="verb">iat</spanx> (issued at) claim has the same meaning
 	      and processing rules as the <spanx style="verb">iat</spanx> claim defined in Section
 	      4.1.6 of <xref target="RFC7519"/>, except that the value is of type NumericDate.
 	      The Claim Key 6 is used to identify this claim.
@@ -286,7 +286,7 @@
 
 	  <section anchor="CWTCNcti" title="cti (CWT ID) Claim">
 	    <t>
-	      The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning, syntax,
+	      The <spanx style="verb">cti</spanx> (CWT ID) claim has the same meaning
 	      and processing rules as the <spanx style="verb">jti</spanx> claim defined in Section
 	      4.1.7 of <xref target="RFC7519"/>, except that the value is of type byte string.
 	      The Claim Key 7 is used to identify this claim.
@@ -546,9 +546,8 @@
 	  IANA "CBOR Web Token (CWT) Claims" registry.
 	</t>
 	<t>
-	  Depending upon the values being requested, registration requests are evaluated on a
-	  Standards Track Required, Specification Required, Expert Review, or Private Use
-	  basis <xref target="RFC8126"/>
+	  Registration requests are evaluated using the criteria described
+	  in the Claim Key instructions in the registration template below
 	  after a three-week review period on the cwt-reg-review@ietf.org mailing list,
 	  on the advice of one or more Designated Experts.
 	  However, to allow for the
@@ -583,6 +582,12 @@
 	  creating a conflict of interest for a particular Expert,
 	  that Expert should defer to the judgment of the other Experts.
 	</t>
+	<t>
+	  Since a high degree of overlap is expected between the contents of
+	  the "CBOR Web Token (CWT) Claims" registry and the "JSON Web Token Claims" registry,
+	  overlap in the corresponding pools of Designated Experts would be useful
+	  to help ensure that an appropriate level of coordination between the registries is maintained.
+	</t>
 
 	<section anchor="IANACWTClaimsKeyRegistryTemplate" title="Registration Template">
 	  <t>
@@ -606,8 +611,9 @@
 	      <t hangText='Claim Key:'>
 		<vspace/>
 		CBOR map key for the claim.
+		Different ranges of values use different registration policies <xref target="RFC8126"/>.
 		Integer values between -256 and 255 and strings of length 1 are designated
-		as Standards Track Required. Integer values from -65536 to 65535
+		as Standards Action. Integer values from -65536 to 65535
 		and strings of length 2 are designated as Specification Required. Integer
 		values of greater than 65535 and strings of length greater than 2 are
 		designated as Expert Review. Integer values less than -65536 are marked
@@ -1289,6 +1295,10 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
 	Carsten Bormann,
 	Esko Dijk,
 	Benjamin Kaduk,
+	Carlos Martinez,
+	Kathleen Moriarty,
+	Dan Romascanu,
+	Kyle Rose,
 	Jim Schaad,
 	Ludwig Seitz,
 	and
@@ -1302,6 +1312,25 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+      <t>
+        -13
+        <list style="symbols">
+	  <t>
+	    Clarified the registration criteria applied to different ranges of Claim Key values,
+	    as suggested by Kathleen Moriarty and Dan Romascanu.
+	  </t>
+	  <t>
+	    No longer describe the syntax of CWT claims as being the same as
+	    that of the corresponding JWT claims, as suggested by Kyle Rose.
+	  </t>
+	  <t>
+	    Added guidance about the selection of the Designated Experts, as suggested by Benjamin Kaduk.
+	  </t>
+          <t>
+	    Acknowledged additional reviewers.
+	  </t>
+        </list>
+      </t>
       <t>
         -12
         <list style="symbols">
