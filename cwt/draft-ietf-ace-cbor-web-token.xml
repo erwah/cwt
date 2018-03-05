@@ -10,7 +10,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-11">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-ace-cbor-web-token-12">
 
   <front>
     <title abbrev="CBOR Web Token">CBOR Web Token (CWT)</title>
@@ -64,7 +64,7 @@
       </address>
     </author>
 
-    <date day="21" month="January" year="2018" />
+    <date day="2" month="February" year="2018" />
 
     <area>Security</area>
     <workgroup>ACE Working Group</workgroup>
@@ -546,7 +546,9 @@
 	  IANA "CBOR Web Token (CWT) Claims" registry.
 	</t>
 	<t>
-	  Values are registered on a Specification Required <xref target="RFC5226"/> basis
+	  Depending upon the values being requested, registration requests are evaluated on a
+	  Standards Track Required, Specification Required, Expert Review, or Private Use
+	  basis <xref target="RFC8126"/>
 	  after a three-week review period on the cwt-reg-review@ietf.org mailing list,
 	  on the advice of one or more Designated Experts.
 	  However, to allow for the
@@ -570,6 +572,8 @@
 	  whether it is likely to be of general applicability
 	  or whether it is useful only for a single application,
 	  and whether the registration description is clear.
+	  Registrations for the limited set of values between -256 and 255 and strings of length 1
+	  are to be restricted to claims with general applicability.
 	</t>
 	<t>
 	  It is suggested that multiple Designated Experts be appointed who are able to
@@ -603,11 +607,11 @@
 		<vspace/>
 		CBOR map key for the claim.
 		Integer values between -256 and 255 and strings of length 1 are designated
-		as Standards Track Document required. Integer values from -65536 to 65535
+		as Standards Track Required. Integer values from -65536 to 65535
 		and strings of length 2 are designated as Specification Required. Integer
 		values of greater than 65535 and strings of length greater than 2 are
-		designated as expert review. Integer values less than -65536 are marked
-		as private use.
+		designated as Expert Review. Integer values less than -65536 are marked
+		as Private Use.
 	      </t>
 	      <t hangText='Claim Value Type(s):'>
 		<vspace/>
@@ -830,7 +834,7 @@
 	      <t>CBOR Tag: TBD (maybe 61 to use the same value as the Content-Format)</t>
 	      <t>Data Item: CBOR Web Token (CWT)</t>
 	      <t>Semantics: CBOR Web Token (CWT), as defined in [[ this specification ]]</t>
-	      <t>Reference: [[ this specification ]]</t>
+	      <t>Description of Semantics: [[ this specification ]]</t>
 	      <t>Point of Contact: Michael B. Jones, mbj@microsoft.com</t>
 	    </list>
 	  </t>
@@ -884,11 +888,10 @@
     </references>
 
     <references title='Informative References'>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5226.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6838.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7515.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7516.xml' ?>
-
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml' ?>
 
       <reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
 	<front>
@@ -1291,10 +1294,36 @@ d18443a10104a1044c53796d6d65747269633235364ba106fb41d584367c2000
 	and
 	Göran Selander.
       </t>
+      <t>
+	[[ RFC Editor:  Is it possible to preserve the non-ASCII spellings of the names
+	Erik Wahlström and Göran Selander in the final specification? ]]
+      </t>
     </section>
 
     <section anchor="History" title="Document History">
       <t>[[ to be removed by the RFC Editor before publication as an RFC ]]</t>
+      <t>
+        -12
+        <list style="symbols">
+          <t>
+	    Updated the RFC 5226 reference to RFC 8126.
+	  </t>
+	  <t>
+	    Made the IANA registration criteria consistent across sections.
+	  </t>
+	  <t>
+	    Stated that registrations for the limited set of values between -256 and 255 and strings of length 1
+	    are to be restricted to claims with general applicability.
+	  </t>
+	  <t>
+	    Changed the "Reference" field name to "Description of Semantics" in the CBOR Tag registration request.
+	  </t>
+	  <t>
+	    Asked the RFC Editor whether it is possible to preserve the non-ASCII spellings of the names
+	    Erik Wahlström and Göran Selander in the final specification.
+	  </t>
+        </list>
+      </t>
       <t>
         -11
         <list style="symbols">
